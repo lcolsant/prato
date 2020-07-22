@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const plateSchema = new mongoose.Schema({
     name: {
         type: String,
+        trim: true,
         unique: true,
         required: [true, 'Please provide a plate name']
     },
