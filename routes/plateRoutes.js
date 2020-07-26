@@ -7,5 +7,9 @@ router.route('/')
     .get(plateController.getAllPlates)
     .post(plateController.createPlate);
 
+router.route('/:id')
+    .get(plateController.getPlate)
+    
+
 
 module.exports = router;
