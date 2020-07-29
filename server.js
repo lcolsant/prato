@@ -12,7 +12,8 @@ const port = process.env.PORT || 3000
 
 //production db - MongoDB Atlas
 mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.4g8pi.mongodb.net/prato?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
-
+//Depracation warning: Use MongoDB driver's findOneAndUpdate() rather than findAndModify(); https://mongoosejs.com/docs/deprecations.html#findandmodify
+mongoose.set('useFindAndModify', false);
 // const db = mongoose.connection;
 
 // db.on('error', ()=> {

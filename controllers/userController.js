@@ -2,6 +2,7 @@
 const User = require('../models/userModel');
 
 
+
 exports.getAllUsers = async (req, res) =>{
     
     try{
@@ -44,20 +45,31 @@ exports.getUser = async (req, res) =>{
     }
 }
 
-exports.createUser = async (req, res) => {
+exports.createUser = (req, res) => {
     
+    res.status(500).json({
+        status:'error',
+        message: 'Please use /signup instead.'
+    });
+
+}
+
+
+exports.updateUser = async (req, res) => {
+    
+    console.log(req.params.id);
     console.log(req.body);
     
     try {
     
-        const newUser = await User.create(req.body);
+        const updatedUser = await User.findByIdAndUpdate(req.params.id,req.body, {new:true, runValidators:true});
 
 
         res.status(201).json({
             status:'sucess',
             data:{
-                message: 'Created a new user sucessfully!',
-                data: newUser,
+                message: 'Updated user sucessfully!',
+                data: updatedUser,
             }
         });
 
@@ -69,6 +81,35 @@ exports.createUser = async (req, res) => {
     }
 
 }
+
+
+
+exports.deleteUser = async (req, res) => {
+    
+    console.log(req.params.id);
+    console.log(req.body);
+    
+    try {
+    
+        await User.findByIdAndDelete(req.params.id);
+
+
+        res.status(204).json({
+            status:'sucess',
+            data:null
+        });
+
+    } catch (err){
+        res.status(404).json({
+            status: 'fail',
+            message: 'Error 💥 deleting user in MongoDB..', err
+        });
+    }
+
+}
+
+
+
     //Alt approach to saving document
     // const newUser = new User ({
     //     name: req.body.name,

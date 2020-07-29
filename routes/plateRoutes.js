@@ -9,6 +9,8 @@ router.route('/')
 
 router.route('/:id')
     .get(plateController.getPlate)
+    .patch(plateController.updatePlate)
+    .delete(plateController.deletePlate)
     
 
 
