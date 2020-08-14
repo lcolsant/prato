@@ -3,14 +3,14 @@ const User = require('../models/userModel');
 
 
 
-exports.getAllUsers = async (req, res) =>{
+exports.getAllUsers = async (req, res) => {
     
-    try{
+    try {
         
         const users = await User.find();
         
         res.status(200).json({
-            status:'sucess',
+            status:'success',
             results: users.length,
             data: {
                 users: users
@@ -19,20 +19,20 @@ exports.getAllUsers = async (req, res) =>{
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: 'Error 💥 retrieving plates from MongoDB..', err
+            message: 'Error 💥 retrieving users from MongoDB..', err
         });
     }
 }
 
 
-exports.getUser = async (req, res) =>{
+exports.getUser = async (req, res) => {
     
-    try{
+    try {
         
         const user = await User.findById(req.params.id);
         
         res.status(200).json({
-            status:'sucess',
+            status:'success',
             data: {
                 user: user
             }
@@ -66,9 +66,9 @@ exports.updateUser = async (req, res) => {
 
 
         res.status(201).json({
-            status:'sucess',
+            status:'success',
             data:{
-                message: 'Updated user sucessfully!',
+                message: 'Updated user successfully!',
                 data: updatedUser,
             }
         });
@@ -95,7 +95,7 @@ exports.deleteUser = async (req, res) => {
 
 
         res.status(204).json({
-            status:'sucess',
+            status:'success',
             data:null
         });
 
@@ -125,9 +125,9 @@ exports.deleteUser = async (req, res) => {
     //     console.log(doc);
         
     //     res.status(200).json({
-    //         status:'sucess',
+    //         status:'success',
     //         data: {
-    //             message: 'created a User sucessfully...',
+    //             message: 'created a User successfully...',
     //             data: newUser,
     //         }
     //     });

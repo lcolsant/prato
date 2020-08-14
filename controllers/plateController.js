@@ -2,15 +2,15 @@ const Plate = require('../models/plateModel');
 
 
 
-exports.getAllPlates = async (req, res) =>{
+exports.getAllPlates = async (req, res) => {
     
-    try{
+    try {
         
         const plates = await Plate.find();
         //Plate.findOne( {_id: req.params.id } )
 
         res.status(200).json({
-            status:'sucess',
+            status:'success',
             results: plates.length,
             data: {
                 plates: plates
@@ -26,14 +26,14 @@ exports.getAllPlates = async (req, res) =>{
 
 
 
-exports.getPlate = async (req, res) =>{
+exports.getPlate = async (req, res) => {
     
-    try{
+    try {
         
         const plate = await Plate.findById(req.params.id);
         
         res.status(200).json({
-            status:'sucess',
+            status:'success',
             data: {
                 plate: plate
             }
@@ -58,9 +58,9 @@ exports.createPlate = async (req, res) => {
 
 
         res.status(201).json({
-            status:'sucess',
+            status:'success',
             data:{
-                message: 'Created a new plate sucessfully!',
+                message: 'Created a new plate successfully!',
                 data: newPlate,
             }
         });
@@ -86,9 +86,9 @@ exports.updatePlate = async (req, res) => {
 
 
         res.status(201).json({
-            status:'sucess',
+            status:'success',
             data:{
-                message: 'Updated plate sucessfully!',
+                message: 'Updated plate successfully!',
                 data: updatedPlate,
             }
         });
@@ -114,7 +114,7 @@ exports.deletePlate = async (req, res) => {
 
 
         res.status(204).json({
-            status:'sucess',
+            status:'success',
             data:null
         });
 

@@ -1,10 +1,11 @@
 const express = require('express');
 const plateController = require('../controllers/plateController.js');
+const authController = require('../controllers/authContoller');
 
 const router = express.Router();
 
 router.route('/')
-    .get(plateController.getAllPlates)
+    .get(authController.protect, plateController.getAllPlates)
     .post(plateController.createPlate);
 
 router.route('/:id')

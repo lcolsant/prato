@@ -4,8 +4,12 @@ const authController = require('../controllers/authContoller');
 
 const router = express.Router();
 
+router.post('/signup', authController.signup);
+router.post('/login', authController.login);
+router.get('/logout', authController.logout);
+
 router.route('/')
-    .get(userController.getAllUsers)
+    .get(authController.protect, userController.getAllUsers)
     .post(userController.createUser)
 
 router.route('/:id')
@@ -13,6 +17,6 @@ router.route('/:id')
     .patch(userController.updateUser)
     .delete(userController.deleteUser)
 
-router.post('/signup', authController.signup);
+
 
 module.exports = router;

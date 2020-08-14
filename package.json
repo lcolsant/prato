@@ -4,8 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js -e ejs,js"
+    "sass": "node-sass sass/main.scss public/css/style.css -w",
+    "server": "nodemon server.js -e ejs,js",
+    "server:prod": "NODE_ENV=production nodemon server.js -e ejs,js",
+    "start": "npm-run-all --parallel server sass",
+    "start:prod": "npm-run-all --parallel server:prod sass"
   },
   "repository": {
     "type": "git",
@@ -28,6 +31,8 @@
     "validator": "^13.1.1"
   },
   "devDependencies": {
-    "reload": "^3.1.0"
+    "livereload": "^0.9.1",
+    "node-sass": "^4.14.1",
+    "npm-run-all": "^4.1.5"
   }
 }
