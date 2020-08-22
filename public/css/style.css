@@ -84,6 +84,34 @@ i {
     i {
       font-size: 2.0rem; } }
 
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border: none;
+  border-radius: 3px;
+  box-shadow: var(--shadow-medium);
+  font-size: 1.2rem;
+  font-weight: 100;
+  margin: 2rem; }
+  .card__img {
+    height: 20rem;
+    background-color: var(--color-secondary); }
+  .card__title {
+    height: 5rem;
+    background-color: var(--color-white);
+    padding: 1rem; }
+  .card__description {
+    height: 10rem;
+    background-color: var(--color-white);
+    padding: 1rem; }
+  .card__bottom {
+    display: grid;
+    margin-top: auto;
+    height: 6rem;
+    background-color: var(--color-grey-light-2);
+    padding: 1rem; }
+
 .container {
   background-color: var(--color-grey-light-1);
   min-height: 100vh;
@@ -126,7 +154,11 @@ i {
     align-items: center;
     margin-right: 1rem; }
     .navbar__link__item {
-      margin-right: 1rem; }
+      margin-right: 1rem;
+      color: var(--color-grey-dark-2);
+      border: 1.2px solid var(--color-grey-dark-2);
+      padding-top: 0.8rem;
+      margin-bottom: 0; }
 
 .navbar__plate {
   height: 10rem;
@@ -145,7 +177,7 @@ i {
   flex-direction: row;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
-  background-color: var(--color-white); }
+  background-color: var(--color-grey-light-3); }
   .footer__logo {
     grid-column: 1/2;
     display: flex;
@@ -200,3 +232,17 @@ i {
     .form__label:first-child {
       display: inline-block;
       margin-top: 4rem; }
+
+.plates {
+  display: grid;
+  grid-template-columns: 1fr;
+  width: 80%;
+  justify-content: center; }
+  .plates__cards {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 36rem);
+    grid-auto-rows: 46rem;
+    column-gap: 0.5rem;
+    margin-top: 4rem;
+    margin-bottom: 6rem; }

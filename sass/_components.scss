@@ -53,3 +53,52 @@ i {
     }
     
 }
+
+.card {
+    // display: inline-block;
+    // height: 30rem;
+    // width: 36rem;
+    display: flex;
+    flex-direction: column;
+
+    background-color:var(--color-white);
+    border: none;
+    border-radius: 3px;
+    box-shadow: var(--shadow-medium);
+    font-size: 1.2rem;
+    font-weight: 100;
+    // padding: 1rem;
+    margin: 2rem;
+
+    &__img {
+        height: 20rem;
+        background-color: var(--color-secondary);
+        // opacity: 50;
+    }
+    
+    &__title {
+        height: 5rem;
+        background-color: var(--color-white);
+        padding: 1rem;
+    }
+
+    &__description {
+        height: 10rem;
+        background-color: var(--color-white);
+        padding: 1rem;
+
+    }
+
+    &__bottom {
+        //to push bottom div to bottom of card; setting to grid and margin-top auto
+        display: grid;
+        margin-top: auto;
+        
+        height: 6rem;
+        background-color: var(--color-grey-light-2);
+        padding: 1rem;
+
+    }
+
+
+}
