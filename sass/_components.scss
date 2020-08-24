@@ -12,12 +12,17 @@
     // padding-top: .6rem;
     margin-bottom: 2rem;
 
-    transition: all .3s;
+    transition: all .2s;
 
     &:hover {
-        transform: translateY(-.5rem);   
+        transform: translateY(-2px);   
         background-color: var(--color-tertiary-light);
         color: var(--color-white);
+                        
+    }
+
+    &:active {
+        transform: translateY(2px);   
                         
     }
 
@@ -70,22 +75,43 @@ i {
     // padding: 1rem;
     margin: 2rem;
 
-    &__img {
+    &__picture {
         height: 20rem;
         background-color: var(--color-secondary);
-        // opacity: 50;
+        position: relative;  //using relative positioning so that overlay is absolute to card__picture div
+
+        &-overlay {
+            position: absolute;  //taking overlay out of flow;
+            width: 100%;  //overlapping 100% of width of parent element
+            height: 100%;  //overlapping 100% of height of parent element
+            background-image: linear-gradient(to right bottom,var(--color-white),var(--color-white));
+            opacity: 0.3;
+
+        }
+
+        &-img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+        }
+
     }
+    
     
     &__title {
         height: 5rem;
         background-color: var(--color-white);
         padding: 1rem;
+        font-size: 1.8rem;
+        font-weight: 300;
     }
 
     &__description {
         height: 10rem;
         background-color: var(--color-white);
         padding: 1rem;
+        font-size: 1.3rem;
+        font-weight: 100;
 
     }
 
@@ -93,12 +119,55 @@ i {
         //to push bottom div to bottom of card; setting to grid and margin-top auto
         display: grid;
         margin-top: auto;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2,auto);
+        // justify-content: center;
+        justify-items: center;
+        align-items: center;
         
-        height: 6rem;
+        height: 8rem;
         background-color: var(--color-grey-light-2);
-        padding: 1rem;
+        padding: 0.2rem;
+
+        &-header {
+            align-self: end;
+            font-size: 1.4rem;
+
+            transition: all .2s;
+
+
+            &:hover {
+                color: var(--color-secondary);
+            }
+        }
+
+        &-btn {
+            border: none;
+            padding-top: 0.1rem;
+            width: 4rem;
+            height: 4rem;
+            background-color: inherit;
+            
+        }
+
+        &-svg {
+
+            transition: all .2s;
+            stroke: var(--color-grey-dark-2);
+            fill:none;
+
+            &:hover {
+                stroke: var(--color-secondary);
+                transform: translateY(-1px)
+            }
+
+            &:active {
+                transform: translateY(1px);
+                fill: var(--color-primary);
+            }
+        }
 
     }
-
+    
 
 }
