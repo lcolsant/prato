@@ -6,7 +6,7 @@
 
     display: grid;
     grid-template-rows: auto 1fr 10rem;
-    grid-template-columns: 1;
+    grid-template-columns: 1fr;
     column-gap: 0.5rem;
 
     // @media only screen and (max-width: $bp-medium) {
@@ -15,19 +15,12 @@
     // }
 }
 
-// .navbar__hero {
-//     display: grid;
-//     justify-items: center;
-//     grid-column: 2/3;
-//     margin-top: 1rem;
-    
-// }
-// #path22 {
-//     fill: purple;
-// }
+
 
 .navbar {
     background-color: var(--color-grey-light-4);
+    // background-color: var(--color-grey-light-5);
+
     // background-color: var(--color-white);
     display: grid;
     grid-template-rows: auto;
@@ -50,6 +43,12 @@
             font-size: 2.5rem;
             font-weight: 100;
             text-transform: uppercase;
+
+            &:hover {
+                color: var(--color-tertiary-light);
+                transition: all .2s;
+                
+            }
             
         }
     }
@@ -109,7 +108,7 @@
     // grid-template-columns: 1fr;
     // width: 100%;
     justify-content: center;
-    align-items: center;
+    // align-items: top;
 
     background-color: var(--color-grey-light-3);
 }
@@ -158,12 +157,21 @@
     // border: 0.5rem solid gray;
     border-radius: 3px;
     font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    margin-top: 6rem;
+    margin-bottom: 6rem;
     padding: 2rem;
+    // height: 36rem;
+    &__signup {
+        height: 48rem;        
+    }
     
-    &__h2 {
+    &__login {
+        height: 32rem;
+    }
+    
+    &__header {
         text-transform: uppercase;
+        font-size: 1.2rem;
         font-weight: 200;
     }
 
@@ -199,7 +207,7 @@
 
     &__label {
         font-size: 1.5rem;
-        font-weight: 500;
+        font-weight: 300;
         
         &:first-child {
             display: inline-block;
@@ -235,8 +243,121 @@
 
     }
 
-    // grid-template-rows: repeat(1,1fr);
-    // grid-template-columns: repeat(auto-fit, minmax(30rem,1fr));
+}
+
+.landing {
+    display: grid;
+    grid-template-rows: 40rem 20rem;
+    grid-template-columns: repeat(3,33.3%);
     // column-gap: 0.5rem;
+    margin-top: 0;
+    margin-bottom: 4rem;
+    // background-color: var(--color-grey-light-3);
+    background-color: transparent;
+
+    &__text {
+        grid-row: 1 / 2;
+        grid-column: 1 / 2;
+        
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+        
+        // text-align: center;
+        font-size: 3.5rem;
+        font-weight: 100;
+
+        padding: 6rem;
+    }
+    
+    &__pic {
+        grid-row: 1 / 2;
+        grid-column: 2 / 4;
+
+        position: relative;
+        
+
+        &-img {
+            object-fit: cover;
+            height: 100%;
+            width: 100%;
+
+            // border-radius: 30%;
+            
+
+        }
+
+        &-overlay {
+            position: absolute;  //taking overlay out of flow;
+            width: 100%;  //overlapping 100% of width of parent element
+            height: 100%;  //overlapping 100% of height of parent element
+            background-image: linear-gradient(to right bottom,var(--color-white),var(--color-white));
+            opacity: 0.3;
+
+        }
+
+    }
+
+    &__smbox {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        font-size: 1.8rem;
+    }
+
+    &__signup {
+        grid-row: 2 / 3;
+        grid-column: 1 / 2;
+        // background-color: var(--color-grey-light-3);
+        box-shadow: var(--shadow-light);
+        
+        &:hover {
+            // box-shadow: var(--shadow-dark);
+            box-shadow: var(--shadow-medium);
+    
+        }
+
+    }
+   
+    &__upload {
+        grid-row: 2 / 3;
+        grid-column: 2 / 3;
+        // border:1px solid var(--color-grey-light-4);
+        box-shadow: var(--shadow-light);
+        
+        &:hover {
+            // box-shadow: var(--shadow-dark);
+            box-shadow: var(--shadow-medium);
+        }
+        
+    }
+    
+
+    &__organize {
+        grid-row: 2 / 3;
+        grid-column: 3 / -1;
+        // border:1px solid var(--color-grey-light-4);
+        box-shadow: var(--shadow-light);
+        
+        &:hover {
+            // box-shadow: var(--shadow-dark);
+            box-shadow: var(--shadow-medium);
+        }
+        
+    }
+
+    &__ionicon {
+        stroke: var(--color-tertiary-light);
+        // stroke: var(--color-red-1);
+        color: var(--color-tertiary-light);
+        // color: var(--color-red-1);
+        
+
+        font-size: 3.2rem;  //specify as multiple of 8px
+
+    }
 
 }
