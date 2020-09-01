@@ -39,6 +39,11 @@
         padding-left: 4rem;
         grid-column: 1/2;
 
+        &__link {
+            text-decoration: none;
+            color: inherit;
+        }
+
         &__h1 {
             font-size: 2.5rem;
             font-weight: 100;
@@ -46,7 +51,7 @@
 
             &:hover {
                 color: var(--color-tertiary-light);
-                transition: all .2s;
+                transition: all .3s;
                 
             }
             
@@ -251,7 +256,7 @@
     grid-template-columns: repeat(3,33.3%);
     // column-gap: 0.5rem;
     margin-top: 0;
-    margin-bottom: 4rem;
+    margin-bottom: 5rem;
     // background-color: var(--color-grey-light-3);
     background-color: transparent;
 

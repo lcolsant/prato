@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const { promisify } = require('util');
 
 
+
 // const signToken = id => {
 //     return jwt.sign({ id }, process.env.JWT_SECRET, {
 //         expiresIn: process.env.JWT_EXPIRES_IN
@@ -11,8 +12,11 @@ const { promisify } = require('util');
 
 //Secure cookie option will be set to true in production
 const cookieOptions = {
-    expires: new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
-    httpOnly: true
+    'expires': new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
+    'httpOnly': true,
+    'secure': true,
+    'X-Forwarded-Proto': 'https',
+    // secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
 };
 
 // const createSendToken = (user, statusCode, req, res) => {
@@ -87,6 +91,8 @@ exports.signup = async (req, res) => {
 
 exports.login = async (req, res, next) => {
     const { email, password } = req.body
+
+    console.log(`from auth controller...${email}...${password}`)
 
     //check if email and password exist
     if(!email || !password) {

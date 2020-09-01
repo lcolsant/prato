@@ -180,13 +180,16 @@ i {
     grid-column: 2/3;
     padding-left: 4rem;
     grid-column: 1/2; }
+    .navbar__prato__link {
+      text-decoration: none;
+      color: inherit; }
     .navbar__prato__h1 {
       font-size: 2.5rem;
       font-weight: 100;
       text-transform: uppercase; }
       .navbar__prato__h1:hover {
         color: var(--color-tertiary-light);
-        transition: all .2s; }
+        transition: all .3s; }
   .navbar__hero {
     display: grid;
     justify-items: center;
@@ -304,7 +307,7 @@ i {
   grid-template-rows: 40rem 20rem;
   grid-template-columns: repeat(3, 33.3%);
   margin-top: 0;
-  margin-bottom: 4rem;
+  margin-bottom: 5rem;
   background-color: transparent; }
   .landing__text {
     grid-row: 1 / 2;

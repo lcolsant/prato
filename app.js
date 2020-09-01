@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 // const appError = require('./utils/appError');
 
 
-landingRouter = require('./routes/landingRoutes')
+viewsRouter = require('./routes/viewRoutes')
 plateRouter = require('./routes/plateRoutes')
 userRouter = require('./routes/userRoutes')
 
@@ -23,7 +23,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/public', express.static(path.join(__dirname,'public')));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
-app.use('/', landingRouter);
+app.use('/', viewsRouter);
 app.use('/api/v1/plates', plateRouter);
 app.use('/api/v1/users', userRouter);
 
