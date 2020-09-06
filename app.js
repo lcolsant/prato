@@ -1,8 +1,9 @@
 const express = require('express');
+const multer = require('multer');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-
+const upload = multer({ dest: 'public/img/users'})
 // const appError = require('./utils/appError');
 
 

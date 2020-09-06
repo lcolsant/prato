@@ -1,6 +1,7 @@
 :root {
   --color-tertiary: #EF946C;
   --color-tertiary-light: #F6BD60;
+  --color-tertiary-dark: #F4A522;
   --color-red-1: #971C0C;
   --color-red-2: #71160A;
   --color-red-3: #5E1208;
@@ -15,6 +16,7 @@
   --color-white: #ffffff;
   --color-black: #000000;
   --shadow-extra-dark: 0px 10px 50px #555;
+  --shadow-button: 0 1rem 2rem rgba(0,0,0,.15);
   --shadow-dark: 0 2rem 6rem rgba(0,0,0,.3);
   --shadow-medium: 0 2rem 6rem rgba(0,0,0,.1);
   --shadow-light: 0 2rem 5rem rgba(0,0,0,.06);
@@ -42,8 +44,9 @@ body {
   min-height: 100vh; }
 
 h3 {
-  font-size: 2rem;
-  font-weight: 300; }
+  font-size: 2.2rem;
+  font-weight: 400;
+  color: var(--color-tertiary-dark); }
   @media only screen and (max-width: 56.25em) {
     h3 {
       font-size: 1.0rem; } }
@@ -53,18 +56,19 @@ h3 {
   width: 12rem;
   border-radius: 2rem;
   border: 1.2px solid var(--color-tertiary-light);
-  background-color: transparent;
-  color: var(--color-tertiary-light);
+  background-color: var(--color-tertiary-light);
+  color: var(--color-white);
   font-size: 1.6rem;
   text-decoration: none;
   text-align: center;
   margin-bottom: 1rem;
   margin-top: 1rem;
-  transition: all .2s; }
+  transition: all .3s; }
   .btn:hover {
     transform: translateY(-2px);
     background-color: var(--color-tertiary-light);
-    color: var(--color-white); }
+    color: var(--color-white);
+    box-shadow: var(--shadow-button); }
   .btn:active {
     transform: translateY(2px); }
   @media only screen and (max-width: 75em) {
@@ -151,11 +155,11 @@ i {
       stroke: var(--color-grey-dark-2);
       fill: none; }
       .card__bottom-svg:hover {
-        stroke: var(--color-secondary);
+        stroke: var(--color-tertiary-light);
         transform: translateY(-1px); }
       .card__bottom-svg:active {
         transform: translateY(1px);
-        fill: var(--color-primary); }
+        fill: var(--color-red-1); }
 
 .container {
   background-color: var(--color-grey-light-1);
@@ -173,6 +177,8 @@ i {
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-content: center; }
+  .navbar a {
+    text-decoration: none; }
   .navbar__prato {
     display: grid;
     justify-items: start;
@@ -205,11 +211,18 @@ i {
     align-items: center;
     margin-right: 1rem; }
     .navbar__link__item {
-      margin-right: 1rem;
+      margin-right: 2rem;
       color: var(--color-grey-dark-2);
-      border: 1.2px solid var(--color-grey-dark-2);
-      padding-top: 0.8rem;
-      margin-bottom: 0; }
+      font-size: 1.5rem;
+      font-weight: 100;
+      text-decoration: none;
+      padding: 1rem; }
+      .navbar__link__item:hover {
+        transition: color .4s;
+        color: var(--color-tertiary-dark);
+        font-weight: 400;
+        border-bottom: 1px solid var(--color-tertiary-dark);
+        transform: translateY(1px); }
 
 .navbar__plate {
   height: 10rem;
@@ -255,9 +268,11 @@ i {
   margin-bottom: 6rem;
   padding: 2rem; }
   .form__signup {
-    height: 48rem; }
+    height: 52rem; }
   .form__login {
-    height: 32rem; }
+    height: 34rem; }
+  .form__createPlate {
+    height: 42rem; }
   .form__header {
     text-transform: uppercase;
     font-size: 1.2rem;
@@ -268,7 +283,7 @@ i {
     height: 4rem;
     border: none;
     border-radius: 2px;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     margin-top: 1rem;
     padding-left: 1.4rem;
     font-size: 1.4rem;
@@ -281,9 +296,13 @@ i {
     .form__input__email::placeholder {
       font-size: 1.4rem;
       letter-spacing: normal; }
+    .form__input__placeholder::placeholder {
+      font-size: 1.4rem;
+      font-weight: 100;
+      letter-spacing: normal; }
   .form__label {
     font-size: 1.5rem;
-    font-weight: 300; }
+    font-weight: 400; }
     .form__label:first-child {
       display: inline-block;
       margin-top: 4rem; }
@@ -301,6 +320,21 @@ i {
     column-gap: 0.5rem;
     margin-top: 4rem;
     margin-bottom: 6rem; }
+  .plates__add {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 60%;
+    margin: 0 auto;
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--color-tertiary-dark); }
+    .plates__add-text {
+      margin-bottom: 2rem; }
+    .plates__add-btn {
+      width: 12rem; }
 
 .landing {
   display: grid;

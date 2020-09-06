@@ -1,17 +1,19 @@
 <div class="plates">
+    <% if (plates.length > 0) { %>
+        <%=plates.length%>
     <div class="plates__cards">
-
-        <% for (var i=0; i<5; i++) { %>
+        <% for (let i=0; i<plates.length; i++) { %>
             <div class="card">
                 <div class="card__picture">
                     <div class="card__picture-overlay">&nbsp;</div>
-                    <img src="../../public/img/plate1.jpg" class="card__picture-img" alt="">
+                    <!-- <img src="../../public/img/plate1.jpg" class="card__picture-img" alt=""> -->
+                    <img src=<%=plates[i].img%> class="card__picture-img" alt="">
                 </div>
                 <div class="card__title">
-                    Glazed Duck Fillet
+                    <%=plates[i].name%>
                 </div>
                 <div class="card__description">
-                    Glazed duck fillet, mashed potatoes seasoned with truffle oil, fig and aniseed sauce
+                    <%=plates[i].description%>
                 </div>
                 <div class="card__bottom">
                     <p class="card__bottom-header">Add Plate</p> 
@@ -29,4 +31,10 @@
             </div>
        <% } %>
     </div>
+    <% } else { %>
+    <div class="plates__add">
+        <p class="plates__add-text">Looks like you haven't added a plate yet...let's get started! </p>
+        <button class="btn plates__add-btn"><a href="/create" class="btn plates__add-btn">Create a Plate</a></button>
+    </div>
+    <% } %>
 </div>  

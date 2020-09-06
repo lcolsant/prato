@@ -18,7 +18,7 @@ export const login = async (email, password) => {
             console.log(res.data)
             window.setTimeout(() => {
                 location.assign('/plates');
-            }, 1500);
+            }, 1000);
         }
     } catch (err) {
         alert('Error logging in!')
@@ -40,4 +40,33 @@ export const logout = async () => {
         alert('Error logging out!')
     }
 }
+
+export const signup = async (name, email, password, passwordConfirm) => {
+    console.log(`in signup...${name}...${email} ...${password}...${passwordConfirm}`);
+    try {
+        const res = await axios({
+            method: 'POST',
+            url: '/api/v1/users/signup',
+            data: {
+                name,
+                email,
+                password,
+                passwordConfirm
+            }
+        });
+
+        if(res.data.status == 'success') {
+            // showAlert('success', 'Logged in successfully!');
+            alert('Sign up successfully!');
+            console.log(res.data)
+            window.setTimeout(() => {
+                location.assign('/plates');
+            }, 1500);
+        }
+    } catch (err) {
+        alert('Error signing up!')
+        console.log(err)
+        // showAlert('error', err.response.data.message);
+    }
+};
 

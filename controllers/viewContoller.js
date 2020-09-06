@@ -1,4 +1,6 @@
 
+const { plates } = require('../dev-data/data/plates-dev');
+// import { plates } from '../dev-data/data/plates-dev';
 
 
 exports.getLogin = (req, res) => {
@@ -18,7 +20,18 @@ exports.getLanding = (req, res) => {
 }
 
 exports.getPlates = (req, res) => {
+    console.log(plates.length)
+    
     res.status(200).render('plates', {
-        title: 'My Plates'
+        title: 'My Plates',
+        plates:plates
+    });
+}
+
+exports.createPlate = (req, res) => {
+    console.log('in create plate');
+
+    res.status(200).render('createPlate', {
+        title: 'Create Plate',
     });
 }

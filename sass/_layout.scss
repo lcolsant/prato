@@ -1,6 +1,5 @@
 .container {
     background-color: var(--color-grey-light-1);
-    //background-color: orangered;
     min-height: 100vh;
     width: 100%;
 
@@ -29,6 +28,10 @@
     justify-content: center;
     align-content: center;
     // align-items: center;
+
+    a {
+        text-decoration: none;
+    }
 
     &__prato {
         display: grid;
@@ -72,12 +75,6 @@
     
 
     &__link {
-        // grid-column: 3/4;
-        // display: grid;
-        // grid-template-columns: repeat(3,1fr);
-        // justify-items: end;
-        // align-items: start;
-        // column-gap: 1rem;
 
         display: flex;
         flex-direction: row;
@@ -87,12 +84,23 @@
         margin-right: 1rem;
 
         &__item {
-            margin-right: 1rem;
+            margin-right: 2rem;
             color: var(--color-grey-dark-2);
-            border: 1.2px solid var(--color-grey-dark-2);
-            padding-top: 0.8rem;
-            margin-bottom: 0;
+            font-size: 1.5rem;
+            font-weight: 100;
+            text-decoration: none;
+            padding: 1rem;
             //background-color: transparent;
+
+            &:hover { 
+                transition: color .4s;
+                color: var(--color-tertiary-dark);
+                font-weight: 400;
+                border-bottom: 1px solid var(--color-tertiary-dark);
+                transform: translateY(1px);   //offset initial upward movement (default)
+
+
+            }
         }
         
     }
@@ -108,13 +116,7 @@
 .main {
     display: flex;
     flex-direction: row;
-
-    // display: grid;
-    // grid-template-columns: 1fr;
-    // width: 100%;
     justify-content: center;
-    // align-items: top;
-
     background-color: var(--color-grey-light-3);
 }
 
@@ -123,13 +125,11 @@
     flex-direction: row;
     grid-template-columns: repeat(3, 1fr);
     justify-content: center;
-    // background-color: var(--color-white);
     background-color: var(--color-grey-light-3);
 
 
     &__logo {
         grid-column: 1/2;
-        
         display: flex;
         align-items: center;
         padding-left: 4rem;
@@ -165,13 +165,18 @@
     margin-top: 6rem;
     margin-bottom: 6rem;
     padding: 2rem;
-    // height: 36rem;
+
+    
     &__signup {
-        height: 48rem;        
+        height: 52rem;        
     }
     
     &__login {
-        height: 32rem;
+        height: 34rem;
+    }
+
+    &__createPlate {
+        height: 42rem;
     }
     
     &__header {
@@ -186,7 +191,7 @@
         height: 4rem;
         border: none;
         border-radius: 2px;
-        margin-bottom: 1rem;
+        margin-bottom: 2rem;
         margin-top: 1rem;
         padding-left: 1.4rem;
         font-size: 1.4rem;
@@ -203,7 +208,17 @@
         &__email {
             &::placeholder {
                 font-size: 1.4rem;
-            letter-spacing: normal;
+                letter-spacing: normal;
+
+
+            }
+        }
+
+        &__placeholder {
+            &::placeholder {
+                font-size: 1.4rem;
+                font-weight: 100;
+                letter-spacing: normal;
 
 
             }
@@ -212,7 +227,7 @@
 
     &__label {
         font-size: 1.5rem;
-        font-weight: 300;
+        font-weight: 400;
         
         &:first-child {
             display: inline-block;
@@ -246,6 +261,27 @@
         margin-top: 4rem;
         margin-bottom: 6rem;
 
+    }
+
+    &__add {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 60%;
+        margin: 0 auto;
+        font-size: 2.5rem;
+        font-weight: 300;
+        color: var(--color-tertiary-dark);
+        
+        &-text {
+            margin-bottom: 2rem;
+        }
+
+        &-btn {
+            width: 12rem;
+        }
     }
 
 }
