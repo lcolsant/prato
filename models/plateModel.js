@@ -13,11 +13,22 @@ const plateSchema = new mongoose.Schema({
     },
     photo: {
         type: String,
-        default: 'default.jpg'
+        default: 'default-plate.jpg'
     },
+    user: {
+        type: String,
+        required: [true, 'A plate must belong to a user']
+    }, 
     slug: String,
-    
-})
+});
+
+// plateSchema.pre(/^find/, function(next){
+//     this.populate({
+//         path: 'user',
+//         select: 'name'
+//     });
+//     next();
+// });
 
 const Plate = mongoose.model('Plate', plateSchema);
 

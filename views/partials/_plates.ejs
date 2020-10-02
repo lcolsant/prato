@@ -1,13 +1,13 @@
 <div class="plates">
     <% if (plates.length > 0) { %>
-        <%=plates.length%>
     <div class="plates__cards">
         <% for (let i=0; i<plates.length; i++) { %>
             <div class="card">
+                <input type="hidden" id="<%= plates[i]._id %>" value= '<%= plates[i]._id %>' >
                 <div class="card__picture">
                     <div class="card__picture-overlay">&nbsp;</div>
                     <!-- <img src="../../public/img/plate1.jpg" class="card__picture-img" alt=""> -->
-                    <img src=<%=plates[i].img%> class="card__picture-img" alt="">
+                    <img src="public/img/plates/<%=plates[i].photo%>" class="card__picture-img" alt="">
                 </div>
                 <div class="card__title">
                     <%=plates[i].name%>
@@ -17,15 +17,8 @@
                 </div>
                 <div class="card__bottom">
                     <p class="card__bottom-header">Add Plate</p> 
-                    <!-- <i class="fal fa-plus-circle"></i> -->
                     <button class="card__bottom-btn">
-                        <svg class="card__bottom-svg" xmlns='http://www.w3.org/2000/svg' width='3.0rem' height='3.0rem' viewBox='0 0 512 512'>
-                            <title>ionicons-v5-a</title>
-                            <!-- <path d='M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z' style='fill:none;stroke:#000;stroke-miterlimit:10;stroke-width:32px'/><line x1='256' y1='176' x2='256' y2='336' style='fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/> -->
-                            <path d='M448,256c0-106-86-192-192-192S64,150,64,256s86,192,192,192S448,362,448,256Z' style='stroke-miterlimit:10;stroke-width:32px'/><line x1='256' y1='176' x2='256' y2='336' style='stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/>
-                            <!-- <line x1='336' y1='256' x2='176' y2='256' style='fill:none;stroke:#000;stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/> -->
-                            <line x1='336' y1='256' x2='176' y2='256' style='stroke-linecap:round;stroke-linejoin:round;stroke-width:32px'/>
-                        </svg>
+                        <ion-icon class="card__bottom-svg"  src="../../public/img/add-circle-outline.svg" ></ion-icon>
                     </button>
                 </div>
             </div>
@@ -33,6 +26,7 @@
     </div>
     <% } else { %>
     <div class="plates__add">
+        <!-- <p class="plates__add-text">Hi  <%= /* user.name  */  %> , looks like you haven't added a plate yet...let's get started! </p> -->
         <p class="plates__add-text">Looks like you haven't added a plate yet...let's get started! </p>
         <button class="btn plates__add-btn"><a href="/create" class="btn plates__add-btn">Create a Plate</a></button>
     </div>

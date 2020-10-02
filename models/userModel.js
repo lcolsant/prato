@@ -37,9 +37,21 @@ const userSchema = new mongoose.Schema({
             message: 'Passwords are not the same!'
         }
     },
-    passwordChangedAt: Date
-
+    plates: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Plate'
+        }
+    ],
+    week: [
+        {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Plate'
+        }
+    ],
+    passwordChangedAt: Date,
 });
+
 
 userSchema.pre('save', async function(next) {
     
@@ -52,6 +64,22 @@ userSchema.pre('save', async function(next) {
     this.passwordConfirm = undefined;
     next();
 
+});
+
+userSchema.pre(/^find/, function(next){
+    this.populate({
+        path: 'plates',
+        select: 'name description photo'
+    });
+    next();
+});
+
+userSchema.pre(/^find/, function(next){
+    this.populate({
+        path: 'week',
+        select: 'name description photo'
+    });
+    next();
 });
 
 userSchema.methods.correctPassword = async function(candidatePassword, userPassword) {  

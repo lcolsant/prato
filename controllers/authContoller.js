@@ -4,6 +4,7 @@ const { promisify } = require('util');
 
 
 
+
 // const signToken = id => {
 //     return jwt.sign({ id }, process.env.JWT_SECRET, {
 //         expiresIn: process.env.JWT_EXPIRES_IN
@@ -123,10 +124,16 @@ exports.login = async (req, res, next) => {
 
     //send cookie
     res.cookie('jwt', token, cookieOptions);
+
+    user.password = undefined;
+    res.locals.user = user;
     
     res.status(200).json({
         status: 'success',
-        token
+        token,
+        data: {
+            user
+        }
     });
 }
 
@@ -134,7 +141,7 @@ exports.logout = (req, res) => {
     
     console.log('hit logged out route');
 
-    res.cookie('jwt', 'logged out', {
+    res.cookie('jwt', 'loggedout', {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true
     });
@@ -145,21 +152,30 @@ exports.logout = (req, res) => {
 exports.protect = async (req, res, next) => {
     let token;
     let decoded;
-    //console.log(req.headers.authorization);       
-    
+    // console.log(`Req.headers.auth: ${req.headers.authorization}`);       
+    console.log(`Req.headers.cookie: ${req.headers.cookie}`)
+
     // 1) Getting token from req.headers
     try {
-        if(!req.headers.authorization && !req.headers.authorization.startsWith('Bearer')) {
-            throw new Error(err);
+        if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+            token = req.headers.authorization.split(' ')[1];
+            
+            // console.log('No req auth...')
+            // throw new Error(err);
+        }else if (req.headers.cookie){
+            token = req.headers.cookie.split('=')[1];
         };
         
-        token = req.headers.authorization.split(' ')[1];
+    
         console.log(`token passed: ${token}`);
 
     } catch(err) {
      
         if(!token) {
+            console.log('Error: No auth token passed. You must be logged in to access this route!')
             return next(new Error('You must be logged in to access this route.'));
+
+            // res.redirect('/');
         }
     }
 
@@ -192,7 +208,42 @@ exports.protect = async (req, res, next) => {
         return next(new Error('User recently changed password. Please log in again.'))
     };
 
-    req.user = currentUser;
     //Grant access to protected route
+    req.user = currentUser;
+    res.locals.user = currentUser;
     next();
 }
+
+// only for rendered pages
+exports.isLoggedIn = async (req, res, next) => {
+    if (req.headers.cookie) {
+      try {
+        // 1) verify token
+
+        console.log('in isLoggedIn')
+        console.log(`isLoggedIn token: ${req.headers.cookie.split('=')[1]}`)
+        const decoded = await promisify(jwt.verify)(
+            req.headers.cookie.split('=')[1],
+            process.env.JWT_SECRET
+        );
+  
+        // 2) Check if user still exists
+        const currentUser = await User.findById(decoded.id);
+        if (!currentUser) {
+          return next();
+        }
+  
+        // 3) Check if user changed password after the token was issued
+        if (currentUser.changedPasswordAfter(decoded.iat)) {
+          return next();
+        }
+  
+        // THERE IS A LOGGED IN USER
+        res.locals.user = currentUser;
+        return next();
+      } catch (err) {
+        return next();
+      }
+    }
+    next();
+  };
