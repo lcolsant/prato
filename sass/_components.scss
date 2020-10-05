@@ -134,6 +134,16 @@ i {
         background-color: var(--color-grey-light-2);
         padding: 0.2rem;
 
+        &-detail {
+            display: grid;
+            grid-template-columns: repeat(2,1fr);
+            height: 12rem;
+            justify-items: center;
+            align-items: center;
+
+            // grid-template-rows: repeat(2,auto);
+        }
+
         &-header {
             align-self: end;
             font-size: 1.4rem;
@@ -172,6 +182,8 @@ i {
                 fill: var(--color-red-1);
             }
         }
+
+
 
     }
     

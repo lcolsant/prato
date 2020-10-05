@@ -261,6 +261,14 @@
         margin-top: 4rem;
         margin-bottom: 6rem;
 
+        &-detail {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 60rem);
+            justify-content: center;
+            margin-top: 4rem;
+            margin-bottom: 6rem;
+        }
+
     }
 
     &__add {

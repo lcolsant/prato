@@ -139,6 +139,12 @@ i {
     height: 8rem;
     background-color: var(--color-grey-light-2);
     padding: 0.2rem; }
+    .card__bottom-detail {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      height: 12rem;
+      justify-items: center;
+      align-items: center; }
     .card__bottom-header {
       align-self: end;
       font-size: 1.4rem;
@@ -344,6 +350,12 @@ i {
     column-gap: 0.5rem;
     margin-top: 4rem;
     margin-bottom: 6rem; }
+    .plates__cards-detail {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, 60rem);
+      justify-content: center;
+      margin-top: 4rem;
+      margin-bottom: 6rem; }
   .plates__add {
     display: flex;
     flex-direction: column;

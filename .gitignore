@@ -1,3 +1,5 @@
 # dependencies
 /node_modules
+/public/img/plates
+/public/img/users
 .env

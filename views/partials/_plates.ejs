@@ -3,12 +3,14 @@
     <div class="plates__cards">
         <% for (let i=0; i<plates.length; i++) { %>
             <div class="card">
-                <input type="hidden" id="<%= plates[i]._id %>" value= '<%= plates[i]._id %>' >
-                <div class="card__picture">
-                    <div class="card__picture-overlay">&nbsp;</div>
-                    <!-- <img src="../../public/img/plate1.jpg" class="card__picture-img" alt=""> -->
-                    <img src="public/img/plates/<%=plates[i].photo%>" class="card__picture-img" alt="">
-                </div>
+                <input type="hidden" id="<%=plates[i]._id%>" value= '<%= plates[i]._id %>' >
+                <a href="/plates/<%=plates[i]._id%>">
+                    <div class="card__picture">
+                        <div class="card__picture-overlay">&nbsp;</div>
+                        <!-- <img src="../../public/img/plate1.jpg" class="card__picture-img" alt=""> -->
+                        <img src="public/img/plates/<%=plates[i].photo%>" class="card__picture-img" alt="">
+                    </div>
+                </a>    
                 <div class="card__title">
                     <%=plates[i].name%>
                 </div>

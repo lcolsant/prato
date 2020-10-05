@@ -9037,11 +9037,14 @@ var logOutBtn = document.querySelector('.navbar__link-logout'); // const IDinput
 
 var selectPlateBtn = document.querySelectorAll('.card').forEach(function (item) {
   item.addEventListener('click', function (e) {
-    e.preventDefault(); // console.log(item.firstElementChild.id)
-
+    // e.preventDefault();
+    // console.log(item.firstElementChild.id)
     var IDinput = document.getElementById(item.firstElementChild.id);
     console.log(IDinput.value);
-    (0, _week.addToWeek)(IDinput.value);
+
+    if (e.target.localName == 'ion-icon') {
+      (0, _week.addToWeek)(IDinput.value);
+    }
   });
 });
 var selectRow = document.querySelectorAll('.row__btn').forEach(function (item) {

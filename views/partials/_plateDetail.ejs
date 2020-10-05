@@ -1,0 +1,24 @@
+<div class="plates">
+    <div class="plates__cards-detail">
+        <div class="card">
+            <input type="hidden" id="<%= plate._id %>" value= '<%= plate._id %>' >
+            <div class="card__picture">
+                <div class="card__picture-overlay">&nbsp;</div>
+                <img src="../public/img/plates/<%=plate.photo%>" class="card__picture-img" alt="">
+            </div>
+            <div class="card__title">
+                <%=plate.name%>
+            </div>
+            <div class="card__description">
+                <%=plate.description%>
+            </div>
+            <div class="card__description">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat.
+            </div>
+            <div class="card__bottom-detail">
+                <button class="btn">Update Plate</button>
+                <button class="btn">Delete Plate</button>
+            </div>
+        </div>
+    </div>
+</div>  

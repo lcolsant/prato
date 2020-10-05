@@ -12,13 +12,16 @@ const logOutBtn = document.querySelector('.navbar__link-logout');
 
 const selectPlateBtn = document.querySelectorAll('.card').forEach(item =>{
     item.addEventListener('click', e => {
-        e.preventDefault();
+        // e.preventDefault();
         // console.log(item.firstElementChild.id)
         let IDinput = document.getElementById(item.firstElementChild.id);
         console.log(IDinput.value);
-        addToWeek(IDinput.value);
+        if(e.target.localName=='ion-icon'){
+            addToWeek(IDinput.value);
+        } 
     });
 });
+
 
 const selectRow = document.querySelectorAll('.row__btn').forEach(item =>{
     item.addEventListener('click', e => {
@@ -29,7 +32,6 @@ const selectRow = document.querySelectorAll('.row__btn').forEach(item =>{
         removeFromWeek(removePlate.value);
     });
 });
-
 
 
 if(loginForm) {

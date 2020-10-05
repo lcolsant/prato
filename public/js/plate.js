@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export const createPlate = async (data) => {
     console.log('In createPlate...');
     console.log(data);
