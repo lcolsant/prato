@@ -46,7 +46,8 @@ body {
 h3 {
   font-size: 2.2rem;
   font-weight: 400;
-  color: var(--color-tertiary-dark); }
+  color: var(--color-tertiary-dark);
+  margin-bottom: 1rem; }
   @media only screen and (max-width: 56.25em) {
     h3 {
       font-size: 1.0rem; } }
@@ -61,7 +62,7 @@ h3 {
   font-size: 1.6rem;
   text-decoration: none;
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
   margin-top: 4rem;
   cursor: pointer;
   transition: all .3s; }
@@ -93,6 +94,9 @@ i {
     i {
       font-size: 2.0rem; } }
 
+#card-nohover {
+  transform: translateY(0); }
+
 .card {
   display: flex;
   flex-direction: column;
@@ -102,7 +106,14 @@ i {
   box-shadow: var(--shadow-medium);
   font-size: 1.2rem;
   font-weight: 100;
-  margin: 2rem; }
+  margin: 2rem;
+  transition: all .2s; }
+  .card__hover:hover {
+    transform: translateY(-0.1rem);
+    box-shadow: var(--shadow-dark); }
+  .card__hover:active {
+    transform: translateY(0);
+    box-shadow: var(--shadow-medium); }
   .card__picture {
     height: 20rem;
     background-color: var(--color-secondary);
@@ -123,12 +134,24 @@ i {
     padding: 1rem;
     font-size: 1.8rem;
     font-weight: 300; }
+    .card__title-detail {
+      font-size: 2.4rem; }
   .card__description {
-    height: 10rem;
+    height: minmax(10rem, min-content);
     background-color: var(--color-white);
     padding: 1rem;
     font-size: 1.3rem;
     font-weight: 100; }
+  .card__recipe {
+    height: min-content;
+    background-color: var(--color-white);
+    padding: 1rem;
+    font-size: 1.3rem;
+    font-weight: 100; }
+  .card__header {
+    font-size: 1.5rem;
+    font-weight: 300;
+    margin-bottom: 1rem; }
   .card__bottom {
     display: grid;
     margin-top: auto;
@@ -145,6 +168,9 @@ i {
       height: 12rem;
       justify-items: center;
       align-items: center; }
+      .card__bottom-detail a {
+        text-decoration: none;
+        color: var(--color-white); }
     .card__bottom-header {
       align-self: end;
       font-size: 1.4rem;
@@ -202,19 +228,21 @@ i {
   column-gap: 0.5rem; }
 
 .navbar {
-  background-color: var(--color-grey-light-4);
+  background-color: var(--color-white);
+  color: var(--color-red-3);
   display: grid;
   grid-template-rows: auto;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   align-content: center; }
   .navbar a {
-    text-decoration: none; }
+    text-decoration: none;
+    color: var(--color-red-3); }
   .navbar__prato {
-    display: grid;
+    display: flex;
     justify-items: start;
     align-items: center;
-    grid-column: 2/3;
+    justify-content: flex-start;
     padding-left: 4rem;
     grid-column: 1/2; }
     .navbar__prato__link {
@@ -227,14 +255,10 @@ i {
       .navbar__prato__h1:hover {
         color: var(--color-tertiary-light);
         transition: all .3s; }
-  .navbar__hero {
-    display: grid;
-    justify-items: center;
-    grid-column: 2/3; }
-    .navbar__hero__svg {
+    .navbar__prato__svg {
       height: 12rem;
       width: 12rem;
-      fill: var(--color-tertiary-light); }
+      fill: var(--color-red-2); }
   .navbar__link {
     display: flex;
     flex-direction: row;
@@ -247,6 +271,11 @@ i {
       font-weight: 100;
       text-decoration: none;
       padding: 1rem; }
+      .navbar__link__item-img {
+        height: 3.5rem;
+        width: 3.5rem;
+        border-radius: 50%;
+        margin-right: 1rem; }
       .navbar__link__item:hover {
         transition: color .4s;
         color: var(--color-tertiary-dark);
@@ -298,11 +327,13 @@ i {
   margin-bottom: 6rem;
   padding: 2rem; }
   .form__signup {
-    height: 52rem; }
-  .form__login {
-    height: 34rem; }
-  .form__createPlate {
+    height: 56rem; }
+  .form__update {
     height: 42rem; }
+  .form__login {
+    height: 36rem; }
+  .form__createPlate {
+    height: 48rem; }
   .form__header {
     text-transform: uppercase;
     font-size: 1.2rem;

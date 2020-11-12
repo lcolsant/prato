@@ -100,3 +100,61 @@ exports.getPlateDetail = async (req, res) => {
         });
     }
 }
+
+exports.updatePlate = async (req, res) => {
+    
+    const plate = await Plate.findById(req.params.id);
+
+
+    try {
+        res.status(200).render('updatePlate', {
+            title: 'Update Plate',
+            plate: plate,
+        });
+
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: 'Error 💥 updating plate in MongoDB..', err
+        });
+    }
+}
+
+exports.getMe = async (req, res) => {
+    
+    try {
+        const token = req.headers.cookie.split('=')[1]
+        const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+        const user = await User.findById(decoded.id, (user)=>{
+            if(user){
+                console.log(`User retrieved: ${user}`)
+            }
+        });
+    
+        res.status(200).render('updateMe', {
+            title: 'My Account',
+            user: user,
+        });
+
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: 'Error 💥 retrieving account ...', err
+        });
+    }
+}
+
+
+exports.updatePassword = async (req, res) => {
+    
+    try {
+        res.status(200).render('updatePassword', {
+        });
+
+    } catch (err) {
+        res.status(404).json({
+            status: 'fail',
+            message: 'Error 💥 rendering update password template..', err
+        });
+    }
+}

@@ -4,6 +4,7 @@ const User = require('../models/userModel');
 const { updateUser } = require('./userController');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+const fs = require('fs');
 
 const multerStorage = multer.diskStorage({
     destination: (req,file, cb) => {
@@ -89,11 +90,10 @@ exports.createPlate = async (req, res) => {
     
     console.log('creating plate...');
     
-    const { name, description } = req.body;
-    console.log(`name:, description`)
+    const { name, description, recipe } = req.body;
 
-    console.log(`name: ${name} description: ${description}`);
-    const photo = 'default-plate.jpg'
+    console.log(`name: ${name} description: ${description} recipe: ${recipe}`);
+    var photo = 'default-plate.jpg'
 
     try {
 
@@ -106,12 +106,6 @@ exports.createPlate = async (req, res) => {
         // console.log(err);
     }
     
-    // console.log(req.file);
-    // console.log(req.body);
-    // console.log(req.user)
-    // console.log(res.locals.user)
-
-    // const { name, description } = req.body;
     
     const userID = req.user._id;
     console.log(`userID: ${userID}`)
@@ -122,6 +116,7 @@ exports.createPlate = async (req, res) => {
         const newPlate = await Plate.create({
             name,
             description,
+            recipe,
             photo,
             user:req.user._id
         });
@@ -130,7 +125,7 @@ exports.createPlate = async (req, res) => {
         console.log(`newPlate: ${newPlate}`)
         
         //add plate to User's plates array
-        console.log(`adding to user: ${userID}`);
+        // console.log(`adding to user: ${userID}`);
 
         const updatedUser = await User.findByIdAndUpdate(
             userID, 
@@ -138,7 +133,7 @@ exports.createPlate = async (req, res) => {
             {new:true}
          );
 
-         console.log(updatedUser);
+        //  console.log(updatedUser);
         
         res.status(201).json({
             status:'success',
@@ -163,11 +158,49 @@ exports.updatePlate = async (req, res) => {
     
     console.log(req.params.id);
     console.log(req.body);
+    console.log(req.file);
+
+
+    console.log('from controller...updating plate...');
     
+    const { name, description, recipe, photo } = req.body;
+
+    console.log(`name: ${name} description: ${description} recipe: ${recipe}`);
+    // const photo = 'default-plate.jpg'
+        
+    try {
+        
+        //if there is no new photo on request object, user has not updated photo. Use previously existing photo path.
+        if(photo === "undefined") {
+            const plate = await Plate.findById(req.params.id);
+            const oldphoto = plate.photo;
+            req.body.photo = oldphoto;
+        } else {
+            // otherwise use the new photo to update db and delete old photo from filesystem
+                console.log(`Filename in update plate: ${req.file.filename}`)
+                req.body.photo = req.file.filename
+    
+                //remove old photo from file system before setting updated photo
+                const plate = await Plate.findById(req.params.id);
+                const oldphoto = plate.photo;
+                if(oldphoto!=='default-plate.jpg'){
+                    const path = `./public/img/plates/${oldphoto}`;
+                    fs.unlink(path, (err) => {
+                        if(err) {
+                            console.log(err);
+                            return
+                        }
+                    });
+                }
+            } 
+        } catch(err) {
+            console.log('Req.file doesn\'t exist')
+        } 
+    
+    //update MongoDB with all new request properties    
     try {
     
         const updatedPlate = await Plate.findByIdAndUpdate(req.params.id,req.body, {new:true, runValidators:true});
-
 
         res.status(201).json({
             status:'success',
@@ -188,12 +221,42 @@ exports.updatePlate = async (req, res) => {
 
 
 exports.deletePlate = async (req, res) => {
-    
+    console.log('in plate controller');
     console.log(req.params.id);
-    console.log(req.body);
+    // console.log(req.body);
     
     try {
-    
+        const token = req.headers.cookie.split('=')[1];
+        const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+        
+        //remove from user's week before deleting plate
+        await User.findByIdAndUpdate(
+            decoded.id, 
+            { $pullAll: { week: [req.params.id] } },
+            {new:true}
+         );
+
+        //remove from user's plates array before deleting plate
+         await User.findByIdAndUpdate(
+            decoded.id, 
+            { $pullAll: { plates: [req.params.id] } },
+            {new:true}
+         );
+        
+         //remove old photo from file system
+         const plate = await Plate.findById(req.params.id);
+         const oldphoto = plate.photo;
+         if(oldphoto!=='default-plate.jpg'){
+             const path = `./public/img/plates/${oldphoto}`;
+             fs.unlink(path, (err) => {
+                 if(err) {
+                     console.log(err);
+                     return
+                 }
+             });
+         }
+
+         //delete plate from MongoDB
         await Plate.findByIdAndDelete(req.params.id);
 
 
@@ -208,7 +271,6 @@ exports.deletePlate = async (req, res) => {
             message: 'Error 💥 deleting plate in MongoDB..', err
         });
     }
-
 }
 
 

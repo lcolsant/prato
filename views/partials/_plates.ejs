@@ -2,7 +2,7 @@
     <% if (plates.length > 0) { %>
     <div class="plates__cards">
         <% for (let i=0; i<plates.length; i++) { %>
-            <div class="card">
+            <div class="card card__hover">
                 <input type="hidden" id="<%=plates[i]._id%>" value= '<%= plates[i]._id %>' >
                 <a href="/plates/<%=plates[i]._id%>">
                     <div class="card__picture">

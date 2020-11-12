@@ -12,7 +12,7 @@ router.route('/')
 
 router.route('/:id')
     .get(plateController.getPlate)
-    .patch(plateController.updatePlate)
+    .patch(authController.protect, plateController.uploadPlatePhoto, plateController.updatePlate)
     .delete(plateController.deletePlate)
     .post(plateController.addToWeek)
 

@@ -11,6 +11,10 @@ const plateSchema = new mongoose.Schema({
         type: String,
         trim: true
     },
+    recipe: {
+        type: String,
+        trim: true
+    },
     photo: {
         type: String,
         default: 'default-plate.jpg'

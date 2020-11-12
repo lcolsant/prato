@@ -1,8 +1,9 @@
 <div class="navbar__prato">
+    <ion-icon class="navbar__prato__svg" src="../../public/img/plate1.svg"></ion-icon>
     <a href="/" class="navbar__prato__link"><h1 class="navbar__prato__h1">Prato</h1></a>
 </div>
 <div class="navbar__hero">
-    <ion-icon class="navbar__hero__svg" src="../../public/img/plate1.svg"></ion-icon>
+    <!-- <ion-icon class="navbar__hero__svg" src="../../public/img/plate1.svg"></ion-icon> -->
 </div>
 <div class="navbar__link">
     <%if(locals.user){%>
@@ -10,6 +11,7 @@
         <a href="/week" class="navbar__link__item">MY WEEK</a>
         <a href="/create" class="navbar__link__item">ADD PLATE</a>
         <a href="/logout" class="navbar__link__item navbar__link-logout">LOG OUT</a>
+        <a href="/me"><img class="navbar__link__item-img" src='/public/img/users/<%=user.photo%>' alt=""></a>
 
     <%}else{%>
         <a href="/login" class="navbar__link__item">LOG IN</a>

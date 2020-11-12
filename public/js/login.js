@@ -42,7 +42,7 @@ export const logout = async () => {
 }
 
 export const signup = async (name, email, password, passwordConfirm) => {
-    console.log(`in signup...${name}...${email} ...${password}...${passwordConfirm}`);
+    // console.log(`in signup...${name}...${email} ...${password}...${passwordConfirm}`);
     try {
         const res = await axios({
             method: 'POST',
@@ -70,3 +70,65 @@ export const signup = async (name, email, password, passwordConfirm) => {
     }
 };
 
+export const updateMe = async (data,id) => {
+
+    console.log(id);
+    console.log('in updateMe:');
+
+    // for (var p of data) {
+    //     console.log(p);
+    // }
+    try {
+
+        const res = await axios({
+            method: 'patch',
+            url: `/api/v1/users/${id}`,
+            data: data
+        });
+
+        if(res.data.status == 'success') {
+            showAlert('success','Updated user successfully!');
+            console.log(res.data)
+            window.setTimeout(() => {
+                location.assign('/plates');
+            }, 2000);
+        }
+
+
+    } catch (err) {
+        alert('Error updating user!');
+        console.log(err);
+    }
+}
+
+export const updatePassword = async (currentPassword, newPassword, passwordConfirm) => {
+
+    console.log('in updatePassword:');
+    console.log(currentPassword, newPassword, passwordConfirm);
+
+    try {
+
+        const res = await axios({
+            method: 'patch',
+            url: `/api/v1/users/`,
+            data: {
+                currentPassword,
+                newPassword,
+                passwordConfirm
+            }
+        });
+
+        if(res.data.status == 'success') {
+            showAlert('success','Updated password successfully!');
+            console.log(res.data)
+            // window.setTimeout(() => {
+            //     location.assign('/plates');
+            // }, 2000);
+        }
+
+
+    } catch (err) {
+        alert('Error updating user!');
+        console.log(err);
+    }
+}

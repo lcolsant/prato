@@ -7,17 +7,24 @@
                 <img src="../public/img/plates/<%=plate.photo%>" class="card__picture-img" alt="">
             </div>
             <div class="card__title">
-                <%=plate.name%>
+                <div class="card__title-detail">
+                    <%=plate.name%>
+                </div>
             </div>
             <div class="card__description">
+                <p class="card__header"><em>Description:</em></p>
                 <%=plate.description%>
             </div>
-            <div class="card__description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat.
+            <div class="card__recipe">
+                <p class="card__header"><em>Recipe:</em></p>
+                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat. -->
+                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat. -->
+                <%=plate.recipe%>
+            
             </div>
             <div class="card__bottom-detail">
-                <button class="btn">Update Plate</button>
-                <button class="btn">Delete Plate</button>
+                <button class="btn"> <a href='/plates/update/<%=plate._id%>'>Update Plate</a></button>
+                <button class="btn deletePlateBtn" id="<%=plate._id %>">Delete Plate</button>
             </div>
         </div>
     </div>

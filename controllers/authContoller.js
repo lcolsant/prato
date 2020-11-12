@@ -194,9 +194,9 @@ exports.protect = async (req, res, next) => {
     }
 
     // 3) Check if user still exists
-    console.log(decoded);
+    // console.log(decoded);
     const currentUser = await User.findById(decoded.id);
-    console.log(currentUser);
+    // console.log(currentUser);
     
     if(!currentUser) {
         return next(new Error('The user belonging to the token no longer exists.'))
@@ -247,3 +247,52 @@ exports.isLoggedIn = async (req, res, next) => {
     }
     next();
   };
+
+  exports.updatePassword = async (req, res) => {
+    
+    try {
+        console.log('in update password')
+        console.log(req.body)
+
+        const user = await User.findById(req.user.id).select('+password');
+
+        console.log(`retrieved user: ${user}`)
+
+        if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
+            return next(new Error('Your current password is wrong.'));
+        }
+
+        user.password = req.body.newPassword;
+        user.passwordConfirm = req.body.passwordConfirm;
+        await user.save();
+
+
+        //send token
+        const token = jwt.sign( {id: user._id} , process.env.JWT_SECRET, {
+            expiresIn: process.env.JWT_EXPIRES_IN
+        });;
+
+        if(process.env.NODE_ENV === 'production') cookieOptions.secure = true;
+
+        //send cookie
+        res.cookie('jwt', token, cookieOptions);
+
+        user.password = undefined;
+        res.locals.user = user;
+        
+        res.status(200).json({
+            status: 'success',
+            token,
+            data: {
+                user
+            }
+        });
+        
+    } catch (error) {
+        console.log('error updating password');
+        console.log(error);
+        
+    }
+    
+    
+  }

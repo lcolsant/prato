@@ -12,7 +12,7 @@
     text-decoration: none;
     text-align: center;
     // padding-top: .6rem;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
     margin-top: 4rem;
     cursor: pointer;
 
@@ -64,6 +64,9 @@ i {
     
 }
 
+#card-nohover {
+    transform: translateY(0);
+}
 .card {
     // display: inline-block;
     // height: 30rem;
@@ -79,6 +82,21 @@ i {
     font-weight: 100;
     // padding: 1rem;
     margin: 2rem;
+    transition: all .2s;
+
+    &__hover {
+        &:hover {
+            transform: translateY(-0.1rem);
+            box-shadow: var(--shadow-dark);
+
+        }
+
+        &:active {
+            transform: translateY(0);
+            box-shadow: var(--shadow-medium);
+        }
+    }
+
 
     &__picture {
         height: 20rem;
@@ -109,15 +127,36 @@ i {
         padding: 1rem;
         font-size: 1.8rem;
         font-weight: 300;
+
+        &-detail {
+            font-size: 2.4rem;
+
+        }
     }
 
     &__description {
-        height: 10rem;
+        // height: 10rem;
+        height: minmax(10rem, min-content);
         background-color: var(--color-white);
         padding: 1rem;
         font-size: 1.3rem;
         font-weight: 100;
 
+    }
+
+    &__recipe {
+        height: min-content;
+        background-color: var(--color-white);
+        padding: 1rem;
+        font-size: 1.3rem;
+        font-weight: 100;
+
+    }
+
+    &__header {
+        font-size: 1.5rem;
+        font-weight: 300;
+        margin-bottom: 1rem;
     }
 
     &__bottom {
@@ -140,6 +179,11 @@ i {
             height: 12rem;
             justify-items: center;
             align-items: center;
+
+            a {
+                text-decoration: none;
+                color: var(--color-white);
+            }
 
             // grid-template-rows: repeat(2,auto);
         }
