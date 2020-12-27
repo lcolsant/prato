@@ -56,9 +56,8 @@ export const signup = async (name, email, password, passwordConfirm) => {
         });
 
         if(res.data.status == 'success') {
-            // showAlert('success', 'Logged in successfully!');
-            alert('Sign up successfully!');
-            console.log(res.data)
+            showAlert('success', 'Created account successfully!');
+            // console.log(res.data)
             window.setTimeout(() => {
                 location.assign('/plates');
             }, 1500);
@@ -129,6 +128,34 @@ export const updatePassword = async (currentPassword, newPassword, passwordConfi
 
     } catch (err) {
         alert('Error updating user!');
+        console.log(err);
+    }
+}
+
+export const deleteMe = async (id) => {
+
+    // console.log(id);
+    // console.log('in updateMe:');
+
+    try {
+
+        const res = await axios({
+            method: 'delete',
+            url: `/api/v1/users/${id}`,
+        });
+
+        console.log(res.status);
+
+        if(res.status == 204) {
+            showAlert('success','Account successfully deleted!');
+            // console.log(res.data)
+            window.setTimeout(() => {
+                location.assign('/');
+            }, 2000);
+        }
+
+    } catch (err) {
+        alert('Error deleting account!');
         console.log(err);
     }
 }

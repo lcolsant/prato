@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/userModel');
 const { promisify } = require('util');
+// const sendEmail = require('../utils/email');
+const Email = require('../utils/email');
 
 
 
@@ -46,8 +48,8 @@ const cookieOptions = {
 
 
 exports.signup = async (req, res) => {
-    
-    //console.log(req.body);
+    console.log('in auth controller, signup:')
+    console.log(req.body);
     
     try {
     
@@ -71,6 +73,20 @@ exports.signup = async (req, res) => {
 
         //Set password to undefined so that it doesn't appear in response
         newUser.password = undefined;
+
+        // Send welcome email
+
+        //use code below for non-class based email option
+        // await sendEmail({
+        //     email: req.body.email,
+        //     name: req.body.name.split(" ")[0],
+        //     subject: 'Welcome to Prato!',
+        //     type: 'welcome'
+        // });
+        
+        const url = `${req.protocol}://${req.get('host')}`
+
+        await new Email(newUser, url).sendWelcome();
 
         res.status(201).json({
             status:'success',

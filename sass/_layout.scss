@@ -55,11 +55,11 @@
             font-weight: 100;
             text-transform: uppercase;
 
-            &:hover {
-                color: var(--color-tertiary-light);
-                transition: all .3s;
+            // &:hover {
+            //     color: var(--color-tertiary-light);
+            //     transition: all .3s;
                 
-            }
+            // }
             
         }
 
@@ -72,9 +72,9 @@
     }
 
     &__hero {
-        // display: grid;
-        // justify-items: center;
-        // grid-column: 2/3;
+        display: grid;
+        justify-items: center;
+        grid-column: 2/3;
         // margin-top: 1rem;
         // &__svg {
         //     height: 12rem;
@@ -155,14 +155,11 @@
 
     &__copyright {
         grid-column: 3/4;
-        
         display: flex;
         justify-content: flex-end;
         align-items: center;
-        
         font-size: 1.4rem;
         font-weight: 100;
-
         padding-right: 4rem;
         
     }
@@ -190,7 +187,34 @@
     }
 
     &__update {
-        height: 42rem;        
+        height: 46rem;
+
+        &__deleteAccount {
+            margin-top: 2rem;
+            margin-left: 0.6rem;
+            color: var(--color-red-2);
+            font-size: 1.5rem;
+            font-weight: 400;
+            border: none;
+            background-color: var(--color-white);
+            padding: 1rem;
+            border-radius: 2px;
+
+            &:hover{
+                transition: all 0.2s;
+                transform: translateY(-1px);
+                color: var(--color-white);
+                background-color: var(--color-red-2);
+                box-shadow: var(--shadow-dark);
+
+            }
+
+            &:active {
+                transform: translateY(0px);
+                box-shadow: var(--shadow-medium);
+            }
+            
+        }        
     }
     
     &__login {
@@ -365,7 +389,7 @@
             width: 100%;  //overlapping 100% of width of parent element
             height: 100%;  //overlapping 100% of height of parent element
             background-image: linear-gradient(to right bottom,var(--color-white),var(--color-white));
-            opacity: 0.3;
+            opacity: 0.2;
 
         }
 
@@ -475,23 +499,18 @@
       grid-template-rows: min-content repeat(3,5rem);
       grid-template-columns: 20rem 50rem 15rem;
 
-      &:first-child{
-          margin-top: 4rem;
-      }
-      
-      &:last-child{
-          margin-bottom: 8rem;
-      }
-
-      margin-bottom: 4rem;
+      margin-top: 1rem;
       padding: 1rem;
       box-shadow: var(--shadow-medium);
       font-size: 2rem;
     //   transition: all 0.3s;
 
-    //   &:hover {
-    //       transform: translateY(-1px);
-    //   }
+    &:hover{
+        transition: all .2s;
+        outline: 2px dashed #20bf6b;
+        // transform: scale(103%);
+    }
+
       
       &__pic {
             grid-row: 1 / -1;

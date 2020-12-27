@@ -123,7 +123,7 @@ i {
       width: 100%;
       height: 100%;
       background-image: linear-gradient(to right bottom, var(--color-white), var(--color-white));
-      opacity: 0.3; }
+      opacity: 0.2; }
     .card__picture-img {
       object-fit: cover;
       height: 100%;
@@ -218,6 +218,24 @@ i {
 .alert--error {
   background-color: #eb4d4b; }
 
+#sortlist {
+  list-style: none;
+  padding: 0;
+  margin: 0; }
+
+#sortlist li {
+  cursor: move;
+  padding: 0;
+  margin: 0; }
+
+#sortlist li.hint {
+  background: #fea;
+  border: 3px dashed red; }
+
+#sortlist li.active {
+  background: #ffd4d4;
+  border: 3px dashed red; }
+
 .container {
   background-color: var(--color-grey-light-1);
   min-height: 100vh;
@@ -252,13 +270,14 @@ i {
       font-size: 2.5rem;
       font-weight: 100;
       text-transform: uppercase; }
-      .navbar__prato__h1:hover {
-        color: var(--color-tertiary-light);
-        transition: all .3s; }
     .navbar__prato__svg {
       height: 12rem;
       width: 12rem;
       fill: var(--color-red-2); }
+  .navbar__hero {
+    display: grid;
+    justify-items: center;
+    grid-column: 2/3; }
   .navbar__link {
     display: flex;
     flex-direction: row;
@@ -329,7 +348,26 @@ i {
   .form__signup {
     height: 56rem; }
   .form__update {
-    height: 42rem; }
+    height: 46rem; }
+    .form__update__deleteAccount {
+      margin-top: 2rem;
+      margin-left: 0.6rem;
+      color: var(--color-red-2);
+      font-size: 1.5rem;
+      font-weight: 400;
+      border: none;
+      background-color: var(--color-white);
+      padding: 1rem;
+      border-radius: 2px; }
+      .form__update__deleteAccount:hover {
+        transition: all 0.2s;
+        transform: translateY(-1px);
+        color: var(--color-white);
+        background-color: var(--color-red-2);
+        box-shadow: var(--shadow-dark); }
+      .form__update__deleteAccount:active {
+        transform: translateY(0px);
+        box-shadow: var(--shadow-medium); }
   .form__login {
     height: 36rem; }
   .form__createPlate {
@@ -433,7 +471,7 @@ i {
       width: 100%;
       height: 100%;
       background-image: linear-gradient(to right bottom, var(--color-white), var(--color-white));
-      opacity: 0.3; }
+      opacity: 0.2; }
   .landing__smbox {
     display: flex;
     flex-direction: column;
@@ -493,14 +531,13 @@ i {
   display: grid;
   grid-template-rows: min-content repeat(3, 5rem);
   grid-template-columns: 20rem 50rem 15rem;
-  margin-bottom: 4rem;
+  margin-top: 1rem;
   padding: 1rem;
   box-shadow: var(--shadow-medium);
   font-size: 2rem; }
-  .row:first-child {
-    margin-top: 4rem; }
-  .row:last-child {
-    margin-bottom: 8rem; }
+  .row:hover {
+    transition: all .2s;
+    outline: 2px dashed #20bf6b; }
   .row__pic {
     grid-row: 1 / -1;
     grid-column: 1 / 2;

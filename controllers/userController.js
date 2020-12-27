@@ -1,8 +1,10 @@
 
 const User = require('../models/userModel');
+const Plate = require('../models/plateModel');
 const multer = require('multer');
 const fs = require('fs');
 const sharp = require('sharp');
+const { findByIdAndDelete } = require('../models/userModel');
 
 
 // const multerStorage = multer.diskStorage({
@@ -175,14 +177,53 @@ exports.updateUser = async (req,res) => {
 
 
 exports.deleteUser = async (req, res) => {
-    
+    console.log('in delete user controller');
     console.log(req.params.id);
-    console.log(req.body);
+    
     
     try {
+        
+        //retrieve User to delete User's plates from DB and file system before deleting user
+        const user = await User.findById(req.params.id);
+        const plates = user.plates;
+        // console.log(plates);
+        const userPhoto = user.photo;
+        const plateIDs = plates.map(plate => plate._id);
+        const platePhotos = plates.map(plate => plate.photo);
+        // console.log(plateIDs);
+        // console.log(platePhotos);
+
+        // 1) delete User photo from filesystem
+
+        if(userPhoto!=='default-user.jpg'){
+            const path = `./public/img/users/${userPhoto}`;
+            fs.unlink(path, (err) => {
+                if(err) {
+                    console.log(err);
+                    return
+                }
+            });
+        }
+
+        // 2) delete user's Plates from DB
+        for(let i=0; i<plateIDs.length; i++) {
+            await Plate.findByIdAndDelete(plateIDs[i]);
+        };
+
+        // 3) delete plate photos from filesystem
+        for(let i=0; i<platePhotos.length; i++) {
+            const path = `./public/img/plates/${platePhotos[i]}`;
+            fs.unlink(path, (err) => {
+                if(err) {
+                    console.log(err);
+                    return
+                }
+            });
+        }
+
+        // 4) delete user from DB 
     
         await User.findByIdAndDelete(req.params.id);
-
 
         res.status(204).json({
             status:'success',

@@ -19,7 +19,7 @@ export const addToWeek = async (plateID) => {
         }
 
     }catch (err) {
-        showAlert('error', 'Error adding plate to week.' );
+        showAlert('error', 'Error adding plate to week. Check that you have less than 7 plates per week!' );
     }
 }
 
@@ -41,6 +41,47 @@ export const removeFromWeek = async (plateID) => {
 
     }catch (err) {
         showAlert('error', 'Error removing plate from week.' );
+    }
+}
+
+export const updateWeek = async (draggedID,droppedID) => {
+    
+    try {
+        // console.log('in updateweek js')
+        // console.log(draggedID,droppedID);
+        const res = await axios({
+            method:'patch',
+            url:`/api/v1/plates/week/update`,
+            data: {
+                draggedID,
+                droppedID
+            }
+        });
+
+        if(res.data.status == 'success'){
+            location.assign('/week');
+        }
+
+    } catch (err) {
+        showAlert('error', 'Error updating week.' );
+    }
+}
+
+export const emailWeek = async () => {
+    
+    try {
+        console.log('in emailWeek js')
+        const res = await axios({
+            method:'GET',
+            url:`/api/v1/plates/week/email`,
+        });
+
+        if(res.data.status == 'success'){
+            showAlert('success', 'Successfully emailed week!');
+        }
+
+    } catch (err) {
+        showAlert('error', 'Error emailing week.' );
     }
 }
 

@@ -1,8 +1,8 @@
 import '@babel/polyfill';  //allow newer javascript features to work in older browsers
-import { login, signup, logout, updateMe, updatePassword } from './login';
+import { login, signup, logout, updateMe, updatePassword, deleteMe } from './login';
 // import { plates } from '../../dev-data/data/plates-dev';
 import { createPlate, deletePlate, updatePlate } from './plate';
-import { addToWeek, removeFromWeek } from './week';
+import { addToWeek, removeFromWeek, updateWeek, emailWeek } from './week';
 
 const loginForm = document.querySelector('.form__login-input');
 const signUpForm = document.querySelector('.form__login-signup');
@@ -12,6 +12,9 @@ const createPlateForm = document.querySelector('.form__createPlate-addPlate')
 const logOutBtn = document.querySelector('.navbar__link-logout');
 const deletePlateBtn = document.querySelector('.deletePlateBtn');
 const updatePlateForm = document.querySelector('.form__createPlate-updatePlate');
+const emailPlates = document.querySelector('.email');
+const deleteAccount = document.querySelector('.form__update__deleteAccount');
+
 // const IDinput = document.getElementById('plateID');
 
 const selectPlateBtn = document.querySelectorAll('.card').forEach(item =>{
@@ -31,9 +34,11 @@ const selectRow = document.querySelectorAll('.row__btn').forEach(item =>{
     item.addEventListener('click', e => {
         e.preventDefault();
         // console.log(item.firstElementChild.id)
-        let removePlate = document.getElementById(item.firstElementChild.id);
-        console.log(removePlate.value);
-        removeFromWeek(removePlate.value);
+        // let removePlate = document.getElementById(item.firstElementChild.id);
+        let removePlate = item.firstElementChild.id;
+        console.log(item.firstElementChild.id);
+        // console.log(removePlate.value);
+        removeFromWeek(removePlate);
     });
 });
 
@@ -127,6 +132,27 @@ if(deletePlateBtn) {
     });
 } 
 
+if(emailPlates) {
+  // console.log('found signup form');
+  emailPlates.addEventListener('click', e => {
+      e.preventDefault();
+      // console.log('email Plates button clicked');
+      // console.log(e.target.id)
+      emailWeek();
+  });
+} 
+
+if(deleteAccount) {
+  // console.log('found signup form');
+  deleteAccount.addEventListener('click', e => {
+      e.preventDefault();
+      console.log('Account deleted');
+      console.log(e.target.value);
+      deleteMe(e.target.value);
+
+  });
+} 
+
 
 
 if(updatePlateForm) {
@@ -143,3 +169,69 @@ if(updatePlateForm) {
         updatePlate(formData,id);
     });
 }
+
+
+//Draggable feature on week page
+
+window.addEventListener("load", function(){
+    var items = document.querySelectorAll("#sortlist li"),
+        dragged = null;
+  
+    for (let i of items) {
+      // DRAG START - YELLOW HIGHLIGHT DROPZONE
+      // Highlight all except the one being dragged
+      i.addEventListener("dragstart", function () {
+        dragged = this;
+        for (let j of items) {
+          if (j != dragged) { j.classList.add("hint"); }
+        }
+      });
+  
+      // Drag Enter - add light red highlight
+      i.addEventListener("dragenter", function () {
+        if (this != dragged) { this.classList.add("active"); }
+      });
+  
+      //DRAG LEAVE - REMOVE RED HIGHLIGHT
+    //   i.addEventListener("dragleave", function () {
+    //     this.classList.remove("active");
+    //   });
+  
+      //Drag over - prevent default drop behavior
+      i.addEventListener("dragover", function (e) {
+        e.preventDefault();
+      });
+  
+      // Drop - determine position of dragged and dropped element
+      i.addEventListener("drop", function (e) {
+        e.preventDefault();
+        if (this != dragged) {
+          let all = document.querySelectorAll("#sortlist li"),
+              draggedpos = 0, droppedpos = 0;
+          for (let it=0; it<all.length; it++) {
+            if (dragged == all[it]) { draggedpos = it; }
+            if (this == all[it]) { droppedpos = it; }
+          }
+          if (draggedpos < droppedpos) {
+            this.parentNode.insertBefore(dragged, this.nextSibling);
+          } else {
+            this.parentNode.insertBefore(dragged, this);
+          }
+        //    console.log(dragged.attributes.id);
+        //    console.log(this.attributes.id);
+
+           const draggedID = dragged.attributes.id.value;
+           const droppedID = this.attributes.id.value;
+           updateWeek(draggedID, droppedID);
+        }
+      });
+  
+      // DRAG END - REMOVE ALL HIGHLIGHT
+      i.addEventListener("dragend", function () {
+        for (let j of items) {
+          j.classList.remove("hint");
+          j.classList.remove("active");
+        }
+      });
+    }
+  });

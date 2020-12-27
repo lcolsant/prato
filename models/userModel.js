@@ -46,7 +46,8 @@ const userSchema = new mongoose.Schema({
     week: [
         {
             type: mongoose.Schema.ObjectId,
-            ref: 'Plate'
+            ref: 'Plate',
+            validate: [arrayLimit,'Cannot exceed 7 plates per week!'],
         }
     ],
     passwordChangedAt: Date,
@@ -99,6 +100,12 @@ userSchema.methods.changedPasswordAfter = function(JWTTimestamp) {
     // False means NOT changed
     return false;
 };
+
+function arrayLimit (val) {
+
+    console.log(val);
+    return val.length < 8;
+}
 
 const User = mongoose.model('User', userSchema)
 

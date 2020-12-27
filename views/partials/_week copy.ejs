@@ -1,0 +1,51 @@
+<div class="week">
+    <% if (week.length > 0) { %>
+    <% for (let i=0; i<week.length; i++) { %>
+    <div class="row">
+        <div class="row__pic">
+            <div class="card__picture">
+                <div class="card__picture-overlay">&nbsp;</div>
+                <img src="public/img/plates/<%=week[i].photo%>" class="card__picture-img" alt="">
+            </div>
+        </div>
+        <div class="row__day">
+            <% if(i==0){ %>
+                <p>Sunday</p>
+            <%} else if (i==1) { %>
+                <p>Monday</p>
+            <% } else if (i==2) { %>
+                <p>Tuesday</p>
+            <% } else if (i==3) { %>
+                <p>Wednesday</p>
+            <% } else if (i==4) { %>
+                <p>Thursday</p>
+            <% } else if (i==5) { %>
+                <p>Friday</p>
+            <% } else if (i==6) { %>
+                <p>Saturday</p>
+            <% } else { %>
+                <p>Not a day of the week!</p>
+            <% } %>
+
+        </div>
+        <div class="row__title">
+            <%=week[i].name%>
+        </div>
+        <div class="row__description">
+            <%=week[i].description%>
+        </div>
+        <div class="row__btn">
+            <input type="hidden" id="<%= week[i]._id %>" value= '<%= week[i]._id %>' >
+            <button class="btn row__btn-btn">Remove Plate</button>
+        </div>
+    </div>
+
+    <% } %>
+
+    <% } else { %>
+        <div class="plates__add">
+            <p class="plates__add-text">Looks like you haven't added a plate to your week yet! </p>
+            <button class="btn plates__add-btn"><a href="/plates" class="btn plates__add-btn">See my plates</a></button>
+        </div>
+    <% } %>
+</div>
