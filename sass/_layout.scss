@@ -55,12 +55,6 @@
             font-weight: 100;
             text-transform: uppercase;
 
-            // &:hover {
-            //     color: var(--color-tertiary-light);
-            //     transition: all .3s;
-                
-            // }
-            
         }
 
         &__svg {
@@ -71,26 +65,23 @@
         }
     }
 
-    &__hero {
-        display: grid;
-        justify-items: center;
-        grid-column: 2/3;
-        // margin-top: 1rem;
-        // &__svg {
-        //     height: 12rem;
-        //     width: 12rem;
-        //     // fill: var(--color-tertiary-light);
-        //     fill: var(--color-red-2);
-        // }
-    }
+    // &__hero {
+    //     display: grid;
+    //     justify-items: center;
+    //     grid-column: 2/3;
+
+    // }
     
 
     &__link {
+        grid-column: 2/4;
 
         display: flex;
         flex-direction: row;
         justify-content: end;
         align-items: center;
+        padding-right: 2rem;
+        // box-sizing: border-box;
         // margin-top: 1rem;
         // margin-right: 1rem;
 
@@ -98,7 +89,7 @@
             margin-right: 1rem;
             color: var(--color-grey-dark-2);
             font-size: 1.5rem;
-            font-weight: 100;
+            // font-weight: 100;
             text-decoration: none;
             padding: 1rem;
             //background-color: transparent;
@@ -113,7 +104,6 @@
             &:hover { 
                 transition: color .4s;
                 color: var(--color-tertiary-dark);
-                font-weight: 400;
                 border-bottom: 1px solid var(--color-tertiary-dark);
                 transform: translateY(1px);   //offset initial upward movement (default)
 
@@ -137,6 +127,12 @@
     justify-content: center;
     background-color: var(--color-grey-light-3);
 }
+
+// .week {
+//     display: flex;
+//     flex-direction: center;
+//     align-items: center;
+// }
 
 .footer {
     display: grid;
@@ -218,7 +214,7 @@
     }
     
     &__login {
-        height: 36rem;
+        height: 38rem;
     }
 
     &__createPlate {
@@ -304,7 +300,7 @@
         grid-template-columns: repeat(auto-fit, 36rem);
         grid-auto-rows: 46rem;
         column-gap: 0.5rem;
-        margin-top: 4rem;
+        margin-top: 2rem;
         margin-bottom: 6rem;
 
         &-detail {
@@ -325,16 +321,22 @@
         text-align: center;
         width: 60%;
         margin: 0 auto;
+        // margin-top: 8rem;
         font-size: 2.5rem;
         font-weight: 300;
         color: var(--color-tertiary-dark);
         
         &-text {
+            margin-top: 6rem;
             margin-bottom: 2rem;
         }
 
         &-btn {
             width: 12rem;
+        }
+
+        &-week {
+            margin-top: 8rem;
         }
     }
 

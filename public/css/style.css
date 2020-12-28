@@ -274,20 +274,17 @@ i {
       height: 12rem;
       width: 12rem;
       fill: var(--color-red-2); }
-  .navbar__hero {
-    display: grid;
-    justify-items: center;
-    grid-column: 2/3; }
   .navbar__link {
+    grid-column: 2/4;
     display: flex;
     flex-direction: row;
     justify-content: end;
-    align-items: center; }
+    align-items: center;
+    padding-right: 2rem; }
     .navbar__link__item {
       margin-right: 1rem;
       color: var(--color-grey-dark-2);
       font-size: 1.5rem;
-      font-weight: 100;
       text-decoration: none;
       padding: 1rem; }
       .navbar__link__item-img {
@@ -298,7 +295,6 @@ i {
       .navbar__link__item:hover {
         transition: color .4s;
         color: var(--color-tertiary-dark);
-        font-weight: 400;
         border-bottom: 1px solid var(--color-tertiary-dark);
         transform: translateY(1px); }
 
@@ -369,7 +365,7 @@ i {
         transform: translateY(0px);
         box-shadow: var(--shadow-medium); }
   .form__login {
-    height: 36rem; }
+    height: 38rem; }
   .form__createPlate {
     height: 48rem; }
   .form__header {
@@ -417,7 +413,7 @@ i {
     grid-template-columns: repeat(auto-fit, 36rem);
     grid-auto-rows: 46rem;
     column-gap: 0.5rem;
-    margin-top: 4rem;
+    margin-top: 2rem;
     margin-bottom: 6rem; }
     .plates__cards-detail {
       display: grid;
@@ -437,9 +433,12 @@ i {
     font-weight: 300;
     color: var(--color-tertiary-dark); }
     .plates__add-text {
+      margin-top: 6rem;
       margin-bottom: 2rem; }
     .plates__add-btn {
       width: 12rem; }
+    .plates__add-week {
+      margin-top: 8rem; }
 
 .landing {
   display: grid;

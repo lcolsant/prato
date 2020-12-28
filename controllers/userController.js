@@ -46,6 +46,7 @@ exports.resizeUserPhoto = async (req, res, next) => {
         req.file.filename = `user-${req.user._id}-${req.body.name}-${Date.now()}.jpeg`;
       
         await sharp(req.file.buffer)
+          .rotate()
           .resize(500, 500)
           .toFormat('jpeg')
           .jpeg({ quality: 90 })
