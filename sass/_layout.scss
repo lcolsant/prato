@@ -128,11 +128,12 @@
     background-color: var(--color-grey-light-3);
 }
 
-// .week {
-//     display: flex;
-//     flex-direction: center;
-//     align-items: center;
-// }
+.week {
+    // display: flex;
+    // flex-direction: center;
+    // align-items: center;
+    margin-top: 2rem;
+}
 
 .footer {
     display: grid;
@@ -184,10 +185,10 @@
 
     &__update {
         height: 46rem;
+        z-index: 0;
 
-        &__deleteAccount {
-            margin-top: 2rem;
-            margin-left: 0.6rem;
+        &__deleteAccount, &__password {
+            margin-top: 1.5rem;
             color: var(--color-red-2);
             font-size: 1.5rem;
             font-weight: 400;
@@ -195,6 +196,7 @@
             background-color: var(--color-white);
             padding: 1rem;
             border-radius: 2px;
+            text-decoration: none;
 
             &:hover{
                 transition: all 0.2s;
@@ -215,6 +217,11 @@
     
     &__login {
         height: 38rem;
+        
+        // &-update{
+        //     position: relative;
+        
+        // }
     }
 
     &__createPlate {
@@ -459,15 +466,13 @@
 
 }
 
-
 .form__upload {
-    width: 0.1px;
-    height: 0.1px;
-    opacity: 0;
-    overflow: hidden;
-    position: absolute;
-    // color: red;
-    z-index: -1;
+    // width: 0.1px;
+    // height: 0.1px;
+    // opacity: 0;
+    // overflow: hidden;
+    // position: absolute;
+    // z-index: -1;
 
     &__label {
      
@@ -571,6 +576,49 @@
         // border: 1px solid turquoise;
       }
   }
+
+  .uploadbtn-wrap {
+      position: relative;
+  }
+
+  input[type="file"] {
+    position: absolute;
+    z-index: -1;
+    top: 8px;
+    left: 54px;
+    font-size: 12px;
+    color: var(--color-tertiary-light);
+  }
+
+  .upload-button {
+    display: inline-block;
+    padding: .8rem 1.2rem; 
+    cursor: pointer;
+    border-radius: 2px;
+    font-size: 1.2rem;
+    // background-color: var(--color-tertiary-light);
+    // color: #fff;
+
+    background-color: var(--color-white);
+    color: var(--color-tertiary-light);
+    border-bottom: 2px solid var(--color-tertiary-light);
+
+    &:hover {
+        transition: all .4s;
+        background-color: var(--color-tertiary-light);
+        color: var(--color-white);
+
+    }  
+    
+    &:active {
+        transition: all .1s;
+        transform: translateY(1px);
+
+    }
+    
+}
+
+
   
 
   

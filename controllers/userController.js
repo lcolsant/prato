@@ -178,8 +178,8 @@ exports.updateUser = async (req,res) => {
 
 
 exports.deleteUser = async (req, res) => {
-    console.log('in delete user controller');
-    console.log(req.params.id);
+    // console.log('in delete user controller');
+    // console.log(req.params.id);
     
     
     try {

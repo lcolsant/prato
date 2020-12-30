@@ -9534,11 +9534,11 @@ if (emailPlates) {
 }
 
 if (deleteAccount) {
-  // console.log('found signup form');
+  // console.log('found delete account button');
   deleteAccount.addEventListener('click', function (e) {
-    e.preventDefault();
-    console.log('Account deleted');
-    console.log(e.target.value);
+    e.preventDefault(); // console.log('Account deleted');
+    // console.log(e.target.value);
+
     (0, _login.deleteMe)(e.target.value);
   });
 }

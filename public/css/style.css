@@ -309,6 +309,9 @@ i {
   justify-content: center;
   background-color: var(--color-grey-light-3); }
 
+.week {
+  margin-top: 2rem; }
+
 .footer {
   display: grid;
   flex-direction: row;
@@ -344,24 +347,25 @@ i {
   .form__signup {
     height: 56rem; }
   .form__update {
-    height: 46rem; }
-    .form__update__deleteAccount {
-      margin-top: 2rem;
-      margin-left: 0.6rem;
+    height: 46rem;
+    z-index: 0; }
+    .form__update__deleteAccount, .form__update__password {
+      margin-top: 1.5rem;
       color: var(--color-red-2);
       font-size: 1.5rem;
       font-weight: 400;
       border: none;
       background-color: var(--color-white);
       padding: 1rem;
-      border-radius: 2px; }
-      .form__update__deleteAccount:hover {
+      border-radius: 2px;
+      text-decoration: none; }
+      .form__update__deleteAccount:hover, .form__update__password:hover {
         transition: all 0.2s;
         transform: translateY(-1px);
         color: var(--color-white);
         background-color: var(--color-red-2);
         box-shadow: var(--shadow-dark); }
-      .form__update__deleteAccount:active {
+      .form__update__deleteAccount:active, .form__update__password:active {
         transform: translateY(0px);
         box-shadow: var(--shadow-medium); }
   .form__login {
@@ -500,31 +504,24 @@ i {
     color: var(--color-tertiary-light);
     font-size: 3.2rem; }
 
-.form__upload {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1; }
-  .form__upload__label {
-    color: var(--color-tertiary-light);
-    display: inline-block;
-    text-decoration: none;
-    border-bottom: 1px solid var(--color-tertiary-light);
-    padding: 3px !important;
-    -webkit-transition: all 0.2s;
-    transition: all 0.2s;
-    cursor: pointer; }
-    .form__upload__label:hover {
-      background-color: var(--color-tertiary-light);
-      color: #fff;
-      -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-      box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
-      -webkit-transform: translateY(-2px);
-      transform: translateY(-2px); }
-    .form__upload__label:active {
-      transform: translateY(2px); }
+.form__upload__label {
+  color: var(--color-tertiary-light);
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-tertiary-light);
+  padding: 3px !important;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+  cursor: pointer; }
+  .form__upload__label:hover {
+    background-color: var(--color-tertiary-light);
+    color: #fff;
+    -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+    -webkit-transform: translateY(-2px);
+    transform: translateY(-2px); }
+  .form__upload__label:active {
+    transform: translateY(2px); }
 
 .row {
   display: grid;
@@ -569,3 +566,31 @@ i {
     align-content: center;
     padding: 1rem;
     background-color: var(--color-grey-light-2); }
+
+.uploadbtn-wrap {
+  position: relative; }
+
+input[type="file"] {
+  position: absolute;
+  z-index: -1;
+  top: 8px;
+  left: 54px;
+  font-size: 12px;
+  color: var(--color-tertiary-light); }
+
+.upload-button {
+  display: inline-block;
+  padding: .8rem 1.2rem;
+  cursor: pointer;
+  border-radius: 2px;
+  font-size: 1.2rem;
+  background-color: var(--color-white);
+  color: var(--color-tertiary-light);
+  border-bottom: 2px solid var(--color-tertiary-light); }
+  .upload-button:hover {
+    transition: all .4s;
+    background-color: var(--color-tertiary-light);
+    color: var(--color-white); }
+  .upload-button:active {
+    transition: all .1s;
+    transform: translateY(1px); }

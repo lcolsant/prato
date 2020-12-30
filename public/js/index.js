@@ -143,11 +143,11 @@ if(emailPlates) {
 } 
 
 if(deleteAccount) {
-  // console.log('found signup form');
+  // console.log('found delete account button');
   deleteAccount.addEventListener('click', e => {
       e.preventDefault();
-      console.log('Account deleted');
-      console.log(e.target.value);
+      // console.log('Account deleted');
+      // console.log(e.target.value);
       deleteMe(e.target.value);
 
   });
