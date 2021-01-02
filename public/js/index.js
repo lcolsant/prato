@@ -15,14 +15,10 @@ const updatePlateForm = document.querySelector('.form__createPlate-updatePlate')
 const emailPlates = document.querySelector('.email');
 const deleteAccount = document.querySelector('.form__update__deleteAccount');
 
-// const IDinput = document.getElementById('plateID');
 
 const selectPlateBtn = document.querySelectorAll('.card').forEach(item =>{
     item.addEventListener('click', e => {
-        // e.preventDefault();
-        // console.log(item.firstElementChild.id)
         let IDinput = document.getElementById(item.firstElementChild.id);
-        // console.log(IDinput.value);
         if(e.target.localName=='ion-icon'){
             addToWeek(IDinput.value);
         } 
@@ -33,18 +29,14 @@ const selectPlateBtn = document.querySelectorAll('.card').forEach(item =>{
 const selectRow = document.querySelectorAll('.row__btn').forEach(item =>{
     item.addEventListener('click', e => {
         e.preventDefault();
-        // console.log(item.firstElementChild.id)
-        // let removePlate = document.getElementById(item.firstElementChild.id);
         let removePlate = item.firstElementChild.id;
         console.log(item.firstElementChild.id);
-        // console.log(removePlate.value);
         removeFromWeek(removePlate);
     });
 });
 
 
 if(updatePasswordForm) {
-    // console.log('found login form');
     updatePasswordForm.addEventListener('submit', e => {
         e.preventDefault();
         const currentPassword = document.getElementById('currentPassword').value;
@@ -56,19 +48,16 @@ if(updatePasswordForm) {
 }
 
 if(loginForm) {
-    // console.log('found login form');
     loginForm.addEventListener('submit', e => {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
-        console.log(email,password)
         login(email, password);
     });
 } 
 
 
 if(signUpForm) {
-    // console.log('found signup form');
     signUpForm.addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('name').value;
@@ -81,7 +70,6 @@ if(signUpForm) {
 } 
 
 if(updateMeForm) {
-    // console.log('found createPlateForm');
     updateMeForm.addEventListener('submit', e => {
         e.preventDefault();
         const id = document.getElementById('user_id').value;
@@ -101,7 +89,6 @@ if(updateMeForm) {
 }
 
 if(createPlateForm) {
-    // console.log('found createPlateForm');
     createPlateForm.addEventListener('submit', e => {
         e.preventDefault();
         const formData = new FormData();  //need this for multipart enctype for form in order to handle image types
@@ -114,7 +101,6 @@ if(createPlateForm) {
 }
 
 if(logOutBtn){
-    // console.log('found logOutBtn');
     logOutBtn.addEventListener('click', e => {
         e.preventDefault();
         logout()
@@ -123,7 +109,6 @@ if(logOutBtn){
 
 
 if(deletePlateBtn) {
-    // console.log('found signup form');
     deletePlateBtn.addEventListener('click', e => {
         e.preventDefault();
         console.log('delete button clicked');
@@ -133,21 +118,15 @@ if(deletePlateBtn) {
 } 
 
 if(emailPlates) {
-  // console.log('found signup form');
   emailPlates.addEventListener('click', e => {
       e.preventDefault();
-      // console.log('email Plates button clicked');
-      // console.log(e.target.id)
       emailWeek();
   });
 } 
 
 if(deleteAccount) {
-  // console.log('found delete account button');
   deleteAccount.addEventListener('click', e => {
       e.preventDefault();
-      // console.log('Account deleted');
-      // console.log(e.target.value);
       deleteMe(e.target.value);
 
   });
@@ -156,7 +135,6 @@ if(deleteAccount) {
 
 
 if(updatePlateForm) {
-    // console.log('found createPlateForm');
     updatePlateForm.addEventListener('submit', e => {
         e.preventDefault();
         const id = document.getElementById('plate_id').value;

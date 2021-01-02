@@ -8438,9 +8438,8 @@ var login = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log("in login...".concat(email, " ...").concat(password));
-            _context.prev = 1;
-            _context.next = 4;
+            _context.prev = 0;
+            _context.next = 3;
             return (0, _axios.default)({
               method: 'POST',
               url: '/api/v1/users/login',
@@ -8450,13 +8449,11 @@ var login = /*#__PURE__*/function () {
               }
             });
 
-          case 4:
+          case 3:
             res = _context.sent;
 
             if (res.data.status == 'success') {
-              (0, _alert.showAlert)('success', 'Logged in successfully!'); // alert('Logged in successfully!');
-
-              console.log(res.data);
+              (0, _alert.showAlert)('success', 'Logged in successfully!');
               window.setTimeout(function () {
                 location.assign('/plates');
               }, 800);
@@ -8465,9 +8462,10 @@ var login = /*#__PURE__*/function () {
             _context.next = 11;
             break;
 
-          case 8:
-            _context.prev = 8;
-            _context.t0 = _context["catch"](1);
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            console.log(_context.t0.response.data.message);
             (0, _alert.showAlert)('error', _context.t0.response.data.message);
 
           case 11:
@@ -8475,7 +8473,7 @@ var login = /*#__PURE__*/function () {
             return _context.stop();
         }
       }
-    }, _callee, null, [[1, 8]]);
+    }, _callee, null, [[0, 7]]);
   }));
 
   return function login(_x, _x2) {
@@ -8510,7 +8508,7 @@ var logout = /*#__PURE__*/function () {
             _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
             console.log(_context2.t0.response);
-            alert('Error logging out!');
+            (0, _alert.showAlert)('error', _context2.t0.response.data.message);
 
           case 11:
           case "end":
@@ -8564,8 +8562,8 @@ var signup = /*#__PURE__*/function () {
           case 7:
             _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
-            alert('Error signing up!');
-            console.log(_context3.t0); // showAlert('error', err.response.data.message);
+            console.log(_context3.t0);
+            (0, _alert.showAlert)('error', _context3.t0.response.data.message);
 
           case 11:
           case "end":
@@ -9397,13 +9395,10 @@ var logOutBtn = document.querySelector('.navbar__link-logout');
 var deletePlateBtn = document.querySelector('.deletePlateBtn');
 var updatePlateForm = document.querySelector('.form__createPlate-updatePlate');
 var emailPlates = document.querySelector('.email');
-var deleteAccount = document.querySelector('.form__update__deleteAccount'); // const IDinput = document.getElementById('plateID');
-
+var deleteAccount = document.querySelector('.form__update__deleteAccount');
 var selectPlateBtn = document.querySelectorAll('.card').forEach(function (item) {
   item.addEventListener('click', function (e) {
-    // e.preventDefault();
-    // console.log(item.firstElementChild.id)
-    var IDinput = document.getElementById(item.firstElementChild.id); // console.log(IDinput.value);
+    var IDinput = document.getElementById(item.firstElementChild.id);
 
     if (e.target.localName == 'ion-icon') {
       (0, _week.addToWeek)(IDinput.value);
@@ -9412,18 +9407,14 @@ var selectPlateBtn = document.querySelectorAll('.card').forEach(function (item) 
 });
 var selectRow = document.querySelectorAll('.row__btn').forEach(function (item) {
   item.addEventListener('click', function (e) {
-    e.preventDefault(); // console.log(item.firstElementChild.id)
-    // let removePlate = document.getElementById(item.firstElementChild.id);
-
+    e.preventDefault();
     var removePlate = item.firstElementChild.id;
-    console.log(item.firstElementChild.id); // console.log(removePlate.value);
-
+    console.log(item.firstElementChild.id);
     (0, _week.removeFromWeek)(removePlate);
   });
 });
 
 if (updatePasswordForm) {
-  // console.log('found login form');
   updatePasswordForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var currentPassword = document.getElementById('currentPassword').value;
@@ -9435,18 +9426,15 @@ if (updatePasswordForm) {
 }
 
 if (loginForm) {
-  // console.log('found login form');
   loginForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
-    console.log(email, password);
     (0, _login.login)(email, password);
   });
 }
 
 if (signUpForm) {
-  // console.log('found signup form');
   signUpForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = document.getElementById('name').value;
@@ -9459,7 +9447,6 @@ if (signUpForm) {
 }
 
 if (updateMeForm) {
-  // console.log('found createPlateForm');
   updateMeForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var id = document.getElementById('user_id').value;
@@ -9492,7 +9479,6 @@ if (updateMeForm) {
 }
 
 if (createPlateForm) {
-  // console.log('found createPlateForm');
   createPlateForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var formData = new FormData(); //need this for multipart enctype for form in order to handle image types
@@ -9506,7 +9492,6 @@ if (createPlateForm) {
 }
 
 if (logOutBtn) {
-  // console.log('found logOutBtn');
   logOutBtn.addEventListener('click', function (e) {
     e.preventDefault();
     (0, _login.logout)();
@@ -9514,7 +9499,6 @@ if (logOutBtn) {
 }
 
 if (deletePlateBtn) {
-  // console.log('found signup form');
   deletePlateBtn.addEventListener('click', function (e) {
     e.preventDefault();
     console.log('delete button clicked'); // console.log(e.target.id)
@@ -9524,27 +9508,20 @@ if (deletePlateBtn) {
 }
 
 if (emailPlates) {
-  // console.log('found signup form');
   emailPlates.addEventListener('click', function (e) {
-    e.preventDefault(); // console.log('email Plates button clicked');
-    // console.log(e.target.id)
-
+    e.preventDefault();
     (0, _week.emailWeek)();
   });
 }
 
 if (deleteAccount) {
-  // console.log('found delete account button');
   deleteAccount.addEventListener('click', function (e) {
-    e.preventDefault(); // console.log('Account deleted');
-    // console.log(e.target.value);
-
+    e.preventDefault();
     (0, _login.deleteMe)(e.target.value);
   });
 }
 
 if (updatePlateForm) {
-  // console.log('found createPlateForm');
   updatePlateForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var id = document.getElementById('plate_id').value;

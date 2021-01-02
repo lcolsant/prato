@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const { promisify } = require('util');
 // const sendEmail = require('../utils/email');
 const Email = require('../utils/email');
+const AppError = require('../utils/appError');
 
 
 
@@ -48,8 +49,8 @@ const cookieOptions = {
 
 
 exports.signup = async (req, res) => {
-    console.log('in auth controller, signup:')
-    console.log(req.body);
+    // console.log('in auth controller, signup:')
+    // console.log(req.body);
     
     try {
     
@@ -100,7 +101,7 @@ exports.signup = async (req, res) => {
     } catch (err){
         res.status(404).json({
             status: 'fail',
-            message: 'Error 💥 saving to MongoDB..', err
+            message: `Error 💥: ${err.message}`
         });
     }
 
@@ -109,11 +110,11 @@ exports.signup = async (req, res) => {
 exports.login = async (req, res, next) => {
     const { email, password } = req.body
 
-    console.log(`from auth controller...${email}...${password}`)
+    // console.log(`from auth controller...${email}...${password}`)
 
     //check if email and password exist
     if(!email || !password) {
-        return next(new Error('Please provide email and password!'));
+        return next(new AppError('Please provide email and password!',401));
              
     }
 
@@ -126,9 +127,7 @@ exports.login = async (req, res, next) => {
     //Password compare here....
     console.log(user);
     if(!user || !(await user.correctPassword(password, user.password))){
-        //console.log(password);
-        //console.log(user.password);
-        return next(new Error('Incorrect email or password'));
+        return next(new AppError('Incorrect email or password',401));
     }
 
     //send token

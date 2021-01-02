@@ -2,7 +2,7 @@ import axios from 'axios';
 import {showAlert} from './alert'
 
 export const login = async (email, password) => {
-    console.log(`in login...${email} ...${password}`);
+    // console.log(`in login...${email} ...${password}`);
     try {
         const res = await axios({
             method: 'POST',
@@ -15,14 +15,14 @@ export const login = async (email, password) => {
 
         if(res.data.status == 'success') {
             showAlert('success', 'Logged in successfully!');
-            // alert('Logged in successfully!');
-            console.log(res.data)
             window.setTimeout(() => {
                 location.assign('/plates');
             }, 800);
         }
     } catch (err) {
+        console.log(err.response.data.message);
         showAlert('error', err.response.data.message);
+        
     }
 };
 
@@ -37,7 +37,8 @@ export const logout = async () => {
         if ((res.data.status == 'success')) location.assign('/');
     } catch (err) {
         console.log(err.response);
-        alert('Error logging out!')
+        showAlert('error', err.response.data.message);
+
     }
 }
 
@@ -63,9 +64,8 @@ export const signup = async (name, email, password, passwordConfirm) => {
             }, 1500);
         }
     } catch (err) {
-        alert('Error signing up!')
         console.log(err)
-        // showAlert('error', err.response.data.message);
+        showAlert('error', err.response.data.message);
     }
 };
 

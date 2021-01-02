@@ -1,8 +1,9 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-
-// const appError = require('./utils/appError');
+const appError = require('./utils/appError');
+const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 
 
 viewsRouter = require('./routes/viewRoutes')
@@ -27,21 +28,12 @@ app.use('/api/v1/plates', plateRouter);
 app.use('/api/v1/users', userRouter);
 
 app.all('*', (req,res,next)=> {
-    res.status(404).json(`Can't find ${req.originalUrl} on this server!`)
+    next(new AppError(`Can't find ${req.originalUrl} on this server!`,404));
+
 });
 
-
-//app.use(appError);
-// app.use((err, req, res, next) => {
-    
-//     err.statusCode = err.statusCode || 500;
-//     err.status = err.status || 'error';
-
-//     res.status(err.statusCode).json({
-//         status: err.status,
-//         message: err.message
-//     });
-// });
+//Global error handling middleware
+app.use(globalErrorHandler);
 
 
 module.exports = app;
