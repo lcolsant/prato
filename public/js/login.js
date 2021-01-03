@@ -2,7 +2,7 @@ import axios from 'axios';
 import {showAlert} from './alert'
 
 export const login = async (email, password) => {
-    // console.log(`in login...${email} ...${password}`);
+    
     try {
         const res = await axios({
             method: 'POST',
@@ -43,7 +43,7 @@ export const logout = async () => {
 }
 
 export const signup = async (name, email, password, passwordConfirm) => {
-    // console.log(`in signup...${name}...${email} ...${password}...${passwordConfirm}`);
+    
     try {
         const res = await axios({
             method: 'POST',
@@ -102,9 +102,6 @@ export const updateMe = async (data,id) => {
 
 export const updatePassword = async (currentPassword, newPassword, passwordConfirm) => {
 
-    console.log('in updatePassword:');
-    console.log(currentPassword, newPassword, passwordConfirm);
-
     try {
 
         const res = await axios({
@@ -119,10 +116,6 @@ export const updatePassword = async (currentPassword, newPassword, passwordConfi
 
         if(res.data.status == 'success') {
             showAlert('success','Updated password successfully!');
-            console.log(res.data)
-            // window.setTimeout(() => {
-            //     location.assign('/plates');
-            // }, 2000);
         }
 
 
@@ -133,9 +126,6 @@ export const updatePassword = async (currentPassword, newPassword, passwordConfi
 }
 
 export const deleteMe = async (id) => {
-
-    // console.log(id);
-    // console.log('in updateMe:');
 
     try {
 
@@ -148,7 +138,6 @@ export const deleteMe = async (id) => {
 
         if(res.status == 204) {
             showAlert('success','Account successfully deleted!');
-            // console.log(res.data)
             window.setTimeout(() => {
                 location.assign('/');
             }, 2000);

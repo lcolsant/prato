@@ -3,8 +3,6 @@ import {showAlert} from './alert';
 
 
 export const createPlate = async (data) => {
-    console.log('In createPlate...');
-    console.log(data);
 
     try {
 
@@ -15,24 +13,20 @@ export const createPlate = async (data) => {
         });
 
         if(res.data.status == 'success') {
-            // showAlert('success', 'Logged in successfully!');
             showAlert('success','Created plate successfully!');
-            console.log(res.data)
             window.setTimeout(() => {
                 location.assign('/plates');
             }, 2000);
         }
     
     } catch (err) {
-        alert('Error creating plate!')
+        showAlert('error', err.response.data.message);
         console.log(err)
     
     }
 }
 
 export const deletePlate = async (data) => {
-    console.log('In deletePlate...');
-    console.log(data);
 
     try {
 
@@ -51,7 +45,7 @@ export const deletePlate = async (data) => {
         }
     
     } catch (err) {
-        alert('Error deleting plate!');
+        showAlert('error', err.response.data.message);
         console.log(err);
     
     }
@@ -75,9 +69,8 @@ export const updatePlate = async (data,id) => {
             }, 2000);
         }
 
-
     } catch (err) {
-        alert('Error updating plate!');
+        showAlert('error', err.response.data.message);
         console.log(err);
     }
 }

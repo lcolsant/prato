@@ -1,8 +1,8 @@
 import '@babel/polyfill';  //allow newer javascript features to work in older browsers
 import { login, signup, logout, updateMe, updatePassword, deleteMe } from './login';
-// import { plates } from '../../dev-data/data/plates-dev';
 import { createPlate, deletePlate, updatePlate } from './plate';
 import { addToWeek, removeFromWeek, updateWeek, emailWeek } from './week';
+// import { plates } from '../../dev-data/data/plates-dev';
 
 const loginForm = document.querySelector('.form__login-input');
 const signUpForm = document.querySelector('.form__login-signup');

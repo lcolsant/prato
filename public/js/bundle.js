@@ -8642,10 +8642,8 @@ var updatePassword = /*#__PURE__*/function () {
       while (1) {
         switch (_context5.prev = _context5.next) {
           case 0:
-            console.log('in updatePassword:');
-            console.log(currentPassword, newPassword, passwordConfirm);
-            _context5.prev = 2;
-            _context5.next = 5;
+            _context5.prev = 0;
+            _context5.next = 3;
             return (0, _axios.default)({
               method: 'patch',
               url: "/api/v1/users/",
@@ -8656,31 +8654,28 @@ var updatePassword = /*#__PURE__*/function () {
               }
             });
 
-          case 5:
+          case 3:
             res = _context5.sent;
 
             if (res.data.status == 'success') {
               (0, _alert.showAlert)('success', 'Updated password successfully!');
-              console.log(res.data); // window.setTimeout(() => {
-              //     location.assign('/plates');
-              // }, 2000);
             }
 
-            _context5.next = 13;
+            _context5.next = 11;
             break;
 
-          case 9:
-            _context5.prev = 9;
-            _context5.t0 = _context5["catch"](2);
+          case 7:
+            _context5.prev = 7;
+            _context5.t0 = _context5["catch"](0);
             alert('Error updating user!');
             console.log(_context5.t0);
 
-          case 13:
+          case 11:
           case "end":
             return _context5.stop();
         }
       }
-    }, _callee5, null, [[2, 9]]);
+    }, _callee5, null, [[0, 7]]);
   }));
 
   return function updatePassword(_x9, _x10, _x11) {
@@ -8709,8 +8704,7 @@ var deleteMe = /*#__PURE__*/function () {
             console.log(res.status);
 
             if (res.status == 204) {
-              (0, _alert.showAlert)('success', 'Account successfully deleted!'); // console.log(res.data)
-
+              (0, _alert.showAlert)('success', 'Account successfully deleted!');
               window.setTimeout(function () {
                 location.assign('/');
               }, 2000);
@@ -8764,43 +8758,39 @@ var createPlate = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            console.log('In createPlate...');
-            console.log(data);
-            _context.prev = 2;
-            _context.next = 5;
+            _context.prev = 0;
+            _context.next = 3;
             return (0, _axios.default)({
               method: 'post',
               url: '/api/v1/plates',
               data: data
             });
 
-          case 5:
+          case 3:
             res = _context.sent;
 
             if (res.data.status == 'success') {
-              // showAlert('success', 'Logged in successfully!');
               (0, _alert.showAlert)('success', 'Created plate successfully!');
-              console.log(res.data);
               window.setTimeout(function () {
                 location.assign('/plates');
               }, 2000);
             }
 
-            _context.next = 13;
+            _context.next = 11;
             break;
 
-          case 9:
-            _context.prev = 9;
-            _context.t0 = _context["catch"](2);
-            alert('Error creating plate!');
+          case 7:
+            _context.prev = 7;
+            _context.t0 = _context["catch"](0);
+            (0, _alert.showAlert)('error', _context.t0.response.data.message);
             console.log(_context.t0);
 
-          case 13:
+          case 11:
           case "end":
             return _context.stop();
         }
       }
-    }, _callee, null, [[2, 9]]);
+    }, _callee, null, [[0, 7]]);
   }));
 
   return function createPlate(_x) {
@@ -8817,16 +8807,14 @@ var deletePlate = /*#__PURE__*/function () {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            console.log('In deletePlate...');
-            console.log(data);
-            _context2.prev = 2;
-            _context2.next = 5;
+            _context2.prev = 0;
+            _context2.next = 3;
             return (0, _axios.default)({
               method: 'delete',
               url: "/api/v1/plates/".concat(data)
             });
 
-          case 5:
+          case 3:
             res = _context2.sent;
             console.log(res.status);
 
@@ -8837,21 +8825,21 @@ var deletePlate = /*#__PURE__*/function () {
               }, 2000);
             }
 
-            _context2.next = 14;
+            _context2.next = 12;
             break;
 
-          case 10:
-            _context2.prev = 10;
-            _context2.t0 = _context2["catch"](2);
-            alert('Error deleting plate!');
+          case 8:
+            _context2.prev = 8;
+            _context2.t0 = _context2["catch"](0);
+            (0, _alert.showAlert)('error', _context2.t0.response.data.message);
             console.log(_context2.t0);
 
-          case 14:
+          case 12:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[2, 10]]);
+    }, _callee2, null, [[0, 8]]);
   }));
 
   return function deletePlate(_x2) {
@@ -8893,7 +8881,7 @@ var updatePlate = /*#__PURE__*/function () {
           case 7:
             _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
-            alert('Error updating plate!');
+            (0, _alert.showAlert)('error', _context3.t0.response.data.message);
             console.log(_context3.t0);
 
           case 11:
@@ -9386,6 +9374,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+// import { plates } from '../../dev-data/data/plates-dev';
 var loginForm = document.querySelector('.form__login-input');
 var signUpForm = document.querySelector('.form__login-signup');
 var updateMeForm = document.querySelector('.form__login-update');

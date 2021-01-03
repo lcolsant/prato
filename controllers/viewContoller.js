@@ -4,8 +4,8 @@ const User = require('../models/userModel');
 const Plate = require('../models/plateModel');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
-
-
+const { nextTick } = require('process');
+const AppError = require('../utils/appError');
 
 // import { plates } from '../dev-data/data/plates-dev';
 
@@ -83,10 +83,7 @@ exports.getPlateDetail = async (req, res) => {
     
     try {
         
-        console.log(`reached getPlateDetail in controller. Params id: ${req.params.id}`);
         const plate = await Plate.findById(req.params.id);
-        console.log(`plate retrieved: ${plate}`)
-        console.log(`plate photo: ${plate.photo}`);
 
         res.status(200).render('detail', {
             title: 'Plate Detail',
@@ -96,7 +93,7 @@ exports.getPlateDetail = async (req, res) => {
     } catch (err) {
         res.status(404).json({
             status: 'fail',
-            message: 'Error 💥 retrieving plate from MongoDB..', err
+            message: 'Error 💥 We\'re sorry, we can\'t find this plate on our server!', err
         });
     }
 }

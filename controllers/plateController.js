@@ -8,6 +8,8 @@ const { promisify } = require('util');
 const fs = require('fs');
 // const sendEmail = require('../utils/email');
 const Email = require('../utils/email');
+const AppError = require('../utils/appError');
+
 
 
 // const multerStorage = multer.diskStorage({
@@ -306,11 +308,8 @@ exports.addToWeek = async (req, res) => {
 
     try {
 
-        // console.log(`In addToWeek controller: ${req.params.id}`);
-        // console.log(req.headers.cookie);
         const token = req.headers.cookie.split('=')[1]
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-        // console.log(`UserID: ${decoded.id}`)
         const user = await User.findById(decoded.id);
 
         if(user.week.length<7){
@@ -327,13 +326,13 @@ exports.addToWeek = async (req, res) => {
                  }
              })
         }else {
-            throw new Error('Error 💥 can\'t save plate to week.  Must be less than 7 plates per week')
+            throw new AppError('Error 💥 must have less than 7 plates per week',400);
         }
 
     } catch(err) {
         res.status(404).json({
             status:'fail',
-            message: 'Error 💥 can\'t save plate to week.  Must be less than 7 plates per week', err
+            message: 'Error 💥 must have less than 7 plates per week', err
         });
     }
 }
