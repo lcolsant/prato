@@ -8427,6 +8427,12 @@ var _alert = require("./alert");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
@@ -8527,7 +8533,7 @@ exports.logout = logout;
 
 var signup = /*#__PURE__*/function () {
   var _ref3 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee3(name, email, password, passwordConfirm) {
-    var res;
+    var res, error;
     return regeneratorRuntime.wrap(function _callee3$(_context3) {
       while (1) {
         switch (_context3.prev = _context3.next) {
@@ -8556,16 +8562,37 @@ var signup = /*#__PURE__*/function () {
               }, 1500);
             }
 
-            _context3.next = 11;
+            _context3.next = 13;
             break;
 
           case 7:
             _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
-            console.log(_context3.t0);
-            (0, _alert.showAlert)('error', _context3.t0.response.data.message);
+            error = _objectSpread({}, _context3.t0.response.data);
+            console.log('caught error login.js');
+            console.log(error.message);
+            (0, _alert.showAlert)('error', error.message); // try{
+            //     if(error.code==11000){
+            //         showAlert('error', `A user with ${error.keyValue.email} already exists.`);
+            //     }
+            //     if(error.errors.passwordConfirm){
+            //         if(typeof error.errors.passwordConfirm.path !== 'undefined'){
+            //             showAlert('error', 'Passwords are not the same!');
+            //         }
+            //     }
+            //     if(error.errors.password){
+            //         if(error.errors.password.kind=='minlength'){
+            //             showAlert('error', `Password must be at least 8 characters.`);
+            //         }
+            //     }
+            //     // else{
+            //     //     showAlert('error', err.response.data.message);
+            //     // }
+            // }catch(err){
+            //     showAlert('error', err);
+            // }
 
-          case 11:
+          case 13:
           case "end":
             return _context3.stop();
         }
@@ -9656,7 +9683,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50787" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51627" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

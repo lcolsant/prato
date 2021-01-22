@@ -5,11 +5,12 @@
   "main": "server.js",
   "scripts": {
     "sass": "node-sass sass/main.scss public/css/style.css -w",
-    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
+    "watch:js": "parcel watch ./public/js/index.js --out-dir ./public/js --out-file bundle.js ",
+    "build:js": "parcel build ./public/js/index.js --out-dir ./public/js --out-file bundle.js",
     "server": "nodemon server.js -e ejs,js",
     "server:prod": "NODE_ENV=production nodemon server.js -e ejs,js",
     "start": "npm-run-all --parallel server sass watch:js",
-    "start:prod": "npm-run-all --parallel server:prod sass watch:js"
+    "start:prod": "npm-run-all --parallel server:prod sass build:js"
   },
   "repository": {
     "type": "git",

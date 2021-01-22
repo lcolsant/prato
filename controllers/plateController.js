@@ -93,7 +93,7 @@ exports.getAllPlates = async (req, res) => {
 
 
 
-exports.getPlate = async (req, res) => {
+exports.getPlate = async (req, res, next) => {
     
     try {
         
@@ -106,10 +106,12 @@ exports.getPlate = async (req, res) => {
             }
         }); 
     } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: 'Error 💥 retrieving plate from MongoDB..', err
-        });
+        // res.status(404).json({
+        //     status: 'fail',
+        //     message: 'Error 💥 retrieving plate from MongoDB..', 
+        //     error: err
+        // });
+        next(err);
     }
 }
 

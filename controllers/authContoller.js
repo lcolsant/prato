@@ -46,7 +46,7 @@ const cookieOptions = {
 // }
 
 
-exports.signup = async (req, res) => {
+exports.signup = async (req, res, next) => {
     
     try {
     
@@ -95,10 +95,15 @@ exports.signup = async (req, res) => {
         });
 
     } catch (err){
-        res.status(404).json({
-            status: 'fail',
-            message: `Error 💥: ${err.message}`
-        });
+        // res.status(500).json({
+        //     status: 'error',
+        //     error: err,
+        //     message: `Error 💥: ${err.message}`
+        //     // message: err
+        // });
+        // return next(new AppError(err.message,500));
+        return next(err);
+
     }
 
 }
@@ -121,7 +126,7 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({email}).select('+password');
     
     //Password compare here....
-    console.log(user);
+    // console.log(user);
     if(!user || !(await user.correctPassword(password, user.password))){
         return next(new AppError('Incorrect email or password',401));
     }
@@ -150,8 +155,6 @@ exports.login = async (req, res, next) => {
 
 exports.logout = (req, res) => {
     
-    console.log('hit logged out route');
-
     res.cookie('jwt', 'loggedout', {
         expires: new Date(Date.now() + 10 * 1000),
         httpOnly: true
@@ -231,8 +234,7 @@ exports.isLoggedIn = async (req, res, next) => {
       try {
         // 1) verify token
 
-        console.log('in isLoggedIn')
-        console.log(`isLoggedIn token: ${req.headers.cookie.split('=')[1]}`)
+        // console.log(`isLoggedIn token: ${req.headers.cookie.split('=')[1]}`)
         const decoded = await promisify(jwt.verify)(
             req.headers.cookie.split('=')[1],
             process.env.JWT_SECRET

@@ -1,12 +1,11 @@
 
-const { plates } = require('../dev-data/data/plates-dev');
 const User = require('../models/userModel');
 const Plate = require('../models/plateModel');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
-const { nextTick } = require('process');
 const AppError = require('../utils/appError');
-
+const { nextTick } = require('process');
+// const { plates } = require('../dev-data/data/plates-dev');
 // import { plates } from '../dev-data/data/plates-dev';
 
 
@@ -28,14 +27,13 @@ exports.getLanding = (req, res) => {
 
 exports.getPlates = async (req, res) => {
     try { 
-        console.log('in get plates');
-        console.log(req.headers.cookie)
+       
+        // console.log(req.headers.cookie)
         const token = req.headers.cookie.split('=')[1]
-        console.log(`Token: ${token}`)
+        // console.log(`Token: ${token}`)
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
-        console.log(decoded);
         
-        console.log(`UserID: ${decoded.id}`)
+        // console.log(`UserID: ${decoded.id}`)
         const user = await User.findById(decoded.id, (user)=>{
             if(user){
                 console.log(`User retrieved: ${user}`)
@@ -79,7 +77,7 @@ exports.getWeek = async (req, res) => {
         week: user.week
     });
 }
-exports.getPlateDetail = async (req, res) => {
+exports.getPlateDetail = async (req, res, next) => {
     
     try {
         
@@ -91,10 +89,14 @@ exports.getPlateDetail = async (req, res) => {
         });
         
     } catch (err) {
-        res.status(404).json({
-            status: 'fail',
-            message: 'Error 💥 We\'re sorry, we can\'t find this plate on our server!', err
-        });
+        console.log(err);
+        // res.status(404).json({
+        //     status: 'fail',
+        //     error: err,
+        //     message: err.message
+        // });
+
+        next(err);
     }
 }
 
