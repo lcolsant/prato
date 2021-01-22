@@ -67,35 +67,9 @@ export const signup = async (name, email, password, passwordConfirm) => {
         }
     } catch (err) {
         let error = {...err.response.data}
-        
-        console.log('caught error login.js')
-        console.log(error.message);
-
-
+        // console.log('caught error login.js')
         showAlert('error', error.message);
         
-        // try{
-
-        //     if(error.code==11000){
-        //         showAlert('error', `A user with ${error.keyValue.email} already exists.`);
-        //     }
-        //     if(error.errors.passwordConfirm){
-        //         if(typeof error.errors.passwordConfirm.path !== 'undefined'){
-        //             showAlert('error', 'Passwords are not the same!');
-        //         }
-        //     }
-            
-        //     if(error.errors.password){
-        //         if(error.errors.password.kind=='minlength'){
-        //             showAlert('error', `Password must be at least 8 characters.`);
-        //         }
-        //     }
-        //     // else{
-        //     //     showAlert('error', err.response.data.message);
-        //     // }
-        // }catch(err){
-        //     showAlert('error', err);
-        // }
     }
 };
 
