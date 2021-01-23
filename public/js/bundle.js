@@ -8562,37 +8562,17 @@ var signup = /*#__PURE__*/function () {
               }, 1500);
             }
 
-            _context3.next = 13;
+            _context3.next = 11;
             break;
 
           case 7:
             _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
-            error = _objectSpread({}, _context3.t0.response.data);
-            console.log('caught error login.js');
-            console.log(error.message);
-            (0, _alert.showAlert)('error', error.message); // try{
-            //     if(error.code==11000){
-            //         showAlert('error', `A user with ${error.keyValue.email} already exists.`);
-            //     }
-            //     if(error.errors.passwordConfirm){
-            //         if(typeof error.errors.passwordConfirm.path !== 'undefined'){
-            //             showAlert('error', 'Passwords are not the same!');
-            //         }
-            //     }
-            //     if(error.errors.password){
-            //         if(error.errors.password.kind=='minlength'){
-            //             showAlert('error', `Password must be at least 8 characters.`);
-            //         }
-            //     }
-            //     // else{
-            //     //     showAlert('error', err.response.data.message);
-            //     // }
-            // }catch(err){
-            //     showAlert('error', err);
-            // }
+            error = _objectSpread({}, _context3.t0.response.data); // console.log('caught error login.js')
 
-          case 13:
+            (0, _alert.showAlert)('error', error.message);
+
+          case 11:
           case "end":
             return _context3.stop();
         }
@@ -9683,7 +9663,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51627" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51444" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

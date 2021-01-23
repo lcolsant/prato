@@ -1,23 +1,17 @@
 express = require('express');
-// const path = require('path');
 
-//const dotenv = require('dotenv')
 require('dotenv').config();
+
+//handle synchronous erros (e.g. using undefined variables)
+process.on('uncaughtException', err => {
+    console.log('Uncaught Exception.💥 Shutting down...');
+    console.log(err.name, err.message);
+    process.exit(1);
+});
+
 const mongoose = require('mongoose');
-// const http = require('http');
-
-//livereload code here
-// const livereload = require('livereload');
-// const server = livereload.createServer({
-    //     'exts': [ html, ejs, css ]
-// });
-
-// server.watch([__dirname + '/public', __dirname + '/views']);
-
 const app = require('./app');
-
 const port = process.env.PORT || 3000
-
 
 //localhost development db
 //mongoose.connect('mongodb://localhost/prato', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
@@ -31,12 +25,20 @@ mongoose.set('useFindAndModify', false);
 mongoose.connection.on('connected', ()=>console.log('Connected to MongoDB...'));
 
 
-app.listen(port, () => {
+const server = app.listen(port, () => {
     console.log(`Server listening on port ${port}.`);
 });
 
-// const server = http.createServer(app);
-// server.listen(app.get('port'), () => console.log('Server listening on port ' + app.get('port') ));
+//handle asynchronous errors outside of express (e.g. mongoDB connection error). close server (allow tasks to finish) and then shut down app
+process.on('unhandledRejection', err => {
+    console.log('Unhandled Rejection.💥 Shutting down...');
+    console.log(err.name, err.message);
+    server.close( () => {
+        process.exit(1);
+    });
+});
+
+
 
 
 
