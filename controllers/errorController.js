@@ -51,23 +51,41 @@ const sendErrorDev = (err, req, res) => {
 const sendErrorProd = (err, req, res) => {
     console.log('in sendErrorProd');
 
-    //check if user, operational, error before sending message to client; else server error 500; send generic message
-    if (err.isOperational) {
-        return res.status(err.statusCode).json({
-            status: err.status,
-            message: err.message
-        });
+    //A) API
+    if(req.originalUrl.startsWith('/api')){
+
+        //check if user, operational, error before sending message to client; else server error 500; send generic message
+        if (err.isOperational) {
+            return res.status(err.statusCode).json({
+                status: err.status,
+                message: err.message
+            });
+        } 
+        
         //programming or other unknown error
-    } else {
-
         console.log('ERROR 💥 ', err);
-
-        res.status(500).json({
+        return res.status(500).json({
             status: 'error',
-            message: '💥 Something went wrong!'
+            message: '💥 Something went very wrong!'
         });
     }
+
+    //B) RENDERED WEBSITE
+    if (err.isOperational) {
+        return res.status(err.statusCode).render('error', {
+            title: 'Something went wrong!',
+            msg: err.message
+        });
+    } 
+    
+    //programming or other unknown error
+    console.log('ERROR 💥 ', err);
+    return res.status(err.statusCode).render('error', {
+        title: 'Something went wrong!',
+        msg: 'Please try again later.'
+    });
 }
+
 
 module.exports = (err, req, res, next) => {
     
