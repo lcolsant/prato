@@ -29,13 +29,23 @@ const sendErrorDev = (err, req, res) => {
     console.log('in sendErrorDev');
     //logging full error information
             
-    return res.status(err.statusCode).json({
-        status: err.status,
-        error: err,
-        message: err.message,
-        stack: err.stack
+    //A) API
+    if(req.originalUrl.startsWith('/api')){
+        return res.status(err.statusCode).json({
+            status: err.status,
+            error: err,
+            message: err.message,
+            stack: err.stack
+        });
+    }
+
+    //B) RENDERED WEBSITE
+    console.log('ERROR 💥', err);
+    return res.status(err.statusCode).render('error',{
+        title: 'Something went wrong!',
+        msg: err.message
     });
-}
+};
 
 
 const sendErrorProd = (err, req, res) => {
