@@ -186,11 +186,11 @@ exports.createPlate = async (req, res) => {
 
 
 
-exports.updatePlate = async (req, res) => {
+exports.updatePlate = async (req, res, next) => {
     
-    console.log(req.params.id);
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.params.id);
+    // console.log(req.body);
+    // console.log(req.file);
 
 
     console.log('from controller...updating plate...');
@@ -243,10 +243,12 @@ exports.updatePlate = async (req, res) => {
         });
 
     } catch (err){
-        res.status(404).json({
-            status: 'fail',
-            message: 'Error 💥 saving to MongoDB..', err
-        });
+        // res.status(404).json({
+        //     status: 'fail',
+        //     message: 'Error 💥 saving to MongoDB..', err
+        // });
+
+        next(err);
     }
 
 }

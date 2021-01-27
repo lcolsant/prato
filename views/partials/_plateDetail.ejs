@@ -13,14 +13,11 @@
             </div>
             <div class="card__description">
                 <p class="card__header"><em>Description:</em></p>
-                <%=plate.description%>
+                <pre><span class="span__textformat"><%=plate.description%></span></pre>
             </div>
             <div class="card__recipe">
                 <p class="card__header"><em>Recipe:</em></p>
-                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat. -->
-                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat. -->
-                <%=plate.recipe%>
-            
+                <pre><span class="span__textformat"><%=plate.recipe%></span></pre>
             </div>
             <div class="card__bottom-detail">
                 <button class="btn"> <a href='/plates/update/<%=plate._id%>'>Update Plate</a></button>

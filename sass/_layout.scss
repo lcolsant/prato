@@ -225,7 +225,8 @@
     }
 
     &__createPlate {
-        height: 48rem;
+        height: 80rem;
+        width: 66rem;
     }
     
     &__header {
@@ -247,19 +248,33 @@
         font-weight: 400;
         color: var(--color-tertiary-light);
 
+        &__wide {
+            width: 60rem;
+
+        }
+
         
         &::placeholder {
             color: var(--color-grey-dark-2);
             font-size: 0.7rem;
             letter-spacing: 0.2rem;
         }
+
+        &__textarea {
+            height: 20rem;
+            width: 60rem;
+            padding: 1.4rem;
+            font-family: inherit;
+            font-size: 1.4rem;
+            font-weight: 400;
+
+
+        }
         
         &__email {
             &::placeholder {
                 font-size: 1.4rem;
                 letter-spacing: normal;
-
-
             }
         }
 
@@ -692,5 +707,20 @@
     background-image: linear-gradient(to right, #ff7730, #eb4d4b);
     font-size: 3.0rem;
   }
+
+
+  pre {
+    white-space: pre-wrap;       /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+.span__textformat {
+    font-size: 1.3rem;
+    font-weight: 100;
+    font-family: Montserrat;
+}
 
   

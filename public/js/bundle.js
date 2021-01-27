@@ -8783,16 +8783,15 @@ var createPlate = /*#__PURE__*/function () {
               }, 2000);
             }
 
-            _context.next = 11;
+            _context.next = 10;
             break;
 
           case 7:
             _context.prev = 7;
             _context.t0 = _context["catch"](0);
             (0, _alert.showAlert)('error', _context.t0.response.data.message);
-            console.log(_context.t0);
 
-          case 11:
+          case 10:
           case "end":
             return _context.stop();
         }
@@ -8864,14 +8863,16 @@ var updatePlate = /*#__PURE__*/function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
-            _context3.next = 3;
+            console.log('in updatePlate');
+            console.log(data);
+            _context3.next = 5;
             return (0, _axios.default)({
               method: 'patch',
               url: "/api/v1/plates/".concat(id),
               data: data
             });
 
-          case 3:
+          case 5:
             res = _context3.sent;
 
             if (res.data.status == 'success') {
@@ -8882,21 +8883,21 @@ var updatePlate = /*#__PURE__*/function () {
               }, 2000);
             }
 
-            _context3.next = 11;
+            _context3.next = 13;
             break;
 
-          case 7:
-            _context3.prev = 7;
+          case 9:
+            _context3.prev = 9;
             _context3.t0 = _context3["catch"](0);
             (0, _alert.showAlert)('error', _context3.t0.response.data.message);
             console.log(_context3.t0);
 
-          case 11:
+          case 13:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 7]]);
+    }, _callee3, null, [[0, 9]]);
   }));
 
   return function updatePlate(_x3, _x4) {
@@ -9527,6 +9528,8 @@ if (updatePlateForm) {
     formData.append('description', document.getElementById('description').value);
     formData.append('recipe', document.getElementById('recipe').value);
     formData.append('photo', document.getElementById('photo').files[0]);
+    console.log(document.getElementById('description').value);
+    console.log(document.getElementById('recipe').value);
     console.log(formData);
     (0, _plate.updatePlate)(formData, id);
   });

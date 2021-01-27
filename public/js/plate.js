@@ -21,8 +21,6 @@ export const createPlate = async (data) => {
     
     } catch (err) {
         showAlert('error', err.response.data.message);
-        console.log(err)
-    
     }
 }
 
@@ -54,6 +52,9 @@ export const deletePlate = async (data) => {
 
 export const updatePlate = async (data,id) => {
     try {
+
+        console.log('in updatePlate');
+        console.log(data);
 
         const res = await axios({
             method: 'patch',

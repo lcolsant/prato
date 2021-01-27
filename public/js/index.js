@@ -143,6 +143,8 @@ if(updatePlateForm) {
         formData.append('description', document.getElementById('description').value);
         formData.append('recipe', document.getElementById('recipe').value);
         formData.append('photo', document.getElementById('photo').files[0]);
+        console.log(document.getElementById('description').value);
+        console.log(document.getElementById('recipe').value);
         console.log(formData);
         updatePlate(formData,id);
     });

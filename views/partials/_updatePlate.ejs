@@ -3,11 +3,13 @@
     <form action="#" class="form__createPlate-updatePlate">
         <input type="hidden" id="plate_id" value= '<%= plate._id %>' >
         <label for="plateName" class="form__label">Plate name</label><br>
-        <input type="text" name="name" class="form__input form__input__placeholder" id="plateName" placeholder="Glazed Duck Fillet" value="<%=plate.name%>"><br>
-        <label for="description" class="form__label">Description</label><br>
-        <input type="text" name="description" class="form__input form__input__placeholder" id="description" placeholder="Glazed duck fillet, mashed potatoes seasoned with truffle oil, fig and aniseed sauce" value="<%=plate.description%>" ><br>
+        <input type="text" name="name" class="form__input form__input__wide form__input__placeholder" id="plateName" placeholder="Glazed Duck Fillet" value="<%=plate.name%>"><br>
+        <label for="description" class="form__label">Description (max 270 chars.)</label><br>
+        <!-- <input type="text" name="description" class="form__input form__input__placeholder" id="description" placeholder="Glazed duck fillet, mashed potatoes seasoned with truffle oil, fig and aniseed sauce" value="<%=plate.description%>" ><br> -->
+        <textarea name="description" id="description"  class="form__input form__input__textarea form__input__placeholder"  ><%=plate.description%></textarea><br>
         <label for="recipe" class="form__label">Recipe</label><br>
-        <input type="text" name="recipe" class="form__input form__input__placeholder" id="recipe" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat." value="<%=plate.recipe%>" ><br>
+        <textarea name="recipe" id="recipe"  class="form__input form__input__textarea form__input__placeholder" ><%=plate.recipe%></textarea><br>
+        <!-- <input type="text" name="recipe" class="form__input form__input__placeholder" id="recipe" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis risus sed vulputate odio ut enim blandit volutpat maecenas. Elit duis tristique sollicitudin nibh sit. Volutpat ac tincidunt vitae semper quis lectus nulla. Et ligula ullamcorper malesuada proin libero nunc consequat." value="<%=plate.recipe%>" ><br> -->
         <label for="photo" class="form__upload__label">Choose new photo</label>
         <input type="file" accept="image/*" class="form__upload" name="photo" id="photo" ><br>
         <!-- <label for="image" class="form__label">Plate Image</label><br> -->

@@ -9,7 +9,8 @@ const plateSchema = new mongoose.Schema({
     },
     description: {
         type: String,
-        trim: true
+        trim: true,
+        maxlength: 270,
     },
     recipe: {
         type: String,
