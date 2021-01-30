@@ -218,15 +218,12 @@
     &__login {
         height: 38rem;
         
-        // &-update{
-        //     position: relative;
-        
-        // }
     }
 
     &__createPlate {
-        height: 80rem;
+        height: 82rem;
         width: 66rem;
+        z-index: 0;
     }
     
     &__header {

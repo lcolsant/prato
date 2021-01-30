@@ -371,8 +371,9 @@ i {
   .form__login {
     height: 38rem; }
   .form__createPlate {
-    height: 80rem;
-    width: 66rem; }
+    height: 82rem;
+    width: 66rem;
+    z-index: 0; }
   .form__header {
     text-transform: uppercase;
     font-size: 1.2rem;
