@@ -462,6 +462,12 @@ i {
   margin-top: 0;
   margin-bottom: 5rem;
   background-color: transparent; }
+  @media only screen and (max-width: 56.25em) {
+    .landing {
+      grid-template-rows: 30rem 30rem 20rem; } }
+  @media only screen and (max-width: 46.875em) {
+    .landing {
+      grid-template-rows: 30rem 30rem repeat(3, 20rem); } }
   .landing__text {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
@@ -472,10 +478,18 @@ i {
     font-size: 3.5rem;
     font-weight: 100;
     padding: 6rem; }
+    @media only screen and (max-width: 56.25em) {
+      .landing__text {
+        grid-row: 2 / 3;
+        grid-column: 1 / -1; } }
   .landing__pic {
     grid-row: 1 / 2;
     grid-column: 2 / 4;
     position: relative; }
+    @media only screen and (max-width: 56.25em) {
+      .landing__pic {
+        grid-row: 1 / 2;
+        grid-column: 1 / -1; } }
     .landing__pic-img {
       object-fit: cover;
       height: 100%;
@@ -496,18 +510,39 @@ i {
     grid-row: 2 / 3;
     grid-column: 1 / 2;
     box-shadow: var(--shadow-light); }
+    @media only screen and (max-width: 56.25em) {
+      .landing__signup {
+        grid-row: 3 / 4; } }
+    @media only screen and (max-width: 46.875em) {
+      .landing__signup {
+        grid-row: 3 / 4;
+        grid-column: 1 / -1; } }
     .landing__signup:hover {
       box-shadow: var(--shadow-medium); }
   .landing__upload {
     grid-row: 2 / 3;
     grid-column: 2 / 3;
     box-shadow: var(--shadow-light); }
+    @media only screen and (max-width: 56.25em) {
+      .landing__upload {
+        grid-row: 3 / 4; } }
+    @media only screen and (max-width: 46.875em) {
+      .landing__upload {
+        grid-row: 4 / 5;
+        grid-column: 1 / -1; } }
     .landing__upload:hover {
       box-shadow: var(--shadow-medium); }
   .landing__organize {
     grid-row: 2 / 3;
     grid-column: 3 / -1;
     box-shadow: var(--shadow-light); }
+    @media only screen and (max-width: 56.25em) {
+      .landing__organize {
+        grid-row: 3 / 4; } }
+    @media only screen and (max-width: 46.875em) {
+      .landing__organize {
+        grid-row: 5 / 6;
+        grid-column: 1 / -1; } }
     .landing__organize:hover {
       box-shadow: var(--shadow-medium); }
   .landing__ionicon {
