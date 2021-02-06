@@ -1,9 +1,9 @@
 <%- include('./partials/_head.ejs') %>
 <body>
     <div class="container" id="top">
-        <nav class="navbar" id="topnav">
+        <div class="nav">
             <%- include('./partials/_navbar.ejs') %>
-        </nav>
+        </div>
         <div class="main">
             <%- include('./partials/_createPlate.ejs') %>
         </div>
@@ -11,18 +11,6 @@
             <%- include('./partials/_footer.ejs') %>
         </footer>
     </div>
-    <script>
-        // responsive navbar
-        function myFunction() {
-            var x = document.getElementById("topnav");
-            console.log(x)
-            if (x.className === "navbar") {
-                x.className += "__responsive";
-            } else {
-                x.className = "navbar";
-            }
-        }
-    </script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="/public/js/bundle.js"></script>
     <!-- <script src="/reload/reload.js"></script>; -->

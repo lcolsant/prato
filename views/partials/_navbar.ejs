@@ -1,32 +1,39 @@
-<div class="navbar__prato">
-    <ion-icon class="navbar__prato__svg" src="../../public/img/plate1.svg"></ion-icon>
-    <!-- <a href="/" class="navbar__prato__link"><h1 class="navbar__prato__h1">Prato</h1></a> -->
-    <h1 class="navbar__prato__h1">Prato</h1>
-</div>
-<!-- <div class="navbar__hero"> -->
-    <!-- <ion-icon class="navbar__hero__svg" src="../../public/img/plate1.svg"></ion-icon> -->
-<!-- </div> -->
-<div class="navbar__link" id="topnav">
-    <%if(locals.user){%>
-        <a href="/plates" class="navbar__link__item">MY PLATES</a>
-        <a href="/week" class="navbar__link__item">MY WEEK</a>
-        <a href="/create" class="navbar__link__item">ADD PLATE</a>
-        <a href="/logout" class="navbar__link__item navbar__link-logout">LOG OUT</a>
-        <div class="user">
-            <a href="/me" class="navbar__link__item"><img class="navbar__link__item-img" src='/public/img/users/<%=user.photo%>' alt=""></a>
-            <!-- <a href="#" class="navbar__link__item" ><%=locals.user.name.split(" ")[0]%></a> -->
-            <p><span class="user__name" id="username"><%=locals.user.name.split(" ")[0]%></span></p>
-        </div>
+<nav class="navbar" id="topnav">
+    <div class="navbar__prato">
+        <ion-icon class="navbar__prato__svg" src="../../public/img/plate1.svg"></ion-icon>
+        <h1 class="navbar__prato__h1">Prato</h1>
+    </div>
+    <div class="navbar__link" id="topnav">
+        <%if(locals.user){%>
+            <a href="/plates" class="navbar__link__item">MY PLATES</a>
+            <a href="/week" class="navbar__link__item">MY WEEK</a>
+            <a href="/create" class="navbar__link__item">ADD PLATE</a>
+            <a href="/logout" class="navbar__link__item navbar__link-logout">LOG OUT</a>
+            <div class="user">
+                <a href="/me" class="navbar__link__item"><img class="navbar__link__item-img" src='/public/img/users/<%=user.photo%>' alt=""></a>
+                <!-- <a href="#" class="navbar__link__item" ><%=locals.user.name.split(" ")[0]%></a> -->
+                <p><span class="user__name" id="username"><%=locals.user.name.split(" ")[0]%></span></p>
+            </div>
 
-    <%}else{%>
-        <a href="/login" class="navbar__link__item">LOG IN</a>
-        <a href="/signup" class="navbar__link__item">SIGN UP</a>
-    <%}%>
+        <%}else{%>
+            <a href="/login" class="navbar__link__item">LOG IN</a>
+            <a href="/signup" class="navbar__link__item">SIGN UP</a>
+        <%}%>
 
-        <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
-</div>
+            <a href="javascript:void(0);" class="icon" onclick="myFunction()">&#9776;</a>
+    </div>
+</nav>
 <script>
     function myFunction() {
+        var x = document.getElementById("topnav");
+        console.log(x)
+        if (x.className === "navbar") {
+            x.className += "__responsive";
+        } else {
+            x.className = "navbar";
+        }
+        
+        
         var y = document.getElementById("username");
         console.log(y)
         if (y.className === "user__name") {
@@ -36,3 +43,5 @@
         }
     }
 </script>
+
+
