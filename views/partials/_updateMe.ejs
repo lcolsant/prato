@@ -7,15 +7,11 @@
         <label for="email" class="form__label">Email address</label><br>
         <input type="email" name="email" class="form__input form__input__email" id="email" value="<%=user.email%>" required><br>
         <div class="uploadbtn-wrap">
-            <!-- <label for="photo" class="form__upload__label new-button">Choose new photo</label> -->
             <label for="photo" class="upload-button">Choose new photo</label>
-            <!-- <input type="file" accept="image/*" class="form__upload" name="photo" id="photo" > -->
             <input type="file" accept="image/*" name="photo" id="photo" >
         </div>
         <input type="submit" class="btn" value="UPDATE">
     </form>
-
-    <!-- <a href="/updatePassword" class="form__upload__label">Update Password</a><br> -->
     <a href="/updatePassword" class="form__update__password">Update Password</a><br>
     <button class="form__update__deleteAccount" value='<%=user._id %>'>Delete Account</button><br>
 </div>

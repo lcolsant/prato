@@ -16,22 +16,14 @@
         // responsive navbar
         function myFunction() {
             var x = document.getElementById("topnav");
-            var y = document.getElementById("username");
             console.log(x)
-            console.log(y)
             if (x.className === "navbar") {
                 x.className += "__responsive";
             } else {
                 x.className = "navbar";
             }
-            if (y.className === "user__name") {
-                y.className += "__responsive";
-            } else {
-                y.className = "user__name";
-            }
         }
     </script>
-    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="/public/js/bundle.js"></script>
     <!-- <script src="/reload/reload.js"></script>; -->
 

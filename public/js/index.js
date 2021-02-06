@@ -30,7 +30,6 @@ const selectRow = document.querySelectorAll('.row__btn').forEach(item =>{
     item.addEventListener('click', e => {
         e.preventDefault();
         let removePlate = item.firstElementChild.id;
-        console.log(item.firstElementChild.id);
         removeFromWeek(removePlate);
     });
 });
@@ -42,7 +41,6 @@ if(updatePasswordForm) {
         const currentPassword = document.getElementById('currentPassword').value;
         const newPassword = document.getElementById('newPassword').value;
         const passwordConfirm = document.getElementById('passwordConfirm').value;
-        console.log(currentPassword,newPassword, passwordConfirm);
         updatePassword(currentPassword, newPassword, passwordConfirm);
     });
 }
@@ -64,7 +62,6 @@ if(signUpForm) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const passwordConfirm = document.getElementById('passwordConfirm').value;
-        console.log(name,email,password, passwordConfirm)
         signup(name, email, password, passwordConfirm);
     });
 } 
@@ -77,10 +74,6 @@ if(updateMeForm) {
         formData.append('name', document.getElementById('name').value);
         formData.append('email', document.getElementById('email').value);
         formData.append('photo', document.getElementById('photo').files[0]);
-        console.log(document.getElementById('name').value);
-        console.log(document.getElementById('email').value);
-        console.log(document.getElementById('photo').value);
-        console.log(formData);
         for (var p of formData) {
             console.log(p);
         }
@@ -111,7 +104,6 @@ if(logOutBtn){
 if(deletePlateBtn) {
     deletePlateBtn.addEventListener('click', e => {
         e.preventDefault();
-        console.log('delete button clicked');
         // console.log(e.target.id)
         deletePlate(e.target.id);
     });
@@ -143,9 +135,6 @@ if(updatePlateForm) {
         formData.append('description', document.getElementById('description').value);
         formData.append('recipe', document.getElementById('recipe').value);
         formData.append('photo', document.getElementById('photo').files[0]);
-        console.log(document.getElementById('description').value);
-        console.log(document.getElementById('recipe').value);
-        console.log(formData);
         updatePlate(formData,id);
     });
 }

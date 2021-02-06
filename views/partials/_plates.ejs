@@ -7,7 +7,6 @@
                 <a href="/plates/<%=plates[i]._id%>">
                     <div class="card__picture">
                         <div class="card__picture-overlay">&nbsp;</div>
-                        <!-- <img src="../../public/img/plate1.jpg" class="card__picture-img" alt=""> -->
                         <img src="public/img/plates/<%=plates[i].photo%>" class="card__picture-img" alt="">
                     </div>
                 </a>    
@@ -28,7 +27,6 @@
     </div>
     <% } else { %>
     <div class="plates__add">
-        <!-- <p class="plates__add-text">Hi  <%= /* user.name  */  %> , looks like you haven't added a plate yet...let's get started! </p> -->
         <p class="plates__add-text">Looks like you haven't added a plate yet...let's get started! </p>
         <button class="btn plates__add-btn"><a href="/create" class="btn plates__add-btn">Create a Plate</a></button>
     </div>

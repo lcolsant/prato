@@ -40,8 +40,6 @@ exports.getPlates = async (req, res) => {
             }
         });
         
-        console.log(user.plates.length)
-
         res.status(200).render('plates', {
             title: 'My Plates',
             plates:user.plates
@@ -54,8 +52,6 @@ exports.getPlates = async (req, res) => {
 }
 
 exports.createPlate = (req, res) => {
-    console.log('in create plate');
-    
 
     res.status(200).render('createPlate', {
         title: 'Create Plate',
@@ -68,7 +64,7 @@ exports.getWeek = async (req, res) => {
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id, (user)=>{
         if(user){
-            console.log(`User retrieved: ${user}`)
+            console.log(`User retrieved: ${user.name}`)
         }
     });
         

@@ -330,7 +330,7 @@ i {
     grid-column: 2/4;
     display: flex;
     flex-direction: row;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
     padding-right: 2rem; }
     @media only screen and (max-width: 56.25em) {

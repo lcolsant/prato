@@ -166,8 +166,7 @@ exports.logout = (req, res) => {
 exports.protect = async (req, res, next) => {
     let token;
     let decoded;
-    // console.log(`Req.headers.auth: ${req.headers.authorization}`);       
-    console.log(`Req.headers.cookie: ${req.headers.cookie}`)
+    // console.log(`Req.headers.cookie: ${req.headers.cookie}`)
 
     // 1) Getting token from req.headers
     try {
@@ -181,7 +180,7 @@ exports.protect = async (req, res, next) => {
         };
         
     
-        console.log(`token passed: ${token}`);
+        // console.log(`token passed: ${token}`);
 
     } catch(err) {
      
@@ -264,12 +263,8 @@ exports.isLoggedIn = async (req, res, next) => {
   exports.updatePassword = async (req, res) => {
     
     try {
-        console.log('in update password')
-        console.log(req.body)
 
         const user = await User.findById(req.user.id).select('+password');
-
-        console.log(`retrieved user: ${user}`)
 
         if (!(await user.correctPassword(req.body.currentPassword, user.password))) {
             return next(new Error('Your current password is wrong.'));

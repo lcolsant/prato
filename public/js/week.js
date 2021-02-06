@@ -47,8 +47,6 @@ export const removeFromWeek = async (plateID) => {
 export const updateWeek = async (draggedID,droppedID) => {
     
     try {
-        // console.log('in updateweek js')
-        // console.log(draggedID,droppedID);
         const res = await axios({
             method:'patch',
             url:`/api/v1/plates/week/update`,
@@ -70,7 +68,6 @@ export const updateWeek = async (draggedID,droppedID) => {
 export const emailWeek = async () => {
     
     try {
-        console.log('in emailWeek js')
         const res = await axios({
             method:'GET',
             url:`/api/v1/plates/week/email`,

@@ -116,11 +116,10 @@ exports.createUser = (req, res) => {
 exports.updateUser = async (req,res) => {
     console.log(`...updating user: ${req.params.id}`);
 
-    console.log(req.params.id);
-    console.log(req.body);
-    console.log(req.file);
+    // console.log(req.params.id);
+    // console.log(req.body);
+    // console.log(req.file);
 
-    console.log('from controller...updating user...');
     const { name, email, photo } = req.body;
     console.log(`name: ${name} email: ${email}`);
 
@@ -133,7 +132,7 @@ exports.updateUser = async (req,res) => {
             req.body.photo = oldphoto;
         } else {
             // otherwise use the new photo to update db and delete old photo from filesystem
-                console.log(`Filename in update plate: ${req.file.filename}`)
+                // console.log(`Filename in update plate: ${req.file.filename}`)
                 req.body.photo = req.file.filename
     
                 //remove old photo from file system before setting updated photo
@@ -178,21 +177,15 @@ exports.updateUser = async (req,res) => {
 
 
 exports.deleteUser = async (req, res) => {
-    // console.log('in delete user controller');
-    // console.log(req.params.id);
-    
     
     try {
         
         //retrieve User to delete User's plates from DB and file system before deleting user
         const user = await User.findById(req.params.id);
         const plates = user.plates;
-        // console.log(plates);
         const userPhoto = user.photo;
         const plateIDs = plates.map(plate => plate._id);
         const platePhotos = plates.map(plate => plate.photo);
-        // console.log(plateIDs);
-        // console.log(platePhotos);
 
         // 1) delete User photo from filesystem
 

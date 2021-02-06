@@ -33,8 +33,6 @@ export const deletePlate = async (data) => {
             url: `/api/v1/plates/${data}`,
         });
 
-        console.log(res.status);
-
         if(res.status == 204) {
             showAlert('success','Deleted plate successfully!');
             window.setTimeout(() => {
@@ -53,9 +51,6 @@ export const deletePlate = async (data) => {
 export const updatePlate = async (data,id) => {
     try {
 
-        console.log('in updatePlate');
-        console.log(data);
-
         const res = await axios({
             method: 'patch',
             url: `/api/v1/plates/${id}`,
@@ -64,7 +59,6 @@ export const updatePlate = async (data,id) => {
 
         if(res.data.status == 'success') {
             showAlert('success','Updated plate successfully!');
-            console.log(res.data)
             window.setTimeout(() => {
                 location.assign('/plates');
             }, 2000);

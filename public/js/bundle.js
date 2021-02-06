@@ -8822,7 +8822,6 @@ var deletePlate = /*#__PURE__*/function () {
 
           case 3:
             res = _context2.sent;
-            console.log(res.status);
 
             if (res.status == 204) {
               (0, _alert.showAlert)('success', 'Deleted plate successfully!');
@@ -8831,21 +8830,21 @@ var deletePlate = /*#__PURE__*/function () {
               }, 2000);
             }
 
-            _context2.next = 12;
+            _context2.next = 11;
             break;
 
-          case 8:
-            _context2.prev = 8;
+          case 7:
+            _context2.prev = 7;
             _context2.t0 = _context2["catch"](0);
             (0, _alert.showAlert)('error', _context2.t0.response.data.message);
             console.log(_context2.t0);
 
-          case 12:
+          case 11:
           case "end":
             return _context2.stop();
         }
       }
-    }, _callee2, null, [[0, 8]]);
+    }, _callee2, null, [[0, 7]]);
   }));
 
   return function deletePlate(_x2) {
@@ -8863,41 +8862,38 @@ var updatePlate = /*#__PURE__*/function () {
         switch (_context3.prev = _context3.next) {
           case 0:
             _context3.prev = 0;
-            console.log('in updatePlate');
-            console.log(data);
-            _context3.next = 5;
+            _context3.next = 3;
             return (0, _axios.default)({
               method: 'patch',
               url: "/api/v1/plates/".concat(id),
               data: data
             });
 
-          case 5:
+          case 3:
             res = _context3.sent;
 
             if (res.data.status == 'success') {
               (0, _alert.showAlert)('success', 'Updated plate successfully!');
-              console.log(res.data);
               window.setTimeout(function () {
                 location.assign('/plates');
               }, 2000);
             }
 
-            _context3.next = 13;
+            _context3.next = 11;
             break;
 
-          case 9:
-            _context3.prev = 9;
+          case 7:
+            _context3.prev = 7;
             _context3.t0 = _context3["catch"](0);
             (0, _alert.showAlert)('error', _context3.t0.response.data.message);
             console.log(_context3.t0);
 
-          case 13:
+          case 11:
           case "end":
             return _context3.stop();
         }
       }
-    }, _callee3, null, [[0, 9]]);
+    }, _callee3, null, [[0, 7]]);
   }));
 
   return function updatePlate(_x3, _x4) {
@@ -9075,34 +9071,33 @@ var emailWeek = /*#__PURE__*/function () {
         switch (_context4.prev = _context4.next) {
           case 0:
             _context4.prev = 0;
-            console.log('in emailWeek js');
-            _context4.next = 4;
+            _context4.next = 3;
             return (0, _axios.default)({
               method: 'GET',
               url: "/api/v1/plates/week/email"
             });
 
-          case 4:
+          case 3:
             res = _context4.sent;
 
             if (res.data.status == 'success') {
               (0, _alert.showAlert)('success', 'Successfully emailed week!');
             }
 
-            _context4.next = 11;
+            _context4.next = 10;
             break;
 
-          case 8:
-            _context4.prev = 8;
+          case 7:
+            _context4.prev = 7;
             _context4.t0 = _context4["catch"](0);
             (0, _alert.showAlert)('error', 'Error emailing week.');
 
-          case 11:
+          case 10:
           case "end":
             return _context4.stop();
         }
       }
-    }, _callee4, null, [[0, 8]]);
+    }, _callee4, null, [[0, 7]]);
   }));
 
   return function emailWeek() {
@@ -9406,7 +9401,6 @@ var selectRow = document.querySelectorAll('.row__btn').forEach(function (item) {
   item.addEventListener('click', function (e) {
     e.preventDefault();
     var removePlate = item.firstElementChild.id;
-    console.log(item.firstElementChild.id);
     (0, _week.removeFromWeek)(removePlate);
   });
 });
@@ -9417,7 +9411,6 @@ if (updatePasswordForm) {
     var currentPassword = document.getElementById('currentPassword').value;
     var newPassword = document.getElementById('newPassword').value;
     var passwordConfirm = document.getElementById('passwordConfirm').value;
-    console.log(currentPassword, newPassword, passwordConfirm);
     (0, _login.updatePassword)(currentPassword, newPassword, passwordConfirm);
   });
 }
@@ -9438,7 +9431,6 @@ if (signUpForm) {
     var email = document.getElementById('email').value;
     var password = document.getElementById('password').value;
     var passwordConfirm = document.getElementById('passwordConfirm').value;
-    console.log(name, email, password, passwordConfirm);
     (0, _login.signup)(name, email, password, passwordConfirm);
   });
 }
@@ -9452,10 +9444,6 @@ if (updateMeForm) {
     formData.append('name', document.getElementById('name').value);
     formData.append('email', document.getElementById('email').value);
     formData.append('photo', document.getElementById('photo').files[0]);
-    console.log(document.getElementById('name').value);
-    console.log(document.getElementById('email').value);
-    console.log(document.getElementById('photo').value);
-    console.log(formData);
 
     var _iterator = _createForOfIteratorHelper(formData),
         _step;
@@ -9497,8 +9485,7 @@ if (logOutBtn) {
 
 if (deletePlateBtn) {
   deletePlateBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    console.log('delete button clicked'); // console.log(e.target.id)
+    e.preventDefault(); // console.log(e.target.id)
 
     (0, _plate.deletePlate)(e.target.id);
   });
@@ -9528,9 +9515,6 @@ if (updatePlateForm) {
     formData.append('description', document.getElementById('description').value);
     formData.append('recipe', document.getElementById('recipe').value);
     formData.append('photo', document.getElementById('photo').files[0]);
-    console.log(document.getElementById('description').value);
-    console.log(document.getElementById('recipe').value);
-    console.log(formData);
     (0, _plate.updatePlate)(formData, id);
   });
 } //Draggable feature on week page

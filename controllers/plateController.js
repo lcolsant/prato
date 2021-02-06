@@ -120,11 +120,11 @@ exports.getPlate = async (req, res, next) => {
 exports.createPlate = async (req, res) => {
 
     
-    console.log('creating plate...');
+    // console.log('creating plate...');
     
     const { name, description, recipe } = req.body;
 
-    console.log(`name: ${name} description: ${description} recipe: ${recipe}`);
+    // console.log(`name: ${name} description: ${description} recipe: ${recipe}`);
     var photo = 'default-plate.jpg'
 
     try {
@@ -140,7 +140,7 @@ exports.createPlate = async (req, res) => {
     
     
     const userID = req.user._id;
-    console.log(`userID: ${userID}`)
+    // console.log(`userID: ${userID}`)
 
     
     try {
@@ -153,11 +153,9 @@ exports.createPlate = async (req, res) => {
             user:req.user._id
         });
         
-        console.log(`newPlate._id: ${newPlate._id}`)
-        console.log(`newPlate: ${newPlate}`)
+        // console.log(`newPlate._id: ${newPlate._id}`)
+        // console.log(`newPlate: ${newPlate}`)
         
-        //add plate to User's plates array
-        // console.log(`adding to user: ${userID}`);
 
         const updatedUser = await User.findByIdAndUpdate(
             userID, 
@@ -188,17 +186,9 @@ exports.createPlate = async (req, res) => {
 
 exports.updatePlate = async (req, res, next) => {
     
-    // console.log(req.params.id);
-    // console.log(req.body);
-    // console.log(req.file);
-
-
-    console.log('from controller...updating plate...');
-    
     const { name, description, recipe, photo } = req.body;
 
-    console.log(`name: ${name} description: ${description} recipe: ${recipe}`);
-    // const photo = 'default-plate.jpg'
+    // console.log(`name: ${name} description: ${description} recipe: ${recipe}`);
         
     try {
         
@@ -255,7 +245,7 @@ exports.updatePlate = async (req, res, next) => {
 
 
 exports.deletePlate = async (req, res) => {
-    console.log('in plate controller');
+    // console.log('in plate controller');
     console.log(req.params.id);
     // console.log(req.body);
     
@@ -376,10 +366,6 @@ exports.updateWeek = async (req, res) => {
 
         const {draggedID, droppedID} = req.body;
 
-        // console.log(`In updateWeek controller`);
-        // console.log(draggedID);
-        // console.log(droppedID);
-        
         const token = req.headers.cookie.split('=')[1]
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
         user = await User.findById(decoded.id);
@@ -389,19 +375,11 @@ exports.updateWeek = async (req, res) => {
         }
 
         temp2 = week[draggedID];
-        console.log(temp2);
         //remove dragged element from array
         week.splice(draggedID,1);
         //add dragged element before dropped element
         week.splice(droppedID,0,temp2);
 
-
-        // console.log('updated week:')
-        // for(let i=0;i<week.length;i++){
-        //     console.log(week[i].name);
-        // }
-
-        
         //empty User's current week array in DB
         await User.findByIdAndUpdate(
             decoded.id, 
@@ -441,7 +419,6 @@ exports.emailWeek = async (req, res) => {
         const token = req.headers.cookie.split('=')[1]
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
         user = await User.findById(decoded.id);
-        console.log(user)
         
         //use code below for non-class based email option
         // await sendEmail({
