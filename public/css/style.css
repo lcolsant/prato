@@ -78,12 +78,12 @@ h3 {
   @media only screen and (max-width: 68.75em) {
     .btn {
       height: 3.5rem;
-      width: 8rem;
+      width: 10rem;
       font-size: 1.3rem; } }
   @media only screen and (max-width: 56.25em) {
     .btn {
       height: 3.5rem;
-      width: 8rem; } }
+      width: 10rem; } }
 
 i {
   font-size: 4rem; }

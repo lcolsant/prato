@@ -5,8 +5,37 @@
             <%- include('./partials/_navbar.ejs') %>
         </div>
         <div class="main">
-            <%- include('./partials/_landing.ejs') %>
-            <%- /* include('./partials/_plates.ejs') */  %>
+            <% if(locals.url == '/') { %>
+                <%- include('./partials/_landing.ejs') %>
+            <% } %>
+            <% if(locals.url == '/signup') { %>
+                <%- include('./partials/_signup.ejs') %>
+            <% } %>
+            <% if(locals.url == '/login') { %>
+                <%- include('./partials/_login.ejs') %>
+            <% } %>
+            <% if(locals.url == '/plates') { %>
+                <%- include('./partials/_plates.ejs') %>
+            <% } %>
+            <% if(locals.url == '/create') { %>
+                <%- include('./partials/_createPlate.ejs') %>
+            <% } %>
+            <% if(locals.url == '/week') { %>
+                <%- include('./partials/_week.ejs') %>
+            <% } %>
+            <% if(locals.url == '/plates/'+locals.plateid) { %>
+                <%- include('./partials/_plateDetail.ejs') %>
+            <% } %>
+            <% if(locals.url == '/plates/update/'+locals.plateid) { %>
+                <%- include('./partials/_updatePlate.ejs') %>
+            <% } %>
+            <% if(locals.url == '/me') { %>
+                <%- include('./partials/_updateMe.ejs') %>
+            <% } %>
+            <% if(locals.url == '/updatePassword') { %>
+                <%- include('./partials/_updatePassword.ejs') %>
+            <% } %>
+            <%- /* include('./partials/_landing.ejs') */ %>
         </div>
         <footer class="footer">
             <%- include('./partials/_footer.ejs') %>

@@ -5,44 +5,58 @@ const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const AppError = require('../utils/appError');
 const { nextTick } = require('process');
+const { url } = require('inspector');
+const { serialize } = require('v8');
 // const { plates } = require('../dev-data/data/plates-dev');
 // import { plates } from '../dev-data/data/plates-dev';
 
 
 exports.getLogin = (req, res) => {
-    res.status(200).render('login', {
-        title: 'Login'
+    
+    const url = req.originalUrl;
+
+    res.status(200).render('index', {
+        title: 'Login',
+        url
     });
 }
 
 exports.getSignup = (req, res) => {
-    res.status(200).render('signup', {
-        title: 'Sign Up'
+    
+    const url = req.originalUrl;
+
+    res.status(200).render('index', {
+        title: 'Sign Up',
+        url
     });
 }
 
 exports.getLanding = (req, res) => {
-    res.status(200).render('index');
+    
+    const url = req.originalUrl;
+    res.status(200).render('index', {
+        url
+    });
 }
 
 exports.getPlates = async (req, res) => {
     try { 
-       
-        // console.log(req.headers.cookie)
+
+        const url = req.originalUrl;
+
         const token = req.headers.cookie.split('=')[1]
-        // console.log(`Token: ${token}`)
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
         
-        // console.log(`UserID: ${decoded.id}`)
         const user = await User.findById(decoded.id, (user)=>{
             if(user){
                 console.log(`User retrieved: ${user}`)
             }
         });
         
-        res.status(200).render('plates', {
+        res.status(200).render('index', {
             title: 'My Plates',
-            plates:user.plates
+            plates:user.plates,
+            url
         });
 
     } catch(err) {
@@ -53,13 +67,17 @@ exports.getPlates = async (req, res) => {
 
 exports.createPlate = (req, res) => {
 
-    res.status(200).render('createPlate', {
+    const url = req.originalUrl;
+
+    res.status(200).render('index', {
         title: 'Create Plate',
+        url
     });
 }
 
 
 exports.getWeek = async (req, res) => {
+    const url = req.originalUrl;
     const token = req.headers.cookie.split('=')[1]
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     const user = await User.findById(decoded.id, (user)=>{
@@ -68,20 +86,27 @@ exports.getWeek = async (req, res) => {
         }
     });
         
-    res.status(200).render('week', {
+    res.status(200).render('index', {
         title: 'My Week',
-        week: user.week
+        week: user.week,
+        url
     });
 }
+
 exports.getPlateDetail = async (req, res, next) => {
     
     try {
-        
+
+        const url = req.originalUrl;
+        const plateid = req.params.id;
+
         const plate = await Plate.findById(req.params.id);
 
-        res.status(200).render('detail', {
+        res.status(200).render('index', {
             title: 'Plate Detail',
             plate: plate,
+            plateid,
+            url
         });
         
     } catch (err) {
@@ -92,19 +117,24 @@ exports.getPlateDetail = async (req, res, next) => {
         //     message: err.message
         // });
 
+        //pass error to global error handler
         next(err);
     }
 }
 
 exports.updatePlate = async (req, res) => {
-    
+
+    const url = req.originalUrl;
+    const plateid = req.params.id;
     const plate = await Plate.findById(req.params.id);
 
 
     try {
-        res.status(200).render('updatePlate', {
+        res.status(200).render('index', {
             title: 'Update Plate',
             plate: plate,
+            plateid,
+            url
         });
 
     } catch (err) {
@@ -118,17 +148,19 @@ exports.updatePlate = async (req, res) => {
 exports.getMe = async (req, res) => {
     
     try {
+        const url = req.originalUrl;
         const token = req.headers.cookie.split('=')[1]
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.id, (user)=>{
             if(user){
-                console.log(`User retrieved: ${user}`)
+                console.log(`User retrieved: ${user.name}`)
             }
         });
     
-        res.status(200).render('updateMe', {
+        res.status(200).render('index', {
             title: 'My Account',
             user: user,
+            url
         });
 
     } catch (err) {
@@ -143,7 +175,10 @@ exports.getMe = async (req, res) => {
 exports.updatePassword = async (req, res) => {
     
     try {
-        res.status(200).render('updatePassword', {
+        const url = req.originalUrl;
+
+        res.status(200).render('index', {
+            url
         });
 
     } catch (err) {
