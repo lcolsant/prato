@@ -20,9 +20,9 @@
     
     justify-content: center;
     align-content: center;
-    // align-items: center;
 
     position: relative;
+
 
     a {
         text-decoration: none;
@@ -44,11 +44,9 @@
                 right: 2.8rem;
                 transition: all .8s;
 
-
                 &:hover {
                     background-color: transparent;
                     color: var(--color-tertiary-light);
-    
                 }
             }
         }
@@ -63,6 +61,8 @@
             opacity: .85;
             font-size: 2rem;
             position: relative;
+
+
         }
         &__responsive a {
             display: block;
@@ -71,8 +71,11 @@
             font-size: 1.2rem;
             text-decoration: none;
             text-transform: uppercase;
+            transition: all 0.4s;
+
+
     
-            &:hover{
+            &:hover {
                 color: var(--color-grey-light-1);
                 transition: all .4s;
                 border-bottom: none;
@@ -87,9 +90,10 @@
                 font-size: 4rem;
                 color: var(--color-red-3);
                 top: 3.2rem;
-                right: 1.6rem;
+                right: 2.8rem;
                 padding: 0;
                 transition: all .8s;
+
 
                 &:hover {
                     background-color: transparent;
@@ -144,6 +148,7 @@
         justify-content: flex-end;
         align-items: center;
         padding-right: 2rem;
+
 
         @media only screen and (max-width: $bp-medium) {
             display: block;
@@ -219,6 +224,12 @@
         font-size: 1.4rem;
         font-weight: 100;
         padding-right: 4rem;
+
+        @media only screen and (max-width: $bp-small) {
+            font-size: 1.2rem;
+            padding-right: 3rem;
+            
+        }
         
     }
 
@@ -396,6 +407,11 @@
             justify-content: center;
             margin-top: 4rem;
             margin-bottom: 6rem;
+
+            @media only screen and (max-width: $bp-small) {
+                grid-template-columns: repeat(auto-fit, 35rem);
+                
+            }
         }
 
     }
@@ -452,19 +468,20 @@
         @media only screen and (max-width: $bp-medium) {
             grid-row: 2 / 3;
             grid-column: 1 / -1;
-    
+            font-size: 3rem;
         }
         
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-
-        
         font-size: 3.5rem;
         font-weight: 100;
-
         padding: 6rem;
+
+        &-p {
+            text-align: center;
+        }
     }
     
     &__pic {
