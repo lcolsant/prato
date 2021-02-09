@@ -3,3 +3,4 @@
 /public/img/plates
 /public/img/users
 .env
+.cache/
