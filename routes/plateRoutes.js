@@ -11,14 +11,14 @@ router.route('/')
     .post(authController.protect, plateController.uploadPlatePhoto, plateController.resizePlatePhoto,plateController.createPlate);
 
 router.route('/:id')
-    .get(plateController.getPlate)
+    .get(authController.protect, plateController.getPlate)
     .patch(authController.protect, plateController.uploadPlatePhoto, plateController.resizePlatePhoto ,plateController.updatePlate)
-    .delete(plateController.deletePlate)
-    .post(plateController.addToWeek)
+    .delete(authController.protect, plateController.deletePlate)
+    .post(authController.protect, plateController.addToWeek)
 
-router.delete('/remove/:id', plateController.removeFromWeek);
-router.patch('/week/update', plateController.updateWeek);
-router.get('/week/email', plateController.emailWeek);
+router.delete('/remove/:id', authController.protect, plateController.removeFromWeek);
+router.patch('/week/update', authController.protect, plateController.updateWeek);
+router.get('/week/email', authController.protect, plateController.emailWeek);
     
 
 

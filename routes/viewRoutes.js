@@ -15,7 +15,7 @@ router.get('/login', viewController.getLogin);
 router.get('/signup', viewController.getSignup);    
 router.get('/create', viewController.createPlate)
 router.get('/week', viewController.getWeek)
-router.get('/me', viewController.getMe)
-router.get('/updatePassword', viewController.updatePassword)
+router.get('/me', authController.protect, viewController.getMe)
+router.get('/updatePassword', authController.protect, viewController.updatePassword)
 
 module.exports = router;

@@ -1,4 +1,3 @@
-
 const User = require('../models/userModel');
 const Plate = require('../models/plateModel');
 const jwt = require('jsonwebtoken');
