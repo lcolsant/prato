@@ -504,6 +504,9 @@ i {
   grid-template-columns: 1fr;
   width: 80%;
   justify-content: center; }
+  @media only screen and (max-width: 56.25em) {
+    .plates {
+      width: 90%; } }
   .plates__cards {
     display: grid;
     justify-content: center;
@@ -512,6 +515,9 @@ i {
     column-gap: 0.5rem;
     margin-top: 2rem;
     margin-bottom: 6rem; }
+    @media only screen and (max-width: 56.25em) {
+      .plates__cards {
+        grid-template-columns: repeat(auto-fit, 34rem); } }
     .plates__cards-detail {
       display: grid;
       grid-template-columns: repeat(auto-fit, 60rem);

@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const appError = require('./utils/appError');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const compression = require('compression');
 
 
 viewsRouter = require('./routes/viewRoutes')
@@ -20,6 +21,7 @@ app.set('views', path.join(__dirname, 'views'));
 //app.use(bodyParser.urlencoded({extended:true}));
 
 //app.use(express.static(path.join(__dirname)));
+app.use(compression());
 app.use('/public', express.static(path.join(__dirname,'public')));
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
