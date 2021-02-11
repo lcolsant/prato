@@ -16,14 +16,17 @@ const port = process.env.PORT || 3000
 //localhost development db
 //mongoose.connect('mongodb://localhost/prato', {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
 
+const DB = process.env.DATABASE_CONNECTION.replace('<PASSWORD>',process.env.DATABASE_PASSWORD);
 //production db - MongoDB Atlas
-mongoose.connect(`mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.4g8pi.mongodb.net/prato?retryWrites=true&w=majority`, {useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true});
+mongoose.connect(DB, {
+    useNewUrlParser: true, 
+    useUnifiedTopology: true, 
+    useCreateIndex: true});
+
 //Depracation warning: Use MongoDB driver's findOneAndUpdate() rather than findAndModify(); https://mongoosejs.com/docs/deprecations.html#findandmodify
 mongoose.set('useFindAndModify', false);
 
-
 mongoose.connection.on('connected', ()=>console.log('Connected to MongoDB...'));
-
 
 const server = app.listen(port, () => {
     console.log(`Server listening on port ${port}.`);
