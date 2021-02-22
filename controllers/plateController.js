@@ -1,6 +1,7 @@
 const Plate = require('../models/plateModel');
 const multer = require('multer');
 const sharp = require('sharp');
+const AWS = require('aws-sdk')
 const User = require('../models/userModel');
 const { updateUser } = require('./userController');
 const jwt = require('jsonwebtoken');
@@ -10,8 +11,15 @@ const fs = require('fs');
 const Email = require('../utils/email');
 const AppError = require('../utils/appError');
 
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_KEY
+});
 
 
+const multerStorage = multer.memoryStorage();
+
+//option below to save directly to disk
 // const multerStorage = multer.diskStorage({
 //     destination: (req,file, cb) => {
 //         cb(null, 'public/img/plates');
@@ -31,10 +39,6 @@ const multerFilter = (req, file, cb) => {
     }
 }
 
-// const upload = multer({ dest: 'public/img'})
-const multerStorage = multer.memoryStorage();
-
-
 const upload = multer({
     storage: multerStorage,
     fileFilter: multerFilter
@@ -46,20 +50,28 @@ exports.resizePlatePhoto = async (req, res, next) => {
     try{
 
         if (!req.file) return next();
-        
-      
         req.file.filename = `user-${req.user._id}-${req.body.name}-${Date.now()}.jpeg`;
-      
-        await sharp(req.file.buffer)
-        //   .resize(2000, 1333)  //3:2 ratio common for images
-        //   .resize(1500, 2000)  //2:3 ratio common for images
-        //   .resize(750, 1000)  //2:3 ratio common for images
-        //   .resize(320, 200)  //2:3 ratio common for images
-          .resize(640,400)  //1.6:1 ratio
-          .toFormat('jpeg')
-          .jpeg({ quality: 90 })
-          .toFile(`public/img/plates/${req.file.filename}`);
-      
+
+        if(process.env.NODE_ENV === 'development'){
+
+            await sharp(req.file.buffer)
+            //   .resize(2000, 1333)  //3:2 ratio common for images
+            //   .resize(1500, 2000)  //2:3 ratio common for images
+            //   .resize(750, 1000)  //2:3 ratio common for images
+            //   .resize(320, 200)  //2:3 ratio common for images
+              .resize(640,400)  //1.6:1 ratio
+              .toFormat('jpeg')
+              .jpeg({ quality: 90 })
+              .toFile(`public/img/plates/${req.file.filename}`);
+        } else if(process.env.NODE_ENV === 'production'){
+            await sharp(req.file.buffer)
+              .resize(640,400)  //1.6:1 ratio
+              .toFormat('jpeg')
+              .jpeg({ quality: 90 })
+              .toBuffer()
+              .then(buffer=>{
+                req.file.buffer = buffer});
+        }
         next();
     }catch(err){
         console.log(err);
@@ -119,67 +131,126 @@ exports.getPlate = async (req, res, next) => {
 
 exports.createPlate = async (req, res) => {
 
-    
     // console.log('creating plate...');
-    
     const { name, description, recipe } = req.body;
+    const userID = req.user._id;
 
     // console.log(`name: ${name} description: ${description} recipe: ${recipe}`);
-    var photo = 'default-plate.jpg'
+    let photo = 'default-plate.jpg';
 
     try {
-
         if(req.file.filename){
             console.log(`Filename in create plate: ${req.file.filename}`)
             photo = req.file.filename
         } 
     } catch(err) {
         console.log('Req.file doesn\'t exist')
-        // console.log(err);
     }
-    
-    
-    const userID = req.user._id;
-    // console.log(`userID: ${userID}`)
 
-    
-    try {
-    
-        const newPlate = await Plate.create({
-            name,
-            description,
-            recipe,
-            photo,
-            user:req.user._id
-        });
-        
-        // console.log(`newPlate._id: ${newPlate._id}`)
-        // console.log(`newPlate: ${newPlate}`)
-        
 
-        const updatedUser = await User.findByIdAndUpdate(
-            userID, 
-            { $push: { plates: newPlate._id } },
-            {new:true}
-         );
-
-        //  console.log(updatedUser);
+    if(process.env.NODE_ENV === 'production') {
         
-        res.status(201).json({
-            status:'success',
-            data:{
-                message: 'Created a new plate successfully!',
-                data: newPlate,
+        let s3upload;
+
+        if (!req.file) {
+            const newPlate = await Plate.create({
+                name,
+                description,
+                recipe,
+                photo,
+                user:req.user._id
+            });
+
+            const updatedUser = await User.findByIdAndUpdate(
+                userID, 
+                { $push: { plates: newPlate._id } },
+                {new:true}
+             );
+
+             return res.status(201).json({
+                status:'success',
+                data:{
+                    message: 'Created a new plate successfully!',
+                    data: newPlate,
+                }
+            });
+        }
+
+        
+        try {
+            
+            if(req.file.buffer) {
+                
+                const params = {
+                    Bucket: process.env.AWS_BUCKET_NAME,
+                    Key: `plates/${photo}`,
+                    Body: req.file.buffer
+                }
+    
+                s3upload = await s3.upload(params).promise();
+                console.log(s3upload);
             }
-        });
+        }catch(error){
+            console.log('Req.file.buffer does not exist');
+        }
+    
 
-    } catch (err){
-        res.status(400).json({
-            status: 'fail',
-            message: 'Error 💥 saving plate to MongoDB..', err
-        });
+            const newPlate = await Plate.create({
+                name,
+                description,
+                recipe,
+                photo: s3upload.Key.split('/')[1],
+                user:req.user._id
+            });
+
+            const updatedUser = await User.findByIdAndUpdate(
+                userID, 
+                { $push: { plates: newPlate._id } },
+                {new:true}
+             );
+
+             res.status(201).json({
+                status:'success',
+                data:{
+                    message: 'Created a new plate successfully!',
+                    data: newPlate,
+                }
+            });
     }
 
+    
+    if(process.env.NODE_ENV === 'development'){
+        try {
+
+            const newPlate = await Plate.create({
+                name,
+                description,
+                recipe,
+                photo,
+                user:req.user._id
+            });
+
+            const updatedUser = await User.findByIdAndUpdate(
+                userID, 
+                { $push: { plates: newPlate._id } },
+                {new:true}
+             );
+
+             res.status(201).json({
+                status:'success',
+                data:{
+                    message: 'Created a new plate successfully!',
+                    data: newPlate,
+                }
+            });
+
+        } catch (err){
+            res.status(400).json({
+                status: 'fail',
+                message: 'Error 💥 saving plate to MongoDB..', err
+            });
+        }
+    }
 }
 
 
@@ -246,41 +317,64 @@ exports.updatePlate = async (req, res, next) => {
 
 exports.deletePlate = async (req, res) => {
     // console.log('in plate controller');
-    console.log(req.params.id);
+    // console.log(req.params.id);
     // console.log(req.body);
     
     try {
         const token = req.headers.cookie.split('=')[1];
         const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
         
-        //remove from user's week before deleting plate
+        // 1) remove from user's week array before deleting plate
         await User.findByIdAndUpdate(
             decoded.id, 
             { $pullAll: { week: [req.params.id] } },
             {new:true}
          );
 
-        //remove from user's plates array before deleting plate
+        // 2) remove from user's plates array before deleting plate
          await User.findByIdAndUpdate(
             decoded.id, 
             { $pullAll: { plates: [req.params.id] } },
             {new:true}
          );
         
-         //remove old photo from file system
+         // 3) remove old photo from file system
          const plate = await Plate.findById(req.params.id);
          const oldphoto = plate.photo;
-         if(oldphoto!=='default-plate.jpg'){
-             const path = `./public/img/plates/${oldphoto}`;
-             fs.unlink(path, (err) => {
-                 if(err) {
-                     console.log(err);
-                     return
-                 }
-             });
+         
+         if(process.env.NODE_ENV === 'development') {
+             if(oldphoto!=='default-plate.jpg'){
+                 const path = `./public/img/plates/${oldphoto}`;
+                 fs.unlink(path, (err) => {
+                     if(err) {
+                         console.log(err);
+                         return
+                     }
+                 });
+             }
          }
 
-         //delete plate from MongoDB
+         if(process.env.NODE_ENV === 'production') {
+            
+            if(oldphoto!=='default-plate.jpg'){
+            
+                const params = {
+                    Bucket: process.env.AWS_BUCKET_NAME,
+                    Key: `plates/${oldphoto}`,
+                }
+            
+                s3.deleteObject(params, (error, data) => {
+                    if(error){
+                        console.log(`AWS error: ${error}`);
+                        res.status(500).send(error)
+                    }
+                    
+                    console.log(`AWS deleted file successfully`);
+                });
+            }
+         }
+
+         // 4) delete plate from MongoDB
         await Plate.findByIdAndDelete(req.params.id);
 
 

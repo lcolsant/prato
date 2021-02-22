@@ -7,9 +7,9 @@ const globalErrorHandler = require('./controllers/errorController');
 const compression = require('compression');
 
 
-viewsRouter = require('./routes/viewRoutes')
-plateRouter = require('./routes/plateRoutes')
-userRouter = require('./routes/userRoutes')
+const viewsRouter = require('./routes/viewRoutes')
+const plateRouter = require('./routes/plateRoutes')
+const userRouter = require('./routes/userRoutes')
 
 const app = express()
 
@@ -35,6 +35,8 @@ app.all('*', (req,res,next) => {
 
 //Global error handling middleware
 app.use(globalErrorHandler);
+
+console.log(`Environment: ${process.env.NODE_ENV}`);
 
 module.exports = app;
 

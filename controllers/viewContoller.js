@@ -55,6 +55,8 @@ exports.getPlates = async (req, res) => {
         res.status(200).render('index', {
             title: 'My Plates',
             plates:user.plates,
+            env: process.env.NODE_ENV,
+            aws_url: process.env.AWS_OBJECT_URL,
             url
         });
 
@@ -88,6 +90,8 @@ exports.getWeek = async (req, res) => {
     res.status(200).render('index', {
         title: 'My Week',
         week: user.week,
+        env: process.env.NODE_ENV,
+        aws_url: process.env.AWS_OBJECT_URL,
         url
     });
 }
@@ -105,6 +109,8 @@ exports.getPlateDetail = async (req, res, next) => {
             title: 'Plate Detail',
             plate: plate,
             plateid,
+            env: process.env.NODE_ENV,
+            aws_url: process.env.AWS_OBJECT_URL,
             url
         });
         

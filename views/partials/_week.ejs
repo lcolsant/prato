@@ -7,7 +7,11 @@
                 <div class="row__pic">
                     <div class="card__picture">
                         <div class="card__picture-overlay">&nbsp;</div>
-                        <img src="public/img/plates/<%=week[i].photo%>" class="card__picture-img" alt="">
+                        <% if(env == 'development') { %>
+                            <img src="public/img/plates/<%=week[i].photo%>" class="card__picture-img" alt="">
+                        <% } else { %>
+                            <img src="<%=aws_url%>/plates/<%=week[i].photo%>" class="card__picture-img" alt="">
+                        <% } %>
                     </div>
                 </div>
                 <div class="row__day">

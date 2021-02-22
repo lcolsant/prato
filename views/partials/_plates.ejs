@@ -7,7 +7,11 @@
                 <a href="/plates/<%=plates[i]._id%>">
                     <div class="card__picture">
                         <div class="card__picture-overlay">&nbsp;</div>
-                        <img src="public/img/plates/<%=plates[i].photo%>" class="card__picture-img" alt="">
+                        <% if(env == 'development') { %>
+                            <img src="public/img/plates/<%=plates[i].photo%>" class="card__picture-img" alt="">
+                        <% } else { %>
+                            <img src="<%=aws_url%>/plates/<%=plates[i].photo%>" class="card__picture-img" alt="">
+                        <% } %>
                     </div>
                 </a>    
                 <div class="card__title">

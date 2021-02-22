@@ -11,7 +11,7 @@
     "server:prod": "NODE_ENV=production nodemon server.js -e ejs,js",
     "start:dev": "npm-run-all --parallel server sass watch:js",
     "start:prod": "npm-run-all --parallel server:prod sass build:js",
-    "start":"node server.js"
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -25,6 +25,7 @@
   "homepage": "https://github.com/lcolsant/prato#readme",
   "dependencies": {
     "@babel/polyfill": "^7.10.4",
+    "aws-sdk": "^2.847.0",
     "axios": "^0.20.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
