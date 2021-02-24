@@ -1,12 +1,18 @@
-
 const User = require('../models/userModel');
 const Plate = require('../models/plateModel');
 const multer = require('multer');
-const fs = require('fs');
 const sharp = require('sharp');
+const AWS = require('aws-sdk')
+const fs = require('fs');
 const { findByIdAndDelete } = require('../models/userModel');
 
+const s3 = new AWS.S3({
+    accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    secretAccessKey: process.env.AWS_SECRET_KEY
+});
 
+
+//option below to save directly to disk
 // const multerStorage = multer.diskStorage({
 //     destination: (req,file, cb) => {
 //         cb(null, 'public/img/users');
@@ -45,13 +51,22 @@ exports.resizeUserPhoto = async (req, res, next) => {
       
         req.file.filename = `user-${req.user._id}-${req.body.name}-${Date.now()}.jpeg`;
       
-        await sharp(req.file.buffer)
-          .rotate()
-          .resize(500, 500)
-          .toFormat('jpeg')
-          .jpeg({ quality: 90 })
-          .toFile(`public/img/users/${req.file.filename}`);
-      
+        if(process.env.NODE_ENV === 'development'){
+            await sharp(req.file.buffer)
+            .rotate()
+            .resize(500, 500)
+            .toFormat('jpeg')
+            .jpeg({ quality: 90 })
+            .toFile(`public/img/users/${req.file.filename}`);
+        } else if(process.env.NODE_ENV === 'production'){
+            await sharp(req.file.buffer)
+            .rotate()
+            .resize(500, 500)
+            .toFormat('jpeg')
+            .toBuffer()
+            .then(buffer=>{
+              req.file.buffer = buffer});
+        }
         next();
     }catch(err){
         console.log(err);
@@ -125,28 +140,69 @@ exports.updateUser = async (req,res) => {
 
     try {
         
-        //if there is no new photo on request object, user has not updated photo. Use previously existing photo path.
+        // 1) if there is no new photo on request object, user has not updated photo. Use previously existing photo path.
         if(photo === "undefined") {
             const user = await User.findById(req.params.id);
             const oldphoto = user.photo;
             req.body.photo = oldphoto;
         } else {
-            // otherwise use the new photo to update db and delete old photo from filesystem
-                // console.log(`Filename in update plate: ${req.file.filename}`)
+            // 2) otherwise use the new photo to update db and delete old photo from filesystem
+            
                 req.body.photo = req.file.filename
     
-                //remove old photo from file system before setting updated photo
+            //2a) remove old photo from file system before uploading new photo
                 const user = await User.findById(req.params.id);
                 const oldphoto = user.photo;
-                if(oldphoto!=='default-user.jpg'){
-                    const path = `./public/img/users/${oldphoto}`;
-                    fs.unlink(path, (err) => {
-                        if(err) {
-                            console.log(err);
-                            return
-                        }
-                    });
+                
+                if(process.env.NODE_ENV === 'development'){
+                    if(oldphoto!=='default-user.jpg'){
+                        const path = `./public/img/users/${oldphoto}`;
+                        fs.unlink(path, (err) => {
+                            if(err) {
+                                console.log(err);
+                                return
+                            }
+                        });
+                    }
                 }
+
+                if(process.env.NODE_ENV === 'production'){
+                    if(oldphoto!=='default-user.jpg'){
+                        const params = {
+                            Bucket: process.env.AWS_BUCKET_NAME,
+                            Key: `users/${oldphoto}`,
+                        }
+                    
+                        s3.deleteObject(params, (error, data) => {
+                            if(error){
+                                console.log(`AWS error: ${error}`);
+                                res.status(500).send(error)
+                            }
+                            
+                            console.log(`AWS deleted user file successfully`);
+                        });
+                    }
+
+                }
+
+
+                // 2b) upload new photo to AWS S3
+                if(process.env.NODE_ENV === 'production') {
+                    if(req.file.buffer) {
+                    
+                        const params = {
+                            Bucket: process.env.AWS_BUCKET_NAME,
+                            Key: `users/${req.file.filename}`,
+                            Body: req.file.buffer
+                        }
+            
+                        const s3upload = await s3.upload(params).promise();
+                        console.log(s3upload);
+                        console.log(s3upload.Key.split('/')[1]);
+                    }
+                }
+
+
             } 
         } catch(err) {
             console.log('Req.file doesn\'t exist')

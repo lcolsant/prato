@@ -276,15 +276,59 @@ exports.updatePlate = async (req, res, next) => {
                 //remove old photo from file system before setting updated photo
                 const plate = await Plate.findById(req.params.id);
                 const oldphoto = plate.photo;
-                if(oldphoto!=='default-plate.jpg'){
-                    const path = `./public/img/plates/${oldphoto}`;
-                    fs.unlink(path, (err) => {
-                        if(err) {
-                            console.log(err);
-                            return
-                        }
-                    });
+
+                if(process.env.NODE_ENV === 'development') {
+                    if(oldphoto!=='default-plate.jpg'){
+                        const path = `./public/img/plates/${oldphoto}`;
+                        fs.unlink(path, (err) => {
+                            if(err) {
+                                console.log(err);
+                                return
+                            }
+                        });
+                    }
                 }
+
+                // Delete old photo object from AWS S3
+                if(process.env.NODE_ENV === 'production') {
+                    if(oldphoto!=='default-plate.jpg'){
+                        const params = {
+                            Bucket: process.env.AWS_BUCKET_NAME,
+                            Key: `plates/${oldphoto}`,
+                        }
+                    
+                        s3.deleteObject(params, (error, data) => {
+                            if(error){
+                                console.log(`AWS error: ${error}`);
+                                res.status(500).send(error)
+                            }
+                            
+                            console.log(`AWS deleted plate file successfully`);
+                        });
+
+                    }
+
+                    // Upload new photo object to AWS S3
+                    try {
+
+            
+                        if(req.file.buffer) {
+
+                            const params = {
+                                Bucket: process.env.AWS_BUCKET_NAME,
+                                Key: `plates/${req.file.filename}`,
+                                Body: req.file.buffer
+                            }
+                
+                            s3upload = await s3.upload(params).promise();
+                            console.log(s3upload);
+                        }
+                    } catch(error){
+                        console.log('Req.file.buffer does not exist');
+                    }
+                }
+
+
             } 
         } catch(err) {
             console.log('Req.file doesn\'t exist')

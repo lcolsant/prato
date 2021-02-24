@@ -3,9 +3,10 @@ const Plate = require('../models/plateModel');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
 const AppError = require('../utils/appError');
-const { nextTick } = require('process');
-const { url } = require('inspector');
-const { serialize } = require('v8');
+// const { nextTick } = require('process');
+// const { url } = require('inspector');
+// const { serialize } = require('v8');
+
 // const { plates } = require('../dev-data/data/plates-dev');
 // import { plates } from '../dev-data/data/plates-dev';
 
@@ -72,6 +73,8 @@ exports.createPlate = (req, res) => {
 
     res.status(200).render('index', {
         title: 'Create Plate',
+        env: process.env.NODE_ENV,
+        aws_url: process.env.AWS_OBJECT_URL,
         url
     });
 }
@@ -139,6 +142,8 @@ exports.updatePlate = async (req, res) => {
             title: 'Update Plate',
             plate: plate,
             plateid,
+            env: process.env.NODE_ENV,
+            aws_url: process.env.AWS_OBJECT_URL,
             url
         });
 
@@ -165,6 +170,8 @@ exports.getMe = async (req, res) => {
         res.status(200).render('index', {
             title: 'My Account',
             user: user,
+            env: process.env.NODE_ENV,
+            aws_url: process.env.AWS_OBJECT_URL,
             url
         });
 
@@ -183,6 +190,8 @@ exports.updatePassword = async (req, res) => {
         const url = req.originalUrl;
 
         res.status(200).render('index', {
+            env: process.env.NODE_ENV,
+            aws_url: process.env.AWS_OBJECT_URL,
             url
         });
 
