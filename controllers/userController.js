@@ -243,36 +243,83 @@ exports.deleteUser = async (req, res) => {
         const plateIDs = plates.map(plate => plate._id);
         const platePhotos = plates.map(plate => plate.photo);
 
-        // 1) delete User photo from filesystem
+        // 1a) delete User photo and plate photos from filesystem (development)
+        if(process.env.NODE_ENV === 'development') {
 
-        if(userPhoto!=='default-user.jpg'){
-            const path = `./public/img/users/${userPhoto}`;
-            fs.unlink(path, (err) => {
-                if(err) {
-                    console.log(err);
-                    return
-                }
-            });
+            if(userPhoto!=='default-user.jpg'){
+                const path = `./public/img/users/${userPhoto}`;
+                fs.unlink(path, (err) => {
+                    if(err) {
+                        console.log(err);
+                        return
+                    }
+                });
+            }
+    
+    
+            // 1b) delete plate photos from filesystem
+            for(let i=0; i<platePhotos.length; i++) {
+                const path = `./public/img/plates/${platePhotos[i]}`;
+                fs.unlink(path, (err) => {
+                    if(err) {
+                        console.log(err);
+                        return
+                    }
+                });
+            }
+        
         }
 
-        // 2) delete user's Plates from DB
+        // 2a) delete User photo and plate photos from AWS (production)
+        if(process.env.NODE_ENV === 'production') {
+
+            if(userPhoto!=='default-user.jpg'){
+
+                const params = {
+                    Bucket: process.env.AWS_BUCKET_NAME,
+                    Key: `users/${userPhoto}`,
+                }
+            
+                s3.deleteObject(params, (error, data) => {
+                    if(error){
+                        console.log(`AWS error: ${error}`);
+                        res.status(500).send(error)
+                    }
+                    
+                    console.log(`AWS deleted file successfully`);
+                });
+
+            }
+    
+    
+            // 2b) delete plate photos from AWS
+            for(let i=0; i<platePhotos.length; i++) {
+                const path = `./public/img/plates/${platePhotos[i]}`;
+
+                const params = {
+                    Bucket: process.env.AWS_BUCKET_NAME,
+                    Key: `plates/${platePhotos[i]}`,
+                }
+            
+                s3.deleteObject(params, (error, data) => {
+                    if(error){
+                        console.log(`AWS error: ${error}`);
+                        res.status(500).send(error)
+                    }
+                    
+                    console.log(`AWS deleted file successfully`);
+                });
+            }
+
+        }
+
+        // 3) delete user's Plates from DB
         for(let i=0; i<plateIDs.length; i++) {
             await Plate.findByIdAndDelete(plateIDs[i]);
         };
 
-        // 3) delete plate photos from filesystem
-        for(let i=0; i<platePhotos.length; i++) {
-            const path = `./public/img/plates/${platePhotos[i]}`;
-            fs.unlink(path, (err) => {
-                if(err) {
-                    console.log(err);
-                    return
-                }
-            });
-        }
-
-        // 4) delete user from DB 
     
+        // 4) delete user from DB 
         await User.findByIdAndDelete(req.params.id);
 
         res.status(204).json({
