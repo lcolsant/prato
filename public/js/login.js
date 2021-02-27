@@ -42,7 +42,7 @@ export const logout = async () => {
     }
 }
 
-export const signup = async (name, email, password, passwordConfirm) => {
+export const signup = async (name, username, email, password, passwordConfirm) => {
     
     try {
 
@@ -51,6 +51,7 @@ export const signup = async (name, email, password, passwordConfirm) => {
             url: '/api/v1/users/signup',
             data: {
                 name,
+                username,
                 email,
                 password,
                 passwordConfirm
@@ -75,8 +76,8 @@ export const signup = async (name, email, password, passwordConfirm) => {
 
 export const updateMe = async (data,id) => {
 
-    console.log(id);
-    console.log('in updateMe:');
+    // console.log(id);
+    // console.log('in updateMe:');
 
     // for (var p of data) {
     //     console.log(p);
@@ -92,9 +93,9 @@ export const updateMe = async (data,id) => {
         if(res.data.status == 'success') {
             showAlert('success','Updated user successfully!');
             console.log(res.data)
-            window.setTimeout(() => {
-                location.assign('/plates');
-            }, 2000);
+            // window.setTimeout(() => {
+            //     location.assign('/plates');
+            // }, 2000);
         }
 
 

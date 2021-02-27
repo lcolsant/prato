@@ -415,9 +415,9 @@ i {
   margin-bottom: 6rem;
   padding: 2rem; }
   .form__signup {
-    height: 56rem; }
+    height: 64rem; }
   .form__update {
-    height: 46rem;
+    height: 54rem;
     z-index: 0; }
     .form__update__deleteAccount, .form__update__password {
       margin-top: 1.5rem;

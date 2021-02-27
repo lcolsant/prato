@@ -10,13 +10,13 @@
             <a href="/create" class="navbar__link__item">ADD PLATE</a>
             <a href="/logout" class="navbar__link__item navbar__link-logout">LOG OUT</a>
             <div class="user">
-                <% if(env == 'development') { %>
+                <% if(locals.env == 'development') { %>
                     <a href="/me" class="navbar__link__item"><img class="navbar__link__item-img" src='/public/img/users/<%=user.photo%>' alt=""></a>
                 <% } else { %>
-                    <a href="/me" class="navbar__link__item"><img class="navbar__link__item-img" src='<%=aws_url%>/users/<%=user.photo%>' alt=""></a>
+                    <a href="/me" class="navbar__link__item"><img class="navbar__link__item-img" src='<%=locals.aws_url%>/users/<%=user.photo%>' alt=""></a>
                 <% } %>
-                <!-- <a href="#" class="navbar__link__item" ><%=locals.user.name.split(" ")[0]%></a> -->
-                <p><span class="user__name" id="username"><%=locals.user.name.split(" ")[0]%></span></p>
+                <!-- <p><span class="user__name" id="username"><%=locals.user.name.split(" ")[0]%></span></p> -->
+                <p><span class="user__name" id="username"><%=locals.user.username%></span></p>
             </div>
 
         <%}else{%>

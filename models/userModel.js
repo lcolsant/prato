@@ -9,6 +9,12 @@ const userSchema = new mongoose.Schema({
         trim: true,
         required: [true, 'Missing a name...']
     },
+    username: {
+        type: String,
+        trim: true,
+        minlength: 4,
+        required: [true, 'Missing a username...']
+    },
     email:{
         type: String,
         required: [true, 'Missing an email...'],

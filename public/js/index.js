@@ -59,10 +59,11 @@ if(signUpForm) {
     signUpForm.addEventListener('submit', e => {
         e.preventDefault();
         const name = document.getElementById('name').value;
+        const username = document.getElementById('username').value;
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         const passwordConfirm = document.getElementById('passwordConfirm').value;
-        signup(name, email, password, passwordConfirm);
+        signup(name, username, email, password, passwordConfirm);
     });
 } 
 
@@ -72,11 +73,13 @@ if(updateMeForm) {
         const id = document.getElementById('user_id').value;
         const formData = new FormData();  //need this for multipart enctype for form in order to handle image types
         formData.append('name', document.getElementById('name').value);
+        formData.append('username', document.getElementById('username1').value);
         formData.append('email', document.getElementById('email').value);
         formData.append('photo', document.getElementById('photo').files[0]);
-        for (var p of formData) {
-            console.log(p);
-        }
+
+        // for (var p of formData) {
+        //     console.log(p);
+        // }
         updateMe(formData,id);
     });
 }

@@ -5,7 +5,8 @@ const ejs = require('ejs');
 module.exports = class Email {
     constructor(user, url) {
         this.to = user.email;
-        this.firstName = user.name.split(' ')[0];
+        // this.firstName = user.name.split(' ')[0];
+        this.username = user.username
         this.url = url;
         this.from = `Prato <${process.env.EMAIL_FROM}>`;
         this.week = user.week;
@@ -41,7 +42,7 @@ module.exports = class Email {
         //render html based on template
         let html;
         ejs.renderFile(`${__dirname}/../views/email/${template}.ejs`,{
-            firstName: this.firstName,
+            username: this.username,
             url: this.url,
             week: this.week,
             subject

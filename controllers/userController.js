@@ -129,14 +129,15 @@ exports.createUser = (req, res) => {
 
 
 exports.updateUser = async (req,res) => {
-    console.log(`...updating user: ${req.params.id}`);
+    // console.log(`...updating user: ${req.params.id}`);
 
     // console.log(req.params.id);
     // console.log(req.body);
     // console.log(req.file);
+    // console.log(req.body);
 
-    const { name, email, photo } = req.body;
-    console.log(`name: ${name} email: ${email}`);
+    const { name, username, email, photo } = req.body;
+    // console.log(`name: ${name} username: ${username} email: ${email}`);
 
     try {
         
