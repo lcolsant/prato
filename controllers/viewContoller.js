@@ -35,6 +35,8 @@ exports.getLanding = (req, res) => {
     
     const url = req.originalUrl;
     res.status(200).render('index', {
+        env: process.env.NODE_ENV,
+        aws_url: process.env.AWS_OBJECT_URL,
         url
     });
 }

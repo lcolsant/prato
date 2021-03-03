@@ -16,13 +16,30 @@ const userRouter = require('./routes/userRoutes')
 const app = express()
 
 //set HTTP security headers
-app.use(helmet());
+app.use(
+        helmet({
+        contentSecurityPolicy: false
+    })
+);
+
+// app.use(
+//     helmet({
+//       contentSecurityPolicy: {
+//         directives: {
+//           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//           "img-src": ["'self'", `${process.env.AWS_OBJECT_URL}`],
+//         //   "script-src": ["'self'","https://unpkg.com/"],
+//           "script-src": ["'self'","unpkg.com"],
+//         },
+//       },
+//     })
+//   );
 
 //set rate Limiter (limiting 100 request per hour)
 const limiter = rateLimit({
     max: 100,
     windowMs: 60 * 60 * 1000,   
-    message: 'Too many requests from this IP, please try again later.'
+    message: 'Too many requests from this IP, please try again after an hour.'
 });
 
 app.use('/api', limiter);
