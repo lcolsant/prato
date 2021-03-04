@@ -49,7 +49,7 @@ const sendErrorDev = (err, req, res) => {
 
 
 const sendErrorProd = (err, req, res) => {
-    console.log('in sendErrorProd');
+    // console.log('in sendErrorProd');
 
     //A) API
     if(req.originalUrl.startsWith('/api')){
@@ -96,9 +96,6 @@ module.exports = (err, req, res, next) => {
     if (process.env.NODE_ENV === 'development') {
         let error = { ...err, name:err.name, message:err.message };
         
-        console.log(process.env.NODE_ENV)
-   
-
         if(error.name === 'CastError') error = handleCastErrorDB(error);
         if(error.code === 11000) error = handleDuplicateFieldsDB(error);
         if(error.name === 'ValidationError') error = handleValidationErrorDB(error);
@@ -109,8 +106,6 @@ module.exports = (err, req, res, next) => {
     
     if (process.env.NODE_ENV === 'production') {
         let error = { ...err, name:err.name, message:err.message };
-
-        console.log(process.env.NODE_ENV)
 
         if(error.name === 'CastError') error = handleCastErrorDB(error);
         if(error.code === 11000) error = handleDuplicateFieldsDB(error);

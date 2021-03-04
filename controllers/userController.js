@@ -49,7 +49,7 @@ exports.resizeUserPhoto = async (req, res, next) => {
 
         if (!req.file) return next();
       
-        req.file.filename = `user-${req.user._id}-${req.body.name}-${Date.now()}.jpeg`;
+        req.file.filename = `user-${req.user._id}-${req.body.username}-${Date.now()}.jpeg`;
       
         if(process.env.NODE_ENV === 'development'){
             await sharp(req.file.buffer)

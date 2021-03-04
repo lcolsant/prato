@@ -93,9 +93,9 @@ export const updateMe = async (data,id) => {
         if(res.data.status == 'success') {
             showAlert('success','Updated user successfully!');
             console.log(res.data)
-            // window.setTimeout(() => {
-            //     location.assign('/plates');
-            // }, 2000);
+            window.setTimeout(() => {
+                location.assign('/plates');
+            }, 2000);
         }
 
 
