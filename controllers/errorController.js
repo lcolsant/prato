@@ -26,7 +26,7 @@ const handleValidationErrorDB = err => {
 
 //send back more detailed error messages in development environment
 const sendErrorDev = (err, req, res) => {
-    console.log('in sendErrorDev');
+    // console.log('in sendErrorDev');
     //logging full error information
             
     //A) API
@@ -95,6 +95,7 @@ module.exports = (err, req, res, next) => {
     // send back more detailed error messages if in development
     if (process.env.NODE_ENV === 'development') {
         let error = { ...err, name:err.name, message:err.message };
+
         
         if(error.name === 'CastError') error = handleCastErrorDB(error);
         if(error.code === 11000) error = handleDuplicateFieldsDB(error);

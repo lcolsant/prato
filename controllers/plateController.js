@@ -129,7 +129,7 @@ exports.getPlate = async (req, res, next) => {
 
 
 
-exports.createPlate = async (req, res) => {
+exports.createPlate = async (req, res, next) => {
 
     // console.log('creating plate...');
     const { name, description, recipe } = req.body;
@@ -245,10 +245,12 @@ exports.createPlate = async (req, res) => {
             });
 
         } catch (err){
-            res.status(400).json({
-                status: 'fail',
-                message: 'Error 💥 saving plate to MongoDB..', err
-            });
+            // res.status(400).json({
+            //     status: 'fail',
+            //     message: 'Error 💥 saving plate to MongoDB..', err
+            // });
+
+            next(err);
         }
     }
 }

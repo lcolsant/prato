@@ -3,7 +3,6 @@ const helmet = require('helmet');
 const path = require('path');
 const rateLimit = require('express-rate-limit');
 const bodyParser = require('body-parser');
-const appError = require('./utils/appError');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const compression = require('compression');
@@ -16,11 +15,9 @@ const userRouter = require('./routes/userRoutes')
 const app = express()
 
 //set HTTP security headers
-app.use(
-        helmet({
-        contentSecurityPolicy: false
-    })
-);
+app.use(helmet({
+    contentSecurityPolicy: false,
+}));
 
 // app.use(
 //     helmet({
@@ -28,7 +25,6 @@ app.use(
 //         directives: {
 //           ...helmet.contentSecurityPolicy.getDefaultDirectives(),
 //           "img-src": ["'self'", `${process.env.AWS_OBJECT_URL}`],
-//         //   "script-src": ["'self'","https://unpkg.com/"],
 //           "script-src": ["'self'","unpkg.com"],
 //         },
 //       },
