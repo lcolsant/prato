@@ -491,7 +491,9 @@ i {
     .form__input__placeholder::placeholder {
       font-size: 1.4rem;
       font-weight: 100;
-      letter-spacing: normal; }
+      letter-spacing: normal;
+      color: var(--color-grey-dark-3);
+      font-family: Montserrat, sans-serif; }
   .form__label {
     font-size: 1.5rem;
     font-weight: 400; }

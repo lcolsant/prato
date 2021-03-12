@@ -16,35 +16,14 @@ const AppError = require('../utils/appError');
 const cookieOptions = {
     'expires': new Date(Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000),
     'httpOnly': true,
-    'secure': true,
+    // 'secure': true,
+    'sameSite':'Lax',
     'X-Forwarded-Proto': 'https',
     // secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
 };
 
-// const createSendToken = (user, statusCode, req, res) => {
-//     const token = signToken(user._id);
-    
-//     res.cookie('jwt', token, {
-//         expires: new Date(
-//             Date.now() + process.env.JWT_EXPIRES_IN * 21 * 60 * 60 * 1000
-//         ),
-//         httpOnly: true,
-//         secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
-//     });
-// };
-    
-//     user.password = undefined;
-    
-//     res.status(201).json({
-//         status:'success',
-//         token,
-//         data:{
-//             message: 'Created a new user successfully!',
-//             data: newUser,
-//         }
-//     });
-// }
 
+ 
 
 exports.signup = async (req, res, next) => {
     
@@ -203,8 +182,9 @@ exports.protect = async (req, res, next) => {
         if(err.name === 'TokenExpiredError') {
             return next(new Error('Your token has expired. Please log in again.'));
         }
+        return next(err);
         
-        return next(new Error('Invalid token. Please log in again.'));
+        // return next(new Error('Invalid token. Please log in again.'));
     }
 
     // 3) Check if user still exists
@@ -285,6 +265,14 @@ exports.isLoggedIn = async (req, res, next) => {
 
         //send cookie
         res.cookie('jwt', token, cookieOptions);
+
+        // res.cookie('jwt', token, {
+        //     expires: new Date(
+        //       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
+        //     ),
+        //     httpOnly: true,
+        //     secure: req.secure || req.headers['x-forwarded-proto'] === 'https'
+        //   });
 
         user.password = undefined;
         res.locals.user = user;
