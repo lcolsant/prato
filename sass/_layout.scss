@@ -659,11 +659,14 @@
       padding: 1rem;
       box-shadow: var(--shadow-medium);
       font-size: 2rem;
+      border-radius: 10px;
+      background-color: var(--color-white);
 
-    &:hover{
-        transition: all .2s;
-        outline: 2px dashed #20bf6b;
-    }
+    // &:hover{
+    //     transition: all .2s;
+    //     outline: 2px dashed #20bf6b;
+
+    // }
 
       
       &__pic {
@@ -678,7 +681,7 @@
             padding: 1rem;
             font-size: 3rem;
             color: var(--color-tertiary-light);
-            background-color: var(--color-grey-light-2);
+            background-color: var(--color-white);
 
             @media only screen and (max-width: $bp-smallest) {
                 font-size: 2.5rem;
@@ -691,7 +694,7 @@
             grid-column: 2 / 3;
             padding: 1rem;
             font-size: 2rem;
-            background-color: var(--color-grey-light-2);
+            background-color: var(--color-white);
 
             @media only screen and (max-width: $bp-smallest) {
                 font-size: 1.5rem;
@@ -703,7 +706,7 @@
             grid-column: 2 / 3;
             padding: 1rem;
             font-size: 1.5rem;
-            background-color: var(--color-grey-light-2);
+            background-color: var(--color-white);
      
             @media only screen and (max-width: $bp-smallest) {
                 font-size: 1.2rem;
@@ -718,7 +721,7 @@
         justify-content: center;
         align-content: center;
         padding: 1rem;
-        background-color: var(--color-grey-light-2);
+        background-color: var(--color-white);
 
         @media only screen and (max-width: $bp-smallest) {
             grid-row: 5 / 6;

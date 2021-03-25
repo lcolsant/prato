@@ -141,7 +141,13 @@ i {
     .card__picture-img {
       object-fit: cover;
       height: 100%;
-      width: 100%; }
+      width: 100%;
+      border-radius: 3%; }
+    .card__picture-img-2 {
+      object-fit: cover;
+      height: 100%;
+      width: 100%;
+      border-radius: 50%; }
   .card__title {
     height: 5rem;
     background-color: var(--color-white);
@@ -246,14 +252,6 @@ i {
   cursor: move;
   padding: 0;
   margin: 0; }
-
-#sortlist li.hint {
-  background: #fea;
-  border: 3px dashed red; }
-
-#sortlist li.active {
-  background: #ffd4d4;
-  border: 3px dashed red; }
 
 .container {
   background-color: var(--color-grey-light-1);
@@ -687,7 +685,9 @@ i {
   margin-top: 1rem;
   padding: 1rem;
   box-shadow: var(--shadow-medium);
-  font-size: 2rem; }
+  font-size: 2rem;
+  border-radius: 10px;
+  background-color: var(--color-white); }
   @media only screen and (max-width: 56.25em) {
     .row {
       grid-template-columns: 20rem 36rem 15rem; } }
@@ -695,9 +695,6 @@ i {
     .row {
       grid-template-rows: min-content repeat(3, 5rem) min-content;
       grid-template-columns: 18rem 16rem; } }
-  .row:hover {
-    transition: all .2s;
-    outline: 2px dashed #20bf6b; }
   .row__pic {
     grid-row: 1 / -1;
     grid-column: 1 / 2;
@@ -708,7 +705,7 @@ i {
     padding: 1rem;
     font-size: 3rem;
     color: var(--color-tertiary-light);
-    background-color: var(--color-grey-light-2); }
+    background-color: var(--color-white); }
     @media only screen and (max-width: 31.25em) {
       .row__day {
         font-size: 2.5rem; } }
@@ -717,7 +714,7 @@ i {
     grid-column: 2 / 3;
     padding: 1rem;
     font-size: 2rem;
-    background-color: var(--color-grey-light-2); }
+    background-color: var(--color-white); }
     @media only screen and (max-width: 31.25em) {
       .row__title {
         font-size: 1.5rem; } }
@@ -726,7 +723,7 @@ i {
     grid-column: 2 / 3;
     padding: 1rem;
     font-size: 1.5rem;
-    background-color: var(--color-grey-light-2); }
+    background-color: var(--color-white); }
     @media only screen and (max-width: 31.25em) {
       .row__description {
         font-size: 1.2rem; } }
@@ -738,7 +735,7 @@ i {
     justify-content: center;
     align-content: center;
     padding: 1rem;
-    background-color: var(--color-grey-light-2); }
+    background-color: var(--color-white); }
     @media only screen and (max-width: 31.25em) {
       .row__btn {
         grid-row: 5 / 6;
