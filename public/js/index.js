@@ -155,8 +155,8 @@ let sortable = new Sortable(myList,{
   onStart: function(e){ console.log('drag started')},
   onEnd: function(e){ 
     console.log('drag ended');
-    console.log(`oldIndex:  ${e.oldIndex}`);
-    console.log(`newIndex:  ${e.newIndex}`);
+    // console.log(`oldIndex:  ${e.oldIndex}`);
+    // console.log(`newIndex:  ${e.newIndex}`);
     updateWeek(e.oldIndex, e.newIndex);
   }
 });
@@ -172,71 +172,5 @@ let sortable = new Sortable(myList,{
 
     // const ismobile = mobileAndTabletCheck();
     // console.log(ismobile ? "mobile" : "non-mobile");
-
-
-
-//****************************************************old drag drop code */    
-      // var items = document.querySelectorAll("#sortlist li"),
-      //     dragged = null;
-    
-      // for (let i of items) {
-      //   // DRAG START - YELLOW HIGHLIGHT DROPZONE
-      //   // Highlight all except the one being dragged
-      //   i.addEventListener("dragstart", function () {
-      //     dragged = this;
-      //     for (let j of items) {
-      //       if (j != dragged) { j.classList.add("hint"); }
-      //     }
-      //   });
-    
-      //   // Drag Enter - add light red highlight
-      //   i.addEventListener("dragenter", function () {
-      //     if (this != dragged) { this.classList.add("active"); }
-      //   });
-    
-      //   //DRAG LEAVE - REMOVE RED HIGHLIGHT
-      // //   i.addEventListener("dragleave", function () {
-      // //     this.classList.remove("active");
-      // //   });
-    
-      //   //Drag over - prevent default drop behavior
-      //   i.addEventListener("dragover", function (e) {
-      //     e.preventDefault();
-      //   });
-    
-      //   // Drop - determine position of dragged and dropped element
-      //   i.addEventListener("drop", function (e) {
-      //     e.preventDefault();
-      //     if (this != dragged) {
-      //       let all = document.querySelectorAll("#sortlist li"),
-      //           draggedpos = 0, droppedpos = 0;
-      //       for (let it=0; it<all.length; it++) {
-      //         if (dragged == all[it]) { draggedpos = it; }
-      //         if (this == all[it]) { droppedpos = it; }
-      //       }
-      //       if (draggedpos < droppedpos) {
-      //         this.parentNode.insertBefore(dragged, this.nextSibling);
-      //       } else {
-      //         this.parentNode.insertBefore(dragged, this);
-      //       }
-      //     //    console.log(dragged.attributes.id);
-      //     //    console.log(this.attributes.id);
-  
-      //        const draggedID = dragged.attributes.id.value;
-      //        const droppedID = this.attributes.id.value;
-      //        updateWeek(draggedID, droppedID);
-      //     }
-      //   });
-    
-      //   // DRAG END - REMOVE ALL HIGHLIGHT
-      //   i.addEventListener("dragend", function () {
-      //     for (let j of items) {
-      //       j.classList.remove("hint");
-      //       j.classList.remove("active");
-      //     }
-      //   });
-      // }
-      
-      //****************************************************old drag drop code */    
 
   // });
