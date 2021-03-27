@@ -63,6 +63,9 @@ h3 {
   margin-top: 4rem;
   cursor: pointer;
   transition: all .3s; }
+  @media only screen and (max-width: 37.5em) {
+    .btn {
+      margin-top: 1rem; } }
   .btn:hover {
     transform: translateY(-2px);
     background-color: var(--color-tertiary-light);
@@ -137,7 +140,7 @@ i {
       width: 100%;
       height: 100%;
       background-image: linear-gradient(to right bottom, var(--color-white), var(--color-white));
-      opacity: 0.2; }
+      opacity: 0.1; }
     .card__picture-img {
       object-fit: cover;
       height: 100%;
@@ -148,6 +151,9 @@ i {
       height: 100%;
       width: 100%;
       border-radius: 50%; }
+      @media only screen and (max-width: 37.5em) {
+        .card__picture-img-2 {
+          height: 80%; } }
   .card__title {
     height: 5rem;
     background-color: var(--color-white);
@@ -287,10 +293,14 @@ i {
           position: absolute;
           top: 3.2rem;
           right: 2.8rem;
-          transition: all .8s; }
+          transition: all .8s;
+          color: var(--color-red-3); }
           .navbar a.icon:hover {
             background-color: transparent;
             color: var(--color-tertiary-light); } }
+    @media only screen and (max-width: 37.5em) {
+      .navbar a.icon {
+        top: 1.6rem; } }
   @media only screen and (max-width: 56.25em) {
     .navbar__responsive {
       grid-row: 1 / 2;
@@ -343,10 +353,17 @@ i {
       font-weight: 100;
       text-transform: uppercase;
       color: var(--color-red-3); }
+      @media only screen and (max-width: 56.25em) {
+        .navbar__prato__h1 {
+          font-size: 2.0rem; } }
     .navbar__prato__svg {
       height: 12rem;
       width: 12rem;
       fill: var(--color-red-2); }
+      @media only screen and (max-width: 37.5em) {
+        .navbar__prato__svg {
+          height: 9rem;
+          width: 9rem; } }
   .navbar__link {
     grid-column: 2/4;
     display: flex;
@@ -691,10 +708,11 @@ i {
   @media only screen and (max-width: 56.25em) {
     .row {
       grid-template-columns: 20rem 36rem 15rem; } }
-  @media only screen and (max-width: 31.25em) {
+  @media only screen and (max-width: 37.5em) {
     .row {
-      grid-template-rows: min-content repeat(3, 5rem) min-content;
-      grid-template-columns: 18rem 16rem; } }
+      grid-template-rows: min-content repeat(2, 5rem) 5rem;
+      grid-template-columns: 15rem 15rem;
+      margin-bottom: 3rem; } }
   .row__pic {
     grid-row: 1 / -1;
     grid-column: 1 / 2;
@@ -705,28 +723,34 @@ i {
     padding: 1rem;
     font-size: 3rem;
     color: var(--color-tertiary-light);
-    background-color: var(--color-white); }
-    @media only screen and (max-width: 31.25em) {
+    background-color: var(--color-white);
+    display: flex; }
+    @media only screen and (max-width: 37.5em) {
       .row__day {
-        font-size: 2.5rem; } }
+        font-size: 2.5rem;
+        justify-content: center; } }
   .row__title {
     grid-row: 2 / 3;
     grid-column: 2 / 3;
     padding: 1rem;
     font-size: 2rem;
-    background-color: var(--color-white); }
-    @media only screen and (max-width: 31.25em) {
+    background-color: var(--color-white);
+    display: flex;
+    color: var(--color-red-3); }
+    @media only screen and (max-width: 37.5em) {
       .row__title {
-        font-size: 1.5rem; } }
+        font-size: 1.5rem;
+        justify-content: center; } }
   .row__description {
     grid-row: 3 / 5;
     grid-column: 2 / 3;
     padding: 1rem;
     font-size: 1.5rem;
-    background-color: var(--color-white); }
+    background-color: var(--color-white);
+    color: var(--color-red-3); }
     @media only screen and (max-width: 31.25em) {
       .row__description {
-        font-size: 1.2rem; } }
+        display: none; } }
   .row__btn {
     grid-row: 1 / -1;
     grid-column: 3 / 4;
@@ -738,8 +762,8 @@ i {
     background-color: var(--color-white); }
     @media only screen and (max-width: 31.25em) {
       .row__btn {
-        grid-row: 5 / 6;
-        grid-column: 1 / -1;
+        grid-row: 3 / 4;
+        grid-column: 2 / 3;
         flex-direction: row; } }
 
 .uploadbtn-wrap {

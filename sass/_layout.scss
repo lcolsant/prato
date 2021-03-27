@@ -43,6 +43,8 @@
                 top: 3.2rem;
                 right: 2.8rem;
                 transition: all .8s;
+                color: var(--color-red-3);
+
 
                 &:hover {
                     background-color: transparent;
@@ -50,6 +52,13 @@
                 }
             }
         }
+
+        @media only screen and (max-width: $bp-small) {
+            &.icon {
+                top: 1.6rem;
+            }
+        }
+
 
     }
 
@@ -130,12 +139,22 @@
             text-transform: uppercase;
             color: var(--color-red-3);
 
+            @media only screen and (max-width: $bp-medium) {
+                font-size: 2.0rem;
+            }
+            
+
         }
 
         &__svg {
             height: 12rem;
             width: 12rem;
             fill: var(--color-red-2);
+
+            @media only screen and (max-width: $bp-small) {
+                height: 9rem;
+                width: 9rem;
+            }
         }
     }
 
@@ -649,9 +668,10 @@
         grid-template-columns: 20rem 36rem 15rem;
           
       }
-      @media only screen and (max-width: $bp-smallest) {
-        grid-template-rows: min-content repeat(3,5rem) min-content;
-        grid-template-columns: 18rem 16rem;
+      @media only screen and (max-width: $bp-small) {
+        grid-template-rows: min-content repeat(2,5rem) 5rem;
+        grid-template-columns: 15rem 15rem;
+        margin-bottom: 3rem;
           
       }
 
@@ -682,9 +702,13 @@
             font-size: 3rem;
             color: var(--color-tertiary-light);
             background-color: var(--color-white);
+            display: flex;
+            
 
-            @media only screen and (max-width: $bp-smallest) {
+            @media only screen and (max-width: $bp-small) {
                 font-size: 2.5rem;
+                justify-content: center;
+
             }
 
       }
@@ -695,9 +719,13 @@
             padding: 1rem;
             font-size: 2rem;
             background-color: var(--color-white);
+            display: flex;
+            color: var(--color-red-3);
 
-            @media only screen and (max-width: $bp-smallest) {
+            @media only screen and (max-width: $bp-small) {
                 font-size: 1.5rem;
+                justify-content: center;
+
             }
       }
 
@@ -707,9 +735,12 @@
             padding: 1rem;
             font-size: 1.5rem;
             background-color: var(--color-white);
+            color: var(--color-red-3);
+
      
             @media only screen and (max-width: $bp-smallest) {
-                font-size: 1.2rem;
+                display: none;
+                // font-size: 1.2rem;
             }
       }
 
@@ -724,8 +755,8 @@
         background-color: var(--color-white);
 
         @media only screen and (max-width: $bp-smallest) {
-            grid-row: 5 / 6;
-            grid-column: 1 / -1;
+            grid-row: 3 / 4;
+            grid-column: 2 / 3;
             flex-direction: row;
           }
 

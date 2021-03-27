@@ -12,6 +12,10 @@
     margin-top: 4rem;
     cursor: pointer;
 
+    @media only screen and (max-width: $bp-small) {
+        margin-top: 1rem;
+    }
+
 
 
     transition: all .3s;
@@ -127,7 +131,7 @@ i {
             width: 100%;  //overlapping 100% of width of parent element
             height: 100%;  //overlapping 100% of height of parent element
             background-image: linear-gradient(to right bottom,var(--color-white),var(--color-white));
-            opacity: 0.2;
+            opacity: 0.1;
 
         }
 
@@ -143,6 +147,9 @@ i {
             height: 100%;
             width: 100%;
             border-radius: 50%;
+            @media only screen and (max-width: $bp-small) {
+                height: 80%;
+            }
 
         }
 
