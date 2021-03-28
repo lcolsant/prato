@@ -291,22 +291,21 @@ i {
           display: block;
           text-decoration: none;
           position: absolute;
-          top: 3.2rem;
-          right: 2.8rem;
-          transition: all .8s;
-          color: var(--color-red-3); }
-          .navbar a.icon:hover {
-            background-color: transparent;
-            color: var(--color-tertiary-light); } }
+          top: 3.6rem;
+          right: 3.2rem;
+          transition: all .3s;
+          color: var(--color-red-3);
+          font-size: 4rem; } }
     @media only screen and (max-width: 37.5em) {
       .navbar a.icon {
-        top: 1.6rem; } }
+        top: 2.2rem;
+        font-size: 3rem;
+        color: var(--color-red-3); } }
   @media only screen and (max-width: 56.25em) {
     .navbar__responsive {
       grid-row: 1 / 2;
       grid-column: 1 / -1;
       background-color: var(--color-white);
-      opacity: .85;
       font-size: 2rem;
       position: relative; }
     .navbar__responsive a {
@@ -328,16 +327,17 @@ i {
         position: absolute;
         font-size: 4rem;
         color: var(--color-red-3);
-        top: 3.2rem;
-        right: 2.8rem;
+        top: 3.6rem;
+        right: 3.2rem;
         padding: 0;
-        transition: all .8s; }
+        transition: all .3s; }
         .navbar__responsive a.icon:hover {
-          background-color: transparent;
-          color: var(--color-tertiary-light); }
-        .navbar__responsive a.icon:active {
-          background-color: transparent;
-          color: var(--color-tertiary-light); } }
+          background-color: transparent; } }
+    @media only screen and (max-width: 56.25em) and (max-width: 37.5em) {
+      .navbar__responsive a.icon.icon {
+        top: 2.2rem;
+        font-size: 3rem;
+        color: var(--color-red-3); } }
   .navbar__prato {
     display: flex;
     justify-items: start;
@@ -699,7 +699,7 @@ i {
   display: grid;
   grid-template-rows: min-content repeat(3, 5rem);
   grid-template-columns: 20rem 50rem 15rem;
-  margin-top: 1rem;
+  margin-top: 3rem;
   padding: 1rem;
   box-shadow: var(--shadow-medium);
   font-size: 2rem;
