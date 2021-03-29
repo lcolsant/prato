@@ -30,7 +30,7 @@
 
         &.icon {
             display: none;
-            font-size: 4rem;
+            color: var(--color-red-3);
         }
 
         @media only screen and (max-width: $bp-medium) {
@@ -41,10 +41,10 @@
                 display: block;
                 text-decoration: none;
                 position: absolute;
-                top: 3.6rem;
+                top: 3.0rem;
                 right: 3.2rem;
                 transition: all .3s;
-                color: var(--color-red-3);
+                color: var(--color-red-3) !important;
                 font-size: 4rem;
 
             }
@@ -92,7 +92,7 @@
                 position: absolute;
                 font-size: 4rem;
                 color: var(--color-red-3);
-                top: 3.6rem;
+                top: 3.0rem;
                 right: 3.2rem;
                 padding: 0;
                 transition: all .3s;
