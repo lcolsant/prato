@@ -148,7 +148,8 @@ i {
             width: 100%;
             border-radius: 50%;
             @media only screen and (max-width: $bp-small) {
-                height: 80%;
+                height: 75%;
+                margin-top: 2rem;
             }
 
         }
