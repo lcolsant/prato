@@ -773,9 +773,12 @@ input[type="file"] {
   position: absolute;
   z-index: -1;
   top: 11px;
-  left: 56px;
+  left: 50px;
   font-size: 12px;
   color: var(--color-tertiary-light); }
+
+input[type="file"]::file-selector-button {
+  margin-right: 2rem; }
 
 .upload-button {
   display: inline-block;
