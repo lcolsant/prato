@@ -22,6 +22,14 @@ const handleValidationErrorDB = err => {
     return new AppError(message, 404);
 };
 
+//handle tokenExpired error
+const handleTokenExpiredError = err => {
+    const message = `You have been logged out.  Please log in again`
+    console.log(message);
+    return new AppError(message, 404);
+
+};
+
 
 
 //send back more detailed error messages in development environment
@@ -111,6 +119,7 @@ module.exports = (err, req, res, next) => {
         if(error.name === 'CastError') error = handleCastErrorDB(error);
         if(error.code === 11000) error = handleDuplicateFieldsDB(error);
         if(error.name === 'ValidationError') error = handleValidationErrorDB(error);
+        if(error.name === 'TokenExpiredError') error = handleTokenExpiredError(error);
 
         
         sendErrorProd(error,req, res);
