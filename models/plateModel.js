@@ -23,6 +23,10 @@ const plateSchema = new mongoose.Schema({
         type: String,
         required: [true, 'A plate must belong to a user']
     }, 
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }, 
     slug: String,
 });
 

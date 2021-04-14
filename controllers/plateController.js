@@ -85,7 +85,7 @@ exports.getAllPlates = async (req, res) => {
     
     try {
         
-        const plates = await Plate.find();
+        const plates = await Plate.find().sort({ createdAt: -1 });
         //Plate.findOne( {_id: req.params.id } )
 
         res.status(200).json({

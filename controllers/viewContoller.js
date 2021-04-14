@@ -54,10 +54,13 @@ exports.getPlates = async (req, res) => {
                 console.log(`User retrieved: ${user}`)
             }
         });
+
+        const plates = await Plate.find({user: user._id}).sort({ createdAt: -1 });
+
         
         res.status(200).render('index', {
             title: 'My Plates',
-            plates:user.plates,
+            plates,
             env: process.env.NODE_ENV,
             aws_url: process.env.AWS_OBJECT_URL,
             url
