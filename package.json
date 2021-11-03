@@ -42,7 +42,7 @@
     "nodemailer": "^6.4.16",
     "sharp": "^0.22.1",
     "sortablejs": "^1.13.0",
-    "validator": "^13.1.1"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "livereload": "^0.9.1",
